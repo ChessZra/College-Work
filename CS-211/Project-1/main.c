@@ -7,6 +7,7 @@ Author: John Ezra See
 
 #include <stdio.h>
 #include <stdbool.h> 
+#include <math.h> 
 
 const int WORLD_SIZE = 65;
 
@@ -26,13 +27,18 @@ bool setBitArray(bool bitArray[8], int rule) {
         if (rule < 0 || rule > 255) return false;
 
         //TODO: Task 1 - write the setBitArray() function
-        int idx = 0;
-        while (rule) {
-            bitArray[idx] = (1 & rule) == 1;
-            rule >>= 1;
-            idx++;
+        if (rule == 0) {
+            for (int i = 0; i < 7; i++) {
+                bitArray[i] = 0;
+            }
+        } else {
+            int idx = 0;
+            while (rule) {
+                bitArray[idx] = (1 & rule) == 1;
+                rule >>= 1;
+                idx++;
+            }
         }
-
         return true;
 }
 
@@ -44,8 +50,19 @@ bool setBitArray(bool bitArray[8], int rule) {
 int stateToIndex(bool state[3]) {
 
     //TODO: Task 4 - write the stateToIndex() function
+    // Since there are only three bits, for-loop is not necessary.
+    int ret = 0;
+    if (state[0]) {
+        ret += 4;
+    }
+    if (state[1]) {
+        ret += 2;
+    }
+    if (state[2]) {
+        ret += 1;
+    }
 
-    return 0;
+    return ret;
 }
 
 //update the state array for each cell in the world array based on the
@@ -88,7 +105,24 @@ void printBitArray(bool bitArray[8], int rule) {
     for (int i = 7; i >= 0; i--) {
         printf("%d", bitArray[i]);
     }
-    printf("\n");
+    printf("\n\n");
+}
+
+// This prints the possible states
+// by looping through the bit array (e.g [01] -> | |   |*|)
+void printPossibleStates(bool bitArray[8]) {
+    printf(" ");
+    for (int i = 7; i >= 0; i--) {
+        if (bitArray[i]) {
+            printf("|*|");
+        } else {
+            printf("| |");
+        }
+        if (i > 0) {
+            printf("     ");
+        }
+    }
+    printf(" \n");
 }
 
 int main() {
@@ -108,7 +142,9 @@ int main() {
     //TODO: Task 3 - use the rule bit array to report the evolution 
     //      step for all possible cell states.
     //      follow the format of the sample output exactly
-
+    printf("The evolution of all possible states are as follows:\n"
+           "|***|   |** |   |* *|   |*  |   | **|   | * |   |  *|   |   |\n");
+    printPossibleStates(bitArray);
 
     //TODO: Task 6 - read in the total number of generation evolution 
     //      steps from the user and initialize the world with ONLY the 
