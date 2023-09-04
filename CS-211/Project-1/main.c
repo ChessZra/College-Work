@@ -23,10 +23,17 @@ typedef struct cell_struct{
 //return true if input rule is valid (0-255)
 //return false if input rule is invalid
 bool setBitArray(bool bitArray[8], int rule) {
+        if (rule < 0 || rule > 255) return false;
 
         //TODO: Task 1 - write the setBitArray() function
+        int idx = 0;
+        while (rule) {
+            bitArray[idx] = (1 & rule) == 1;
+            rule >>= 1;
+            idx++;
+        }
 
-        return false;
+        return true;
 }
 
 //convert a 3-bit state array to its 
@@ -63,6 +70,26 @@ void evolveWorld(cell world[WORLD_SIZE], bool ruleBitArray[8]) {
     return;
 }
 
+// This function will keep on asking for a rule number
+// that satisfies [0, 255] - modifies the parameter
+void readValidRule(int* ruleRef) {
+    int rule = -1;
+    while (rule < 0 || rule > 255) {
+        printf("Enter the rule # (0-255): ");
+        scanf("%d", &rule);
+    }
+    *ruleRef = rule;
+}
+
+// This prints the associated bit array for the read rule number
+// For example, "The bit array for rule #30 is 00011110"
+void printBitArray(bool bitArray[8], int rule) {
+    printf("\nThe bit array for rule #%d is ", rule);
+    for (int i = 7; i >= 0; i--) {
+        printf("%d", bitArray[i]);
+    }
+    printf("\n");
+}
 
 int main() {
     cell world[WORLD_SIZE];
@@ -72,12 +99,11 @@ int main() {
     //TODO: Task 2 - read in a valid rule# and
     //      generate the rule's 8-bit rule bit array 
     //      print the bit array in correct binary number order
-    int ruleNum = -1;
-    while (ruleNum < 0 || ruleNum > 255) {
-        printf("Enter the rule # (0-255): ");
-        scanf("%d", &ruleNum);
-    }
-    printf("Success %d\n", ruleNum);
+    bool bitArray[8] = {0};
+    int rule;
+    readValidRule(&rule);
+    setBitArray(bitArray, rule);
+    printBitArray(bitArray, rule);
 
     //TODO: Task 3 - use the rule bit array to report the evolution 
     //      step for all possible cell states.
@@ -90,7 +116,6 @@ int main() {
     //      make sure to set the state array for each cell.
     
     printf("Initializing world & evolving...\n");
-
 
     //TODO: Task 8 - evolve the world the user-specified number  
     //      of generations, printing each active cell as '*' and
