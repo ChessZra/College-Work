@@ -27,18 +27,13 @@ bool setBitArray(bool bitArray[8], int rule) {
         if (rule < 0 || rule > 255) return false;
 
         //TODO: Task 1 - write the setBitArray() function
-        if (rule == 0) {
-            for (int i = 0; i < 7; i++) {
-                bitArray[i] = 0;
-            }
-        } else {
-            int idx = 0;
-            while (rule) {
-                bitArray[idx] = (1 & rule) == 1;
-                rule >>= 1;
-                idx++;
-            }
+        int idx = 0;
+        for (int i = 0; i < 8; i++) {
+            bitArray[idx] = (1 & rule) == 1;
+            rule >>= 1;
+            idx++;
         }
+  
         return true;
 }
 
@@ -72,7 +67,21 @@ int stateToIndex(bool state[3]) {
 void setStates(cell world[WORLD_SIZE]) {
 
     //TODO: Task 5 - write the setStates() function
-
+    // This loop traverses the cell from left to right
+    // For every cell, check its left and right neighbors (w/ wrapping)
+    // Then update the state array
+    for (int i = 0; i < WORLD_SIZE; i++) {
+        int left = i - 1;
+        int right = i + 1;
+        if (left == -1) 
+            left = WORLD_SIZE - 1;
+        if (right == WORLD_SIZE)
+            right = 0;
+        
+        world[i].state[0] = world[left].active;
+        world[i].state[1] = world[i].active;
+        world[i].state[2] = world[right].active;
+    }
     return;
 }
 
@@ -83,6 +92,22 @@ void setStates(cell world[WORLD_SIZE]) {
 void evolveWorld(cell world[WORLD_SIZE], bool ruleBitArray[8]) {
 
     //TODO: Task 7 - write the evolveWorld() function
+    // This loop will create the new generation world
+    // based on the rule and states
+    cell newWorld[WORLD_SIZE];
+    for (int i = 0; i < WORLD_SIZE; i++) {
+        bool states[3] = {world[i].state[0], world[i].state[1], world[i].state[2]};
+        newWorld[i].active = false;
+        if (ruleBitArray[stateToIndex(states)]) 
+            newWorld[i].active = true;
+    }
+    setStates(newWorld);
+    
+    // This for-loop simply copies newWorld to world
+    // since newWorld = world is not permitted in C
+    for (int i = 0; i < WORLD_SIZE; i++) {
+        world[i] = newWorld[i];
+    }
 
     return;
 }
@@ -122,7 +147,7 @@ void printPossibleStates(bool bitArray[8]) {
             printf("     ");
         }
     }
-    printf(" \n");
+    printf(" \n\n");
 }
 
 int main() {
@@ -150,13 +175,41 @@ int main() {
     //      steps from the user and initialize the world with ONLY the 
     //      middle cell active, all other cells should be inactive; 
     //      make sure to set the state array for each cell.
-    
-    printf("Initializing world & evolving...\n");
+    int numGenerations;
+    printf("Enter the number of generations: ");
+    scanf("%d", &numGenerations);
+    for (int i = 0; i < WORLD_SIZE; i++) {
+        if (i == 32) {
+            world[i].active = true;
+        } else {
+            world[i].active = false;
+        }
+    }
+    setStates(world);
+    printf("\nInitializing world & evolving...\n");
+    printf("                                *                                \n");
 
     //TODO: Task 8 - evolve the world the user-specified number  
     //      of generations, printing each active cell as '*' and
     //      each non-active cell as ' ' (whitespace) after each
     //      evolution step to the next generation
 
+    // repeat the evolution by the given number of times 
+    for (int i = 0; i < numGenerations - 1; i++) { 
+        evolveWorld(world, bitArray); // evolve to get the modified and updated world
+
+        // print the resulting world
+        for (int j = 0; j < WORLD_SIZE; j++) {
+            if (world[j].active) {
+                printf("*");
+            }
+            else {
+                printf(" ");
+            }
+        }
+
+        printf("\n");
+    }
+    
     return 0;
 }
