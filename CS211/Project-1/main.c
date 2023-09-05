@@ -115,8 +115,8 @@ void printPossibleStates(bool bitArray[8]) {
 }
 
 // The main function is the entry point or the driver
-// code for this program. 
-// It will ask the user for two integers
+// code for this program. It will ask the user for two inputs
+// which will be used to create the cellular automation.
 int main() {
     cell world[WORLD_SIZE];
     bool bitArray[8];
