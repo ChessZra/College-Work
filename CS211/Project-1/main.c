@@ -167,7 +167,6 @@ void printPossibleStates(bool bitArray[8]) {
  * 
  * @return: 0 to represent successful program execution.
  */
-
 int main() {
     cell world[WORLD_SIZE];
     bool bitArray[8];
