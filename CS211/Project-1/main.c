@@ -1,10 +1,16 @@
-/*-------------------------------------------
+/*------------------------------------------------------------------------------------
 Program 1: Elementary Cellular Automaton
 Course: CS 211, Fall 2023, UIC
 System: Advanced zyLab
 Author: John Ezra See
-------------------------------------------- */
 
+Description: This program is an abstract version of cellular automation in 
+two dimensions. The rules are specified by the given number. And, specific patterns
+and shapes emerge from the given number. This program highlights and visualizes how
+these cells spread in unexpected patterns.
+--------------------------------------------------------------------------------------*/
+
+// Preproccesor directives:
 #include <stdio.h>
 #include <stdbool.h> 
 #include <math.h> 
