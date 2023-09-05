@@ -9,7 +9,6 @@ two dimensions. The rules are specified by the given number. And, specific patte
 and shapes emerge from the given number. This program highlights and visualizes how
 these cells spread in unexpected patterns.
 --------------------------------------------------------------------------------------*/
-
 // Preproccesor directives:
 #include <stdio.h>
 #include <stdbool.h> 
