@@ -66,8 +66,7 @@ int stateToIndex(bool state[3]) {
     This function updates the state array for each cell in the world array based
     on the current status of active for the nearby [left,me,right] cells.
     @param world    : An array of cells with size WORLD_SIZE representing the world
-                      The array is assumed to be periodic/cyclic.
-    @return         : None                                                            */
+                      The array is assumed to be periodic/cyclic.                     */
 void setStates(cell world[WORLD_SIZE]) {
     //  For every cell, check the activity of its left and right neighbors (with wrapping)
     for (int i = 0; i < WORLD_SIZE; i++) {
@@ -86,8 +85,7 @@ void setStates(cell world[WORLD_SIZE]) {
     @param world            : An array of cells with size WORLD_SIZE representing 
                               the world. The array is assumed to be periodic/cyclic.
     @param ruleBitArray     : An array with bit representation in reversed form of 
-                              the rule number
-    @return                 : None                                                    */
+                              the rule number                                         */
 void evolveWorld(cell world[WORLD_SIZE], bool ruleBitArray[8]) {
     // This loop will create the new generation world
     cell newWorld[WORLD_SIZE];
@@ -106,11 +104,10 @@ void evolveWorld(cell world[WORLD_SIZE], bool ruleBitArray[8]) {
 /** readValidRule:                                                                    - -
     This function will keep on asking for a rule number that satisfies [0, 255] 
     - modifies the parameter 
-    @param ruleRef      : the parameter subject to be modified
-    @return             : None                                                        */
+    @param ruleRef      : the parameter subject to be modified                        */
 void readValidRule(int* ruleRef) {
     int rule = -1;
-    while (rule < 0 || rule > 255) {
+    while (rule < 0x0 || rule > 0xFF) {
         printf("Enter the rule # (0-255): ");
         scanf("%d", &rule);
     }
@@ -122,8 +119,7 @@ void readValidRule(int* ruleRef) {
     For example, "The bit array for rule #30 is 00011110".
     @param bitArray     : An array of boolean representing a byte (8 bits) 
                           in reversed form.
-    @param rule         : An integer to be displayed to the user
-    @return             : None                                                        */
+    @param rule         : An integer to be displayed to the user                      */
 void printBitArray(bool bitArray[8], int rule) {
     printf("\nThe bit array for rule #%d is ", rule);
     for (int i = 7; i >= 0; i--) {
@@ -136,8 +132,7 @@ void printBitArray(bool bitArray[8], int rule) {
     This prints all the possible states.
     This loops through the bit array (e.g [01] -> | |   |*|).
  @param bitArray        : An array of boolean representing a byte (8 bits) 
-                          in reversed form.
- @return                : None                                                        */
+                          in reversed form.                                           */
 void printPossibleStates(bool bitArray[8]) {
     for (int i = 7; i >= 0; i--) {
         printf(bitArray[i] ? "|*|     " : "| |     ");
