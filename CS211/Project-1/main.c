@@ -34,14 +34,14 @@ typedef struct cell_struct {
     @return             : true if input is valid (0-255) inclusive
                           false if input is invalid                                   */
 bool setBitArray(bool bitArray[8], int rule) {
-        // Case - invalid rule input:
-        if (rule < 0x0 || rule > 0xFF) return false;
-        
-        // set bitArray[8]
-        for (int i = 0; i < 8; rule >>= 1) {
-            bitArray[i++] = (0x1 & rule);
-        }
-        return true;
+    // Case - invalid rule input:
+    if (rule < 0x0 || rule > 0xFF) return false;
+    
+    // set bitArray[8]
+    for (int i = 0; i < 8; rule >>= 1) {
+        bitArray[i++] = (0x1 & rule);
+    }
+    return true;
 }
 
 /** stateToIndex:                                                                     - -
