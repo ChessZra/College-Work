@@ -1,0 +1,53 @@
+\documentclass[11pt]{article}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{Lecture Assignment 1 (Extra Credit)}
+\author{John Ezra See}
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Given definitions:}
+\begin{itemize}
+    \item An integer $n$ is even if and only if there exists an integer $k$ such that $n = 2k$.
+    \item An integer $n$ is odd if and only if there exists an integer $k$ such that $n = 2k + 1$.
+    \item A real number $r$ is rational if and only if there exist integers $a$ and $b$ with $b \neq 0$ such that $r = \frac{a}{b}$.
+\end{itemize}
+
+\section{Objective:}
+\begin{enumerate}
+    \item If $m + n$ and $n + p$ are odd integers, where $m$, $n$, and $p$ are integers then $m + p$ is even.
+    \item The product of any two rational numbers is rational.
+\end{enumerate}
+
+\section{Proof:}
+\begin{enumerate}
+    % Question 1 - proof
+    \item Let $m$, $n$, $p$ be integers and $m + n$ and $n + p$ are odd integers, we will show that $m + p$ is even. \\
+    Since $m + n$ is odd, then $m + n = 2k + 1$ (1) for some integer k. And since $n + p$ is odd, then $n + p = 2j + 1$ (2) for some integer j. \\
+    Adding both equations together, we get $m + n + n + p = 2k + 1 + 2j + 1$, simplifying to $m + p = 2k + 2j + 2 - 2n$ or $m + p = 2(k + j + 1 - n)$. \\
+    Since k, j, n are integers, the sum of them are also integers. \\
+    Since $m + p$ is equal to $2m$, where $m = (k + j + 1 - n)$, $m + p$ is even. \\
+
+    % Question 2 - proof
+    \item Let $a$ and $b$ be two rational numbers, which can also be expressed as $a = c/d$ and $b = e/f$, where $c$, $d$, $e$, $f$ are both integers, and $d \neq 0$ and $f \neq 0$, we will prove that their product is also rational. \\
+    The product of two rational numbers is $a * b$ which can also be expressed as $\frac{c}{d} * \frac{e}{f} = \frac{c * e}{d * f}$ \\
+    Since $c$ and $e$ are both integers, then their product is also an integer, giving us $\frac{k}{d * f}$ where k is the product of $c$ and $e$. \\
+    Since $d$ and $f$ are both nonzeroes, then their product $j$ will be a nonzero integer.\\
+    Now we have $a * b = \frac{k}{j}$, where $k$, $j$ are both integers and $j \neq 0$. Hence the product of $a$ and $b$ is also rational.
+
+   
+\end{enumerate}
+
+
+\end{document}
