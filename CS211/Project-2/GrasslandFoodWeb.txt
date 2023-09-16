@@ -1,0 +1,20 @@
+7
+Grass
+Grasshopper
+Hawk
+Lizard
+Rabbit
+Snake
+Mouse
+10
+6 0
+3 1
+2 3
+2 6
+2 5
+4 0
+2 1
+5 6
+2 4
+1 0
+3

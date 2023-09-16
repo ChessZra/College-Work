@@ -25,9 +25,27 @@ void buildWeb(Org* web, int numOrg, int predInd, int preyInd) {
     //      (2) append the prey index as the last element of the predator's prey[] array 
     //      (3) update the numPrey subitem for the predator appropriately 
 
+    
+    if (!web[predInd].numPrey) { // Case: prey array is empty, allocates memory for one int.
+        web[predInd].prey = (int*) malloc(sizeof(int));
+    } else { // Case: prey array is not empty, allocates memory for one extra int.
+        // Allocate a new prey array with the new size.
+        // Copy the old elements to the new prey array.
+        // Free up the old array.
+        // Repipe the old array to the new array.
+        int* newPrey = (int*) malloc(sizeof(int) * (web[predInd].numPrey + 1));
+        for (int i = 0; i < web[predInd].numPrey; i++) {
+            newPrey[i] = web[predInd].prey[i];
+        }
+        free(web[predInd].prey);
+        web[predInd].prey = newPrey;
+    }
 
+    // (2) append the prey index as the last element of the predator's prey[] array 
+    web[predInd].prey[web[predInd].numPrey] = preyInd;
 
-
+    // (3) update the numPrey subitem for the predator appropriately 
+    web[predInd].numPrey += 1;
 }
 
 
@@ -71,6 +89,31 @@ void extinction(Org** web, int* numOrgs, int index) {
 }
 
 
+// Food Web Predators & Prey:
+//   Grass
+//   Grasshopper eats Grass
+//   Hawk eats Lizard, Mouse, Snake, Grasshopper, Rabbit
+//   Lizard eats Grasshopper
+//   Rabbit eats Grass
+//   Snake eats Mouse
+//   Mouse eats Grass
+void printFoodWeb(Org* web, int numOrg) {
+
+    for (int i = 0; i < numOrg; i++) {
+        printf("  %s", web[i].name);
+        if (web[i].numPrey) 
+            printf(" eats ");
+        for (int j = 0; j < web[i].numPrey; j++) {
+            if (j == (web[i].numPrey - 1)) {
+                printf("%s", web[web[i].prey[j]].name);
+            } else {
+                printf("%s, ", web[web[i].prey[j]].name);
+            }
+        }
+        printf("\n");
+    }
+}
+
 
 int main(void) {
 
@@ -108,6 +151,7 @@ int main(void) {
 
     printf("Food Web Predators & Prey:\n");
     //TODO: print the Food Web Organisms with what they eat (i.e. prey)
+    printFoodWeb(web, numOrgs);
     printf("\n");
 
     printf("Apex Predators:\n");
