@@ -99,7 +99,6 @@ void extinction(Org** web, int* numOrgs, int index) {
 //   Snake eats Mouse
 //   Mouse eats Grass
 void printFoodWeb(Org* web, int numOrg) {
-
     for (int i = 0; i < numOrg; i++) {
         printf("  %s", web[i].name);
         if (web[i].numPrey) 
@@ -115,6 +114,29 @@ void printFoodWeb(Org* web, int numOrg) {
     }
 }
 
+ 
+void identifyApexPredators(Org* web, int numOrg, int apexPredators[]) {
+    // Initialize every organism as a predator.
+    for (int i = 0; i < numOrg; i++) {
+        apexPredators[i] = 1;
+    }
+    
+    // Filter non-predators based on whether they appear in the prey[] arrays.
+    for (int i = 0; i < numOrg; i++) {
+        for (int j = 0; j < web[i].numPrey; j++) {
+            int preyIndex = web[i].prey[j];
+            apexPredators[preyIndex] = 0;
+        }
+    }
+}
+
+void printApexPredators(Org* web, int numOrg, int apexPredators[]) {
+    for (int i = 0; i < numOrg; i++) {
+        if (apexPredators[i]) {
+            printf("  %s\n", web[i].name);
+        }
+    }
+}
 
 int main(void) {
 
@@ -157,6 +179,10 @@ int main(void) {
 
     printf("Apex Predators:\n");
     //TODO: identify and print the organisms not eaten by any others
+    int apexPredators[numOrgs]; // Index: Respective predator, Value: 1 -> is predator or 0 -> is not predator.
+    identifyApexPredators(web, numOrgs, apexPredators);
+    printApexPredators(web, numOrgs, apexPredators);
+    
     printf("\n");
 
     printf("Producers:\n");
