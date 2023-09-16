@@ -1,0 +1,43 @@
+13
+Fox
+Hawk
+Herbivor_Insect
+Insectivor_Bird
+Mouse
+Plants
+Predaceous_Insect
+Rabbit
+Seed_Eating_Bird
+Snake
+Spider
+Squirrel
+Toad
+27
+0 8
+1 7
+0 4
+1 3
+2 5
+3 10
+4 5
+9 2
+6 2
+7 5
+8 5
+1 11
+9 4
+3 2
+9 8
+0 3
+0 12
+9 3
+10 6
+9 6
+0 7
+9 12
+11 5
+0 11
+10 2
+1 8
+12 6
+10

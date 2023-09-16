@@ -115,7 +115,7 @@ void printFoodWeb(Org* web, int numOrg) {
 }
 
  
-void identifyApexPredators(Org* web, int numOrg, int apexPredators[]) {
+void identifyApexPredators(Org* web, int numOrg, bool apexPredators[]) {
     // Initialize every organism as a predator.
     for (int i = 0; i < numOrg; i++) {
         apexPredators[i] = 1;
@@ -130,13 +130,185 @@ void identifyApexPredators(Org* web, int numOrg, int apexPredators[]) {
     }
 }
 
-void printApexPredators(Org* web, int numOrg, int apexPredators[]) {
+void printApexPredators(Org* web, int numOrg, bool apexPredators[]) {
     for (int i = 0; i < numOrg; i++) {
         if (apexPredators[i]) {
             printf("  %s\n", web[i].name);
         }
     }
 }
+
+void identifyProducers(Org* web, int numOrg, bool producers[]) {
+    // Build the producers array based on whether the organism has eaten something or not.
+    for (int i = 0; i < numOrg; i++) {
+        if (!web[i].numPrey) { // If the organism has no prey, then it is a producer.
+            producers[i] = 1;
+        } else {               // Otherwise, it eats something.
+            producers[i] = 0;
+        }
+    }
+}
+
+void printProducers(Org* web, int numOrg, bool producers[]) {
+    for (int i = 0; i < numOrg; i++) {
+        if (producers[i]) {
+            printf("  %s\n", web[i].name);
+        }
+    }
+}
+
+void identifyFlexibleEaters(Org* web, int numOrg, bool mostFlexibleEaters[]) {
+    // Get max number of eaten preys.
+    int maxPreys = 0;
+    for (int i = 0; i < numOrg; i++) {
+        if (web[i].numPrey > maxPreys) {
+            maxPreys = web[i].numPrey;
+        }
+    }
+
+    // Build mostFlexibleEaters[] array based on the calculated maxPreys number.
+    for (int i = 0; i < numOrg; i++) {
+        if (web[i].numPrey == maxPreys) {
+            mostFlexibleEaters[i] = 1;
+        } else {
+            mostFlexibleEaters[i] = 0;
+        }
+    }
+}
+
+void printFlexibleEaters(Org* web, int numOrg, bool mostFlexibleEaters[]) {
+    for (int i = 0; i < numOrg; i++) {
+        if (mostFlexibleEaters[i]) {
+            printf("  %s\n", web[i].name);
+        }
+    }
+}
+
+void identifyTastiestFood(Org* web, int numOrg, bool tastiestFood[]) {
+    // Get max number of eaten preys.
+    int numTimesEaten[numOrg];
+    int maxNumTimes = 0;
+    for (int i = 0; i < numOrg; i++) {
+        numTimesEaten[i] = 0;
+    }
+
+    for (int i = 0; i < numOrg; i++) {
+        for (int j = 0; j < web[i].numPrey; j++) {
+            int preyIndex = web[i].prey[j];
+            numTimesEaten[preyIndex] += 1;
+            if (numTimesEaten[preyIndex] > maxNumTimes) {
+                maxNumTimes = numTimesEaten[preyIndex];
+            }
+        }
+    }
+
+    for (int i = 0; i < numOrg; i++) {
+        tastiestFood[i] = 0;
+        if (numTimesEaten[i] == maxNumTimes) 
+            tastiestFood[i] = 1;
+    }
+}
+
+void printTastiestFood(Org* web, int numOrg, bool tastiestFood[]) {
+    for (int i = 0; i < numOrg; i++) {
+        if (tastiestFood[i]) {
+            printf("  %s\n", web[i].name);
+        }
+    }
+}
+
+void identifyFoodWebHeights(Org* web, int numOrg, int foodWebHeights[]) {
+    // set all heights to 0
+    // assume changes to the heights need to be made
+    // visit all organisms in web[ ]
+    // for each organism, set its height as one more than its maximum prey height
+    // if no changes to the heights were made, then we are done; otherwise, redo step 3
+
+    for (int i = 0; i < numOrg; i++) {
+        foodWebHeights[i] = 0;
+    }
+
+    bool changes = true;
+    while (changes) {
+        changes = false;
+        for (int i = 0; i < numOrg; i++) {
+            int maxPreyHeight = -1;
+            for (int j = 0; j < web[i].numPrey; j++) {
+                if (foodWebHeights[web[i].prey[j]] > maxPreyHeight) 
+                    maxPreyHeight = foodWebHeights[web[i].prey[j]];
+            }
+            if (foodWebHeights[i] != (maxPreyHeight + 1)) {
+                foodWebHeights[i] = maxPreyHeight + 1;
+                changes = true;
+            }
+        }
+    }
+}
+
+void printFoodWebHeights(Org* web, int numOrg, int foodWebHeights[]) {
+    for (int i = 0; i < numOrg; i++) {
+        printf("  %s: %d\n", web[i].name, foodWebHeights[i]);
+    }
+}
+
+void identifyVoreTypes(Org* web, int numOrg, int voreTypes[], bool producers[]) {
+    // Producer (1): eats no other organism in the food web; the assumption is that all producers are plants and all plants are producers.
+    // Herbivore (2): only eat producers (i.e. only plants)
+    // Omnivore (3): eats producers and non-producers (i.e. plants and animals)
+    // Carnivore (4): only eats non-producers (i.e. only animals)
+    for (int i = 0; i < numOrg; i++) {
+        bool eatsAnimals = false, eatsPlants = false;
+        for (int j = 0; j < web[i].numPrey; j++) {
+            int orgIndex = web[i].prey[j];
+            if (producers[orgIndex]) {
+                eatsPlants = true;
+            } else {
+                eatsAnimals = true;
+            }
+        }
+        if (!eatsAnimals && !eatsPlants) {
+            voreTypes[i] = 1;
+        } else if (!eatsAnimals && eatsPlants) {
+            voreTypes[i] = 2;
+        } else if (eatsAnimals && eatsPlants) {
+            voreTypes[i] = 3;
+        } else if (eatsAnimals && !eatsPlants) {
+            voreTypes[i] = 4;
+        }
+    }
+}
+
+// Vore Types:
+//   Producers:
+//     Grass
+//   Herbivores:
+//     Grasshopper
+//     Rabbit
+//     Mouse
+//   Omnivores:
+//   Carnivores:
+//     Hawk
+//     Lizard
+//     Snake
+void printVoreTypes(Org* web, int numOrg, int voreTypes[]) {
+    for (int i = 1; i <= 4; i++) {
+        if (i == 1) {
+            printf("  Producers:\n");
+        }  else if (i == 2) {
+            printf("  Herbivores:\n");
+        } else if (i == 3) {
+            printf("  Omnivores:\n");
+        } else if (i == 4) {
+            printf("  Carnivores:\n");
+        }
+
+        for (int j = 0; j < numOrg; j++) {
+            if (voreTypes[j] == i) 
+                printf("    %s\n", web[j].name);
+        }
+    }
+}
+
 
 int main(void) {
 
@@ -173,38 +345,48 @@ int main(void) {
     printf("--------------------------------\n\n");
 
     printf("Food Web Predators & Prey:\n");
-    //TODO: print the Food Web Organisms with what they eat (i.e. prey)
     printFoodWeb(web, numOrgs);
     printf("\n");
 
     printf("Apex Predators:\n");
-    //TODO: identify and print the organisms not eaten by any others
-    int apexPredators[numOrgs]; // Index: Respective predator, Value: 1 -> is predator or 0 -> is not predator.
+    bool apexPredators[numOrgs]; // Index: Respective org, Value: 1, 0 indicating whether the org is a predator or not.
     identifyApexPredators(web, numOrgs, apexPredators);
     printApexPredators(web, numOrgs, apexPredators);
-    
+
     printf("\n");
 
     printf("Producers:\n");
-    //TODO: identify and print the organisms that eat no other organisms
+    bool producers[numOrgs]; // Index: Respective org, Value: 1, 0 indicating whether the org is a producer or not.
+    identifyProducers(web, numOrgs, producers);
+    printProducers(web, numOrgs, producers);
     printf("\n");
 
     printf("Most Flexible Eaters:\n");
-    //TODO: identity and print the organism(s) with the most prey
+    bool mostFlexibleEaters[numOrgs]; // Index: Respective org, Value: 1, 0 indicating whether the org is the most flexible eater or not. 
+    identifyFlexibleEaters(web, numOrgs, mostFlexibleEaters);
+    printFlexibleEaters(web, numOrgs, mostFlexibleEaters);
+
     printf("\n");
 
     printf("Tastiest Food:\n");
-    //TODO: identity and print organism(s) eaten by the most other organisms
+    bool tastiestFood[numOrgs];
+    identifyTastiestFood(web, numOrgs, tastiestFood);
+    printTastiestFood(web, numOrgs, tastiestFood);
+
     printf("\n");
 
     printf("Food Web Heights:\n");
-    //TODO: calculate and print the length of the longest chain from a 
-    //      producer to each organism
+    int foodWebHeights[numOrgs]; // Index: Respective org, Value: the web height of the org.
+    identifyFoodWebHeights(web, numOrgs, foodWebHeights);
+    printFoodWebHeights(web, numOrgs, foodWebHeights);
+
     printf("\n");
 
     printf("Vore Types:\n");
-    //TODO: classify all organisms and print each group
-    //      (producers, herbivores, omnivores, & carnivores)
+    int voreTypes[numOrgs]; // Index: Respective org, Value: 1 -> Producer, 2 -> Herbivore, 3 -> Omnivore, 4 -> Carnivore
+    identifyVoreTypes(web, numOrgs, voreTypes, producers);
+    printVoreTypes(web, numOrgs, voreTypes);
+
     printf("\n");
 
     printf("--------------------------------\n");
