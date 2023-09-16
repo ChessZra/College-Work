@@ -46,6 +46,7 @@ void buildWeb(Org* web, int numOrg, int predInd, int preyInd) {
 
     // (3) update the numPrey subitem for the predator appropriately 
     web[predInd].numPrey += 1;
+   
 }
 
 
