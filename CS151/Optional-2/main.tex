@@ -1,0 +1,52 @@
+\documentclass[11pt]{article}
+
+\usepackage{sectsty}
+\usepackage{graphicx}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\title{Lecture Assignment 2 (Extra Credit)}
+\author{John Ezra See}
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Given definitions:}
+\begin{itemize}
+    \item An integer $n$ is even if and only if there exists an integer $k$ such that $n = 2k$.
+    \item An integer $n$ is odd if and only if there exists an integer $k$ such that $n = 2k + 1$.
+    \item A real number $r$ is rational if and only if there exist integers $a$ and $b$ with $b \neq 0$ such that $r = \frac{a}{b}$.
+\end{itemize}
+
+\section{Objective:}
+\begin{enumerate}
+    \item For every integer $n$, if $n^3$ is even, then n is even.
+    \item For every non-zero real number $x$, if $x$ is irrational, then $1/x$ is \textit{irrational}.
+\end{enumerate}
+
+\section{Proof (by contrapositive):}
+\begin{enumerate}
+    % Question 1 - proof
+    \item Let integer n be any integer, we will assume that $n$ is not even, and prove that $n^3$ is not even. \\
+    Since $n$ is not even, then it is odd, which could be expressed by the following: $n = 2k + 1$ for some integer k. \\
+    Since $n = 2k + 1$, we can raise both sides to the power of $3$ giving us, $n^3 = (2k + 1)^3$. \\
+    This equation simplifies to $n^3 = 8k^3 + 12k^2 + 6k + 1 = 2(4k^3 + 6k^2 + 3k) + 1.$ \\
+    Since $k$ is an integer, the expression for $4k^3 + 6k^2 + 3k$ is also an integer and could be represented as $m$. \\
+    This gives us the equation, $n^3 = 2m + 1$. This is odd by definition, proving that $n^3$ is not even.
+
+    % Question 2 - proof
+    \item Let x be a non-zero real number, we will assume that $1/x$ is not irrational, and prove that $x$ is not irrational. \\
+    Since $1/x$ is not irrational, then $1/x$ is rational. \\
+    Since $1/x$ is rational and a real number, then there exists integers $a$ and $b$ with $b \neq 0$ such that $1/x = a/b$. \\
+    Getting the reciprocal gives $x = b/a$. Since x is a real number and $a$ and $b$ are both integers, then $a \neq 0$. \\
+    This satisfies the definition for a rational number. Thus x is rational, proving that it is not irrational.
+\end{enumerate}
+
+
+\end{document}
