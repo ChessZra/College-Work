@@ -1,3 +1,15 @@
+/* -----------------------------------------------------------------------------------
+Program 1: Elementary Cellular Automaton
+Course: CS 211, Fall 2023, UIC
+System: Advanced zyLab
+Author: John Ezra See
+- -               - -
+Description: This program analyzes food webs, letting users define predator-prey 
+relationships. It dynamically manages organism data and handles species extinctions,
+updating the food web accordingly.
+------------------------------------------------------------------------------------- */
+// Preproccesor directives:
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -8,7 +20,14 @@ typedef struct Org_struct {
     int numPrey;
 } Org;
 
-
+/** buildWeb:                                                                         - -
+    This function builds the predator-prey relationships in the prey subitem for every 
+    Org in web. This function initializes the web parameter.
+    @param web          : An array pointer of organisms.
+    @param numOrg       : The number of organisms in web (i.e size of the web).
+    @param predInd      : The respective index of predator in the web.
+    @param preyInd      : The respective index of prey in the web.
+    @return             : Changes web parameter by reference.                         */
 void buildWeb(Org* web, int numOrg, int predInd, int preyInd) {
     if (!web[predInd].numPrey) { // Case: prey array is empty, allocates memory for
                                  // one int.
@@ -33,7 +52,13 @@ void buildWeb(Org* web, int numOrg, int predInd, int preyInd) {
     web[predInd].numPrey += 1;
 }
 
-
+/** extinction:                                                                       - -
+    This function handles the web by updating all the predator-prey relationships
+    and removing the extinct index from the web and the prey[] array.
+    @param web          : A pointer of array pointer of organisms.
+    @param numOrgs      : The number of organisms in web (i.e size of the web).
+    @param Index        : The respective index of the extinct specimen.
+    @return             : Changes web and numOrgs parameter by reference.             */
 void extinction(Org** web, int* numOrgs, int index) {
     // Purpose: Remove extinct organism at index from web[].
     free((*web)[index].prey); // free up dynamically allocated prey array subitem 
@@ -94,7 +119,11 @@ void extinction(Org** web, int* numOrgs, int index) {
 
 }
 
-
+/** printFoodWeb:                                                                     - -
+    This function prints the food web. (e.g Lion eats eagle)
+    @param web          : An array pointer of organisms.
+    @param numOrg       : The number of organisms in web (i.e size of the web).
+    @return             : None                                                        */
 void printFoodWeb(Org* web, int numOrg) {
     for (int i = 0; i < numOrg; i++) {
         printf("  %s", web[i].name);
@@ -111,7 +140,14 @@ void printFoodWeb(Org* web, int numOrg) {
     }
 }
 
-
+/** identifyApexPredators:                                                            - -
+    This function initializes the apex predators by traversing every single animal on 
+    the web to see if they are an apex predator or not.
+    @param web              : An array pointer of organisms.
+    @param numOrg           : The number of organisms in web (i.e size of the web).
+    @param apexPredators    : A static array: index: respective animal index.
+                              value: 1 -> predator, 0 -> not predator.
+    @return                 : Changes the apexPredators array.                        */
 void identifyApexPredators(Org* web, int numOrg, bool apexPredators[]) {
     // Initialize every organism as a predator.
     for (int i = 0; i < numOrg; i++) {
@@ -127,7 +163,13 @@ void identifyApexPredators(Org* web, int numOrg, bool apexPredators[]) {
     }
 }
 
-
+/** printApexPredators:                                                               - -
+    This function prints the apex predators.
+    @param web              : An array pointer of organisms.
+    @param numOrg           : The number of organisms in web (i.e size of the web).
+    @param apexPredators    : A static array: index: respective animal index.
+                              value: 1 -> predator, 0 -> not predator.
+    @return                 : None.                                                   */
 void printApexPredators(Org* web, int numOrg, bool apexPredators[]) {
     for (int i = 0; i < numOrg; i++) {
         if (apexPredators[i]) {
@@ -136,7 +178,14 @@ void printApexPredators(Org* web, int numOrg, bool apexPredators[]) {
     }
 }
 
-
+/** identifyProducers:                                                                - -
+    This function initializes the producers by traversing every single animal on the web
+    to see if they are a producer or not.
+    @param web          : An array pointer of organisms.
+    @param numOrg       : The number of organisms in web (i.e size of the web).
+    @param producers    : A static array: index: respective animal index
+                          value: 1 -> producer, 0 -> not producer.
+    @return             : Changes the producers array.                                */
 void identifyProducers(Org* web, int numOrg, bool producers[]) {
     // Build the producers array based on whether the organism has eaten something or 
     // not.
@@ -149,7 +198,13 @@ void identifyProducers(Org* web, int numOrg, bool producers[]) {
     }
 }
 
-
+/** printProducers:                                                                   - -
+    This function prints the producers.
+    @param web          : An array pointer of organisms.
+    @param numOrg       : The number of organisms in web (i.e size of the web).
+    @param producers    : A static array: index: respective animal index
+                          value: 1 -> producer, 0 -> not producer.
+    @return             : None                                                        */
 void printProducers(Org* web, int numOrg, bool producers[]) {
     for (int i = 0; i < numOrg; i++) {
         if (producers[i]) {
@@ -158,7 +213,14 @@ void printProducers(Org* web, int numOrg, bool producers[]) {
     }
 }
 
-
+/** identifyFlexibleEaters:                                                           - -
+    This function initializes the mostFlexibleEaters array by going through the web 
+    and checking who eats the most diversed animals.
+    @param web                  : An array pointer of organisms.
+    @param numOrg               : The number of organisms in web (i.e size of the web).
+    @param mostFlexibleEaters   : A static array: index: respective animal index.
+                                  value: 1 -> flexible eater, 0 -> the opposite.
+    @return                     : Changes the mostFlexibleEaters array.               */
 void identifyFlexibleEaters(Org* web, int numOrg, bool mostFlexibleEaters[]) {
     // Get max number of eaten preys.
     int maxPreys = 0;
@@ -178,7 +240,13 @@ void identifyFlexibleEaters(Org* web, int numOrg, bool mostFlexibleEaters[]) {
     }
 }
 
-
+/** printFlexibleEaters:                                                              - -
+    This function prints the most flexible eaters.
+    @param web                  : An array pointer of organisms.
+    @param numOrg               : The number of organisms in web (i.e size of the web).
+    @param mostFlexibleEaters   : A static array: index: respective animal index,
+                                  value: 1 -> flexible eater, 0 -> the opposite.
+    @return                     : None                                                */
 void printFlexibleEaters(Org* web, int numOrg, bool mostFlexibleEaters[]) {
     for (int i = 0; i < numOrg; i++) {
         if (mostFlexibleEaters[i]) {
@@ -187,7 +255,14 @@ void printFlexibleEaters(Org* web, int numOrg, bool mostFlexibleEaters[]) {
     }
 }
 
-
+/** identifyTastiestFood:                                                             - -
+    This function initializes the tastiestFood array by checking which animal in the web
+    is most prone to being a prey.
+    @param web          : An array pointer of organisms.
+    @param numOrg       : The number of organisms in web (i.e size of the web).
+    @param tastiestFood : A static array: index: respective animal index,
+                          value: 1 -> tasty food, 0 -> non-tasty.
+    @return             : Changes the tastiestFood array.                             */
 void identifyTastiestFood(Org* web, int numOrg, bool tastiestFood[]) {
     // Get max number of eaten preys.
     int numTimesEaten[numOrg];
@@ -213,7 +288,13 @@ void identifyTastiestFood(Org* web, int numOrg, bool tastiestFood[]) {
     }
 }
 
-
+/** printTastiestFood:                                                                - -
+    This function prints the tastiest animal.
+    @param web          : An array pointer of organisms.
+    @param numOrg       : The number of organisms in web (i.e size of the web).
+    @param tastiestFood : A static array: index: respective animal index,
+                          value: 1 -> tasty food, 0 -> non-tasty
+    @return             : None                                                        */
 void printTastiestFood(Org* web, int numOrg, bool tastiestFood[]) {
     for (int i = 0; i < numOrg; i++) {
         if (tastiestFood[i]) {
@@ -222,7 +303,15 @@ void printTastiestFood(Org* web, int numOrg, bool tastiestFood[]) {
     }
 }
 
-
+/** printFoodWebHeights:                                                              - -
+    This function analyzes the height of each food using a certain algorithm:
+    the path from the producer up to that point. This function is to initialize 
+    the foodWebHeights array.
+    @param web              : An array pointer of organisms.
+    @param numOrg           : The number of organisms in web (i.e size of the web).
+    @param foodWebHeights   : A static array: index: respective animal index
+                              value: the height (path)
+    @return                 : Changes the foodWebHeights array.                       */
 void identifyFoodWebHeights(Org* web, int numOrg, int foodWebHeights[]) {
     // set all heights to 0
     // assume changes to the heights need to be made
@@ -252,14 +341,29 @@ void identifyFoodWebHeights(Org* web, int numOrg, int foodWebHeights[]) {
     }
 }
 
-
+/** printFoodWebHeights:                                                              - -
+    This function prints the height of each food.
+    @param web              : An array pointer of organisms.
+    @param numOrg           : The number of organisms in web (i.e size of the web).
+    @param foodWebHeights   : A static array: index: respective animal index
+                              value: the height (path)
+    @return                 : None                                                    */
 void printFoodWebHeights(Org* web, int numOrg, int foodWebHeights[]) {
     for (int i = 0; i < numOrg; i++) {
         printf("  %s: %d\n", web[i].name, foodWebHeights[i]);
     }
 }
 
+/** printVoreTypes:                                                                   - -
+    This function categorizes every single animal to their respective type.
 
+    @param web          : An array pointer of organisms.
+    @param numOrg       : The number of organisms in web (i.e size of the web).
+    @param voreTypes    : A static array: index: respective animal index
+                                    value: the type of vore.
+    @param producers    : A static array: index: respective animal index
+                          value: 1 -> producer, 0 -> not producer.
+    @return             : Changes the voreTypes array.                                */
 void identifyVoreTypes(Org* web, int numOrg, int voreTypes[], bool producers[]) {
     // Producer (1): eats no other organism in the food web; the assumption is that 
                             //all producers are plants and all plants are producers.
@@ -288,7 +392,13 @@ void identifyVoreTypes(Org* web, int numOrg, int voreTypes[], bool producers[]) 
     }
 }
 
-
+/** printVoreTypes:                                                                   - -
+    This function prints the type of Vore for each animal.
+    @param web          : An array pointer of organisms.
+    @param numOrg       : The number of organisms in web (i.e size of the web).
+    @param voreTypes    : A static array: index: respective animal index
+                          value: the type of vore.
+    @return             : None                                                        */
 void printVoreTypes(Org* web, int numOrg, int voreTypes[]) {
     for (int i = 1; i <= 4; i++) {
         if (i == 1) {
@@ -308,7 +418,9 @@ void printVoreTypes(Org* web, int numOrg, int voreTypes[]) {
     }
 }
 
-
+/** main:
+    The driver code of the program. This is where the code starts.
+    @return     : integer to signify successful program execution.                    */
 int main(void) {
 
     int numOrgs;
@@ -342,7 +454,7 @@ int main(void) {
         buildWeb(web,numOrgs,predInd,preyInd);
     }
     printf("--------------------------------\n\n");
-
+    /* --------------------------- Identify/Print section --------------------------- */
     printf("Food Web Predators & Prey:\n");
     printFoodWeb(web, numOrgs);
     printf("\n");
@@ -352,7 +464,6 @@ int main(void) {
                                  // whether the org is a predator or not.
     identifyApexPredators(web, numOrgs, apexPredators);
     printApexPredators(web, numOrgs, apexPredators);
-
     printf("\n");
 
     printf("Producers:\n");
@@ -368,14 +479,12 @@ int main(void) {
                                       // or not. 
     identifyFlexibleEaters(web, numOrgs, mostFlexibleEaters);
     printFlexibleEaters(web, numOrgs, mostFlexibleEaters);
-
     printf("\n");
 
     printf("Tastiest Food:\n");
     bool tastiestFood[numOrgs];
     identifyTastiestFood(web, numOrgs, tastiestFood);
     printTastiestFood(web, numOrgs, tastiestFood);
-
     printf("\n");
 
     printf("Food Web Heights:\n");
@@ -383,7 +492,6 @@ int main(void) {
                                 // the org.
     identifyFoodWebHeights(web, numOrgs, foodWebHeights);
     printFoodWebHeights(web, numOrgs, foodWebHeights);
-
     printf("\n");
 
     printf("Vore Types:\n");
@@ -391,9 +499,9 @@ int main(void) {
                             // 2 -> Herbivore, 3 -> Omnivore, 4 -> Carnivore
     identifyVoreTypes(web, numOrgs, voreTypes, producers);
     printVoreTypes(web, numOrgs, voreTypes);
-
     printf("\n");
 
+    /* --------------------------- Extinction section ------------------------------- */
     printf("--------------------------------\n");
     int extInd;
     printf("Enter extinct species index:\n");
@@ -401,7 +509,7 @@ int main(void) {
     printf("Species Extinction: %s\n", web[extInd].name);
     extinction(&web,&numOrgs,extInd);
     printf("--------------------------------\n\n");
-    // ----------------------- Extinction section ------------------------------------
+    
 
     printf("UPDATED Food Web Predators & Prey:\n");
     printFoodWeb(web, numOrgs);
