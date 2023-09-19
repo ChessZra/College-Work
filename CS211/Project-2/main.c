@@ -1,5 +1,5 @@
 /* -----------------------------------------------------------------------------------
-Program 1: Elementary Cellular Automaton
+Program 2: Food Web Analysis with Dynamic Memory
 Course: CS 211, Fall 2023, UIC
 System: Advanced zyLab
 Author: John Ezra See
