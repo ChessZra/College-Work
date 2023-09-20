@@ -44,10 +44,8 @@ void buildWeb(Org* web, int numOrg, int predInd, int preyInd) {
         free(web[predInd].prey);
         web[predInd].prey = newPrey;
     }
-
     // (2) append the prey index as the last element of the predator's prey[] array 
     web[predInd].prey[web[predInd].numPrey] = preyInd;
-
     // (3) update the numPrey subitem for the predator appropriately 
     web[predInd].numPrey += 1;
 }
@@ -70,17 +68,14 @@ void extinction(Org** web, int* numOrgs, int index) {
     free(web[0]);
     *web = newArr;
     *numOrgs -= 1;
-
     // Purpose: Remove index from all organisms' prey[] array subitems.
     for (int i = 0; i < *numOrgs; i++) {
-
         // Step 1: Find if the extinct organism exists in prey[].
         bool extinctPreyFound = false;
         for (int j = 0; j < web[0][i].numPrey; j++) {
             if (web[0][i].prey[j] == index) 
                 extinctPreyFound = true;
         }
-
         // Step 2: Allocate a new array properly.
         int* newPrey = NULL;
         if (extinctPreyFound && web[0][i].numPrey > 1) { // Case: Extinct organism is 
@@ -90,7 +85,6 @@ void extinction(Org** web, int* numOrgs, int index) {
         } else if (!extinctPreyFound && web[0][i].numPrey) {
             newPrey = (int*) malloc(sizeof(int) * web[0][i].numPrey);
         }
-
         // Step 3: Populate the allocated array.
         for (int j = 0, k = 0; j < web[0][i].numPrey; j++) {
             int preyInd = web[0][i].prey[j];
@@ -102,11 +96,9 @@ void extinction(Org** web, int* numOrgs, int index) {
                 newPrey[k++] = preyInd;
             }
         }
-        
         // Step 4: Free up the old prey array and re-assign it to the new one.
         free(web[0][i].prey);
         web[0][i].prey = newPrey;
-
         // Step 5: Update numprey subitem.
         if (extinctPreyFound) {
             web[0][i].numPrey -= 1;
@@ -148,7 +140,6 @@ void identifyApexPredators(Org* web, int numOrg, bool apexPredators[]) {
     for (int i = 0; i < numOrg; i++) {
         apexPredators[i] = 1;
     }
-    
     // Filter non-predators based on whether they appear in the prey[] arrays.
     for (int i = 0; i < numOrg; i++) {
         for (int j = 0; j < web[i].numPrey; j++) {
@@ -184,8 +175,9 @@ void identifyProducers(Org* web, int numOrg, bool producers[]) {
     // Build the producers array based on whether the organism has eaten something or 
     // not.
     for (int i = 0; i < numOrg; i++) {
-        producers[i] = (!web[i].numPrey) ? 1 : 0; // If the organism has no prey, then it is a producer.
-                                                  // Otherwise, it eats something.
+        producers[i] = (!web[i].numPrey) ? 1 : 0; // If the organism has no prey, then 
+                                                  // it is a producer. Otherwise, it
+                                                  // eats something.
     }
 }
 
@@ -218,7 +210,6 @@ void identifyFlexibleEaters(Org* web, int numOrg, bool mostFlexibleEaters[]) {
         if (web[i].numPrey > maxPreys) 
             maxPreys = web[i].numPrey;
     }
-
     // Build mostFlexibleEaters[] array based on the calculated maxPreys number.
     for (int i = 0; i < numOrg; i++) {
         mostFlexibleEaters[i] = (web[i].numPrey == maxPreys) ? 1 : 0;
