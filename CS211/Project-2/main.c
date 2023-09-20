@@ -370,19 +370,11 @@ void identifyVoreTypes(Org* web, int numOrg, int voreTypes[], bool producers[]) 
                           value: the type of vore.
     @return             : None                                                        */
 void printVoreTypes(Org* web, int numOrg, int voreTypes[]) {
-    for (int i = 1; i <= 4; i++) {
-        if (i == 1) {
-            printf("  Producers:\n");
-        }  else if (i == 2) {
-            printf("  Herbivores:\n");
-        } else if (i == 3) {
-            printf("  Omnivores:\n");
-        } else if (i == 4) {
-            printf("  Carnivores:\n");
-        }
-
+    const char *strs[] = {"Producers", "Herbivores", "Omnivores", "Carnivores"};
+    for (int i = 0; i < 4; i++) {
+        printf("  %s:\n", strs[i]);
         for (int j = 0; j < numOrg; j++) {
-            if (voreTypes[j] == i) 
+            if (voreTypes[j] == (i + 1)) 
                 printf("    %s\n", web[j].name);
         }
     }
@@ -392,7 +384,7 @@ void printVoreTypes(Org* web, int numOrg, int voreTypes[]) {
     The driver code of the program. This is where the code starts.
     @return     : integer to signify successful program execution.                    */
 int main(void) {
-
+    
     int numOrgs;
     printf("Welcome to the Food Web Application\n");
     printf("--------------------------------\n");
@@ -470,7 +462,6 @@ int main(void) {
     identifyVoreTypes(web, numOrgs, voreTypes, producers);
     printVoreTypes(web, numOrgs, voreTypes);
     printf("\n");
-
     /* --------------------------- Extinction section ------------------------------- */
     printf("--------------------------------\n");
     int extInd;
@@ -480,7 +471,6 @@ int main(void) {
     extinction(&web,&numOrgs,extInd);
     printf("--------------------------------\n\n");
     
-
     printf("UPDATED Food Web Predators & Prey:\n");
     printFoodWeb(web, numOrgs);
     printf("\n");
@@ -521,7 +511,6 @@ int main(void) {
     printVoreTypes(web, numOrgs, voreTypes);
     printf("\n");
     printf("--------------------------------\n");
-
     // Free up all of the allocated memory.
     for (int i = 0; i < numOrgs; i++) {
         free(web[i].prey);
