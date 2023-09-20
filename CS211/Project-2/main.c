@@ -33,10 +33,10 @@ void buildWeb(Org* web, int numOrg, int predInd, int preyInd) {
                                  // one int.
         web[predInd].prey = (int*) malloc(sizeof(int));
     } else { // Case: prey array is not empty, allocates memory for one extra int.
-        // Allocate a new prey array with the new size.
-        // Copy the old elements to the new prey array.
-        // Free up the old array.
-        // Repipe the old array to the new array.
+            // Allocate a new prey array with the new size.
+            // Copy the old elements to the new prey array.
+            // Free up the old array.
+            // Repipe the old array to the new array.
         int* newPrey = (int*) malloc(sizeof(int) * (web[predInd].numPrey + 1));
         for (int i = 0; i < web[predInd].numPrey; i++) {
             newPrey[i] = web[predInd].prey[i];
@@ -61,43 +61,39 @@ void buildWeb(Org* web, int numOrg, int predInd, int preyInd) {
     @return             : Changes web and numOrgs parameter by reference.             */
 void extinction(Org** web, int* numOrgs, int index) {
     // Purpose: Remove extinct organism at index from web[].
-    free((*web)[index].prey); // free up dynamically allocated prey array subitem 
+    free(web[0][index].prey); // free up dynamically allocated prey array subitem 
     Org* newArr = (*numOrgs - 1) ? (Org*) malloc((*numOrgs - 1) * sizeof(Org)) : NULL;
-
-    int j = 0;
-    for (int i = 0; i < *numOrgs; i++) {
+    for (int i = 0, j = 0; i < *numOrgs; i++) {
         if (i == index) continue;
-        newArr[j] = (*web)[i];
-        j += 1;
+        newArr[j++] = web[0][i];
     }
-    free(*web);
+    free(web[0]);
     *web = newArr;
     *numOrgs -= 1;
 
     // Purpose: Remove index from all organisms' prey[] array subitems.
     for (int i = 0; i < *numOrgs; i++) {
-    
+
         // Step 1: Find if the extinct organism exists in prey[].
         bool extinctPreyFound = false;
-        for (int j = 0; j < (*web)[i].numPrey; j++) {
-            if ((*web)[i].prey[j] == index) 
+        for (int j = 0; j < web[0][i].numPrey; j++) {
+            if (web[0][i].prey[j] == index) 
                 extinctPreyFound = true;
         }
 
         // Step 2: Allocate a new array properly.
         int* newPrey = NULL;
-        if (extinctPreyFound && (*web)[i].numPrey > 1) { // Case: Extinct organism is 
+        if (extinctPreyFound && web[0][i].numPrey > 1) { // Case: Extinct organism is 
                                                 // found, we would like to remove that
                                                 // so allocate a new array of size - 1
-            newPrey = (int*) malloc(sizeof(int) * ((*web)[i].numPrey - 1));
-        } else if (!extinctPreyFound && (*web)[i].numPrey) {
-            newPrey = (int*) malloc(sizeof(int) * (*web)[i].numPrey);
+            newPrey = (int*) malloc(sizeof(int) * (web[0][i].numPrey - 1));
+        } else if (!extinctPreyFound && web[0][i].numPrey) {
+            newPrey = (int*) malloc(sizeof(int) * web[0][i].numPrey);
         }
 
         // Step 3: Populate the allocated array.
-        int k = 0;
-        for (int j = 0; j < (*web)[i].numPrey; j++) {
-            int preyInd = (*web)[i].prey[j];
+        for (int j = 0, k = 0; j < web[0][i].numPrey; j++) {
+            int preyInd = web[0][i].prey[j];
             if (preyInd == index) {
                 continue;
             } else if (preyInd > index) {
@@ -108,15 +104,14 @@ void extinction(Org** web, int* numOrgs, int index) {
         }
         
         // Step 4: Free up the old prey array and re-assign it to the new one.
-        free((*web)[i].prey);
-        (*web)[i].prey = newPrey;
+        free(web[0][i].prey);
+        web[0][i].prey = newPrey;
 
         // Step 5: Update numprey subitem.
         if (extinctPreyFound) {
-            (*web)[i].numPrey -= 1;
+            web[0][i].numPrey -= 1;
         }
     }
-
 }
 
 /** printFoodWeb:                                                                     - -
@@ -172,9 +167,8 @@ void identifyApexPredators(Org* web, int numOrg, bool apexPredators[]) {
     @return                 : None.                                                   */
 void printApexPredators(Org* web, int numOrg, bool apexPredators[]) {
     for (int i = 0; i < numOrg; i++) {
-        if (apexPredators[i]) {
+        if (apexPredators[i]) 
             printf("  %s\n", web[i].name);
-        }
     }
 }
 
@@ -190,11 +184,8 @@ void identifyProducers(Org* web, int numOrg, bool producers[]) {
     // Build the producers array based on whether the organism has eaten something or 
     // not.
     for (int i = 0; i < numOrg; i++) {
-        if (!web[i].numPrey) { // If the organism has no prey, then it is a producer.
-            producers[i] = 1;
-        } else {               // Otherwise, it eats something.
-            producers[i] = 0;
-        }
+        producers[i] = (!web[i].numPrey) ? 1 : 0; // If the organism has no prey, then it is a producer.
+                                                  // Otherwise, it eats something.
     }
 }
 
@@ -207,9 +198,8 @@ void identifyProducers(Org* web, int numOrg, bool producers[]) {
     @return             : None                                                        */
 void printProducers(Org* web, int numOrg, bool producers[]) {
     for (int i = 0; i < numOrg; i++) {
-        if (producers[i]) {
+        if (producers[i]) 
             printf("  %s\n", web[i].name);
-        }
     }
 }
 
@@ -225,18 +215,13 @@ void identifyFlexibleEaters(Org* web, int numOrg, bool mostFlexibleEaters[]) {
     // Get max number of eaten preys.
     int maxPreys = 0;
     for (int i = 0; i < numOrg; i++) {
-        if (web[i].numPrey > maxPreys) {
+        if (web[i].numPrey > maxPreys) 
             maxPreys = web[i].numPrey;
-        }
     }
 
     // Build mostFlexibleEaters[] array based on the calculated maxPreys number.
     for (int i = 0; i < numOrg; i++) {
-        if (web[i].numPrey == maxPreys) {
-            mostFlexibleEaters[i] = 1;
-        } else {
-            mostFlexibleEaters[i] = 0;
-        }
+        mostFlexibleEaters[i] = (web[i].numPrey == maxPreys) ? 1 : 0;
     }
 }
 
@@ -249,9 +234,8 @@ void identifyFlexibleEaters(Org* web, int numOrg, bool mostFlexibleEaters[]) {
     @return                     : None                                                */
 void printFlexibleEaters(Org* web, int numOrg, bool mostFlexibleEaters[]) {
     for (int i = 0; i < numOrg; i++) {
-        if (mostFlexibleEaters[i]) {
+        if (mostFlexibleEaters[i]) 
             printf("  %s\n", web[i].name);
-        }
     }
 }
 
@@ -265,8 +249,7 @@ void printFlexibleEaters(Org* web, int numOrg, bool mostFlexibleEaters[]) {
     @return             : Changes the tastiestFood array.                             */
 void identifyTastiestFood(Org* web, int numOrg, bool tastiestFood[]) {
     // Get max number of eaten preys.
-    int numTimesEaten[numOrg];
-    int maxNumTimes = 0;
+    int numTimesEaten[numOrg], maxNumTimes = 0;
     for (int i = 0; i < numOrg; i++) {
         numTimesEaten[i] = 0;
     }
@@ -282,9 +265,7 @@ void identifyTastiestFood(Org* web, int numOrg, bool tastiestFood[]) {
     }
 
     for (int i = 0; i < numOrg; i++) {
-        tastiestFood[i] = 0;
-        if (numTimesEaten[i] == maxNumTimes) 
-            tastiestFood[i] = 1;
+        tastiestFood[i] = (numTimesEaten[i] == maxNumTimes) ? 1 : 0;
     }
 }
 
@@ -297,13 +278,12 @@ void identifyTastiestFood(Org* web, int numOrg, bool tastiestFood[]) {
     @return             : None                                                        */
 void printTastiestFood(Org* web, int numOrg, bool tastiestFood[]) {
     for (int i = 0; i < numOrg; i++) {
-        if (tastiestFood[i]) {
+        if (tastiestFood[i]) 
             printf("  %s\n", web[i].name);
-        }
     }
 }
 
-/** printFoodWebHeights:                                                              - -
+/** identifyFoodWebHeights:                                                           - -
     This function analyzes the height of each food using a certain algorithm:
     the path from the producer up to that point. This function is to initialize 
     the foodWebHeights array.
@@ -319,7 +299,6 @@ void identifyFoodWebHeights(Org* web, int numOrg, int foodWebHeights[]) {
     // for each organism, set its height as one more than its maximum prey height
     // if no changes to the heights were made, then we are done; otherwise, redo      
     // step 3
-
     for (int i = 0; i < numOrg; i++) {
         foodWebHeights[i] = 0;
     }
@@ -354,7 +333,7 @@ void printFoodWebHeights(Org* web, int numOrg, int foodWebHeights[]) {
     }
 }
 
-/** printVoreTypes:                                                                   - -
+/** identifyVoreTypes:                                                                - -
     This function categorizes every single animal to their respective type.
 
     @param web          : An array pointer of organisms.
@@ -418,7 +397,7 @@ void printVoreTypes(Org* web, int numOrg, int voreTypes[]) {
     }
 }
 
-/** main:
+/** main:                                                                             - -
     The driver code of the program. This is where the code starts.
     @return     : integer to signify successful program execution.                    */
 int main(void) {
