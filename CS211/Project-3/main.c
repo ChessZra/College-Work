@@ -37,7 +37,23 @@ typedef struct Pattern_struct {
 //               note: newWord is a C-string, automatically a pointer
 //-------------------------------------------------------------------
 void addWord(char*** words, int* numWords, int* maxWords, char* newWord) {
+    if (*numWords == *maxWords) { // Case: the current words exceed the capacity, double the size of **words.
+        char** newArray = (char**) malloc(sizeof(char*) * (*maxWords * 2));
+        for (int i = 0; i < *numWords; i++) {
+            newArray[i] = (*words)[i];
+        } 
+        free(*words);
+        *words = newArray;
+        *maxWords *= 2;
+    }
 
+    char* newWordCopy = (char*) malloc(sizeof(char) * (strlen(newWord) + 1)); // Add + 1 because of the edge case '\0'
+    strcpy(newWordCopy, newWord);
+
+    // Add the new word to the end of the array and update *numWords;
+    (*words)[*numWords] = newWordCopy;
+    
+    *numWords += 1;
 }
 
 //-------------------------------------------------------------------
@@ -170,7 +186,7 @@ int main(int argc, char* argv[]) {
         printSettings(&wordSize, &numGuesses, &statsMode, &wordMode, &letterMode, &patternMode);
     } else {
         printf("Terminating program...\n");
-        return;
+        return 0;
     }
 
     //-------------------------------------------------------------------
