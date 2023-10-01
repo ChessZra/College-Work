@@ -203,17 +203,45 @@ int main(int argc, char* argv[]) {
     //                        can store a word containing exactly 
     //                        wordSize lower-case letters
     //-------------------------------------------------------------------
-    
-    int capacity = 4;
-    char** wordList = (char**)malloc(capacity*sizeof(char*));
-    
+    int capacity = 4, numWords = 0, dictionarySize = 0;
+    char** wordList = (char**) malloc(capacity*sizeof(char*));
+    char longestWord[100] = "", buffer[100];
+    FILE* inputFile;
+    inputFile = fopen("dictionary.txt", "r");
+    while (fgets(buffer, 100, inputFile)) {
+        dictionarySize++;
+        // Get the longest word:
+        if (strlen(buffer) > strlen(longestWord)) {
+            strcpy(longestWord, buffer);
+        }
+        // Add the word to the array if it is equal to the given size.
+        if ((strlen(buffer) - 1) == wordSize) 
+            addWord(&wordList, &numWords, &capacity, buffer);
+    }
+    fclose(inputFile);
 
     //-------------------------------------------------------------------
     // TODO - Task IV: display dictionary stats [-s] & word list [-w] 
     //                 if the proper command-line flags are turned ON;
     //                 see sample output for proper formatting 
     //-------------------------------------------------------------------
-    
+    if (statsMode) {
+        printf("The dictionary contains %d words total.\n"
+                "The longest word %s has %ld chars.\n"
+                "The dictionary contains %d words of length %d.\n"
+                "Max size of the dynamic words array is %d.\n", 
+                dictionarySize, longestWord, strlen(longestWord) - 1, numWords, wordSize, capacity);
+    } 
+    if (wordMode) {
+        printf("Words of length %d:\n", wordSize);
+        for (int i = 0; i < numWords; i++) {
+            printf("  %s", wordList[i]);
+        }
+        if (!numWords) {
+            printf("Dictionary has no words of length %d.\nTerminating program...", wordSize);
+            return 0;
+        }
+    }
 
 
     //-------------------------------------------------------------------
