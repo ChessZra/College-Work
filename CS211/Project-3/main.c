@@ -72,6 +72,53 @@ int strDiffInd(char* str1, char* str2) {
     return -1; //modify this
 }
 
+
+bool setSettings(int argc, char* argv[], int* wordSize, int* numGuesses, bool* statsMode, bool* wordMode, bool* letterMode, bool* patternMode, bool* verboseMode, bool* extensionMode) {
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(argv[i], "-n") == 0) {
+            if (atoi(argv[i + 1]) > 1) { 
+                *wordSize = atoi(argv[i + 1]);
+                i += 1;
+            } else {
+                printf("\nInvalid word size.\n");
+                return false;
+            }
+        } else if (strcmp(argv[i], "-g") == 0) {
+            if (atoi(argv[i + 1]) > 1) { 
+                *numGuesses = atoi(argv[i + 1]);
+                i += 1;
+            } else {
+                printf("\nInvalid number of guesses.\n");
+                return false;
+            }
+        } else if (strcmp(argv[i], "-s") == 0) {
+            *statsMode = true;
+        } else if (strcmp(argv[i], "-w") == 0) {
+            *wordMode = true;
+        } else if (strcmp(argv[i], "-l") == 0) {
+            *letterMode = true;
+        } else if (strcmp(argv[i], "-p") == 0) {
+            *patternMode = true;
+        } else if (strcmp(argv[i], "-v") == 0) {
+            *statsMode = true; *wordMode = true; *letterMode = true; *patternMode = true; 
+        } else {
+            printf("\nInvalid command-line argument.\n");
+            return false;
+        }
+    }
+    return true;
+}
+
+void printSettings(int* wordSize, int* numGuesses, bool* statsMode, bool* wordMode, bool* letterMode, bool* patternMode) {
+    printf("Game Settings:\n");
+    printf("  Word Size = %d\n", *wordSize);
+    printf("  Number of Guesses = %d\n", *numGuesses);
+    printf("  View Stats Mode = %s\n", (*statsMode) ? "ON" : "OFF");
+    printf("  View Word List Mode = %s\n", (*wordMode) ? "ON" : "OFF");
+    printf("  View Letter List Mode = %s\n", (*letterMode) ? "ON" : "OFF");
+    printf("  View Pattern List Mode = %s\n", (*patternMode) ? "ON" : "OFF");
+}
+
 int main(int argc, char* argv[]) {
 
     printf("Welcome to the (Evil) Word Guessing Game!\n\n");
@@ -117,9 +164,15 @@ int main(int argc, char* argv[]) {
     //                        the evil word game, e.g. optimizing the 
     //                        algorithm to predict future guesses
     //-------------------------------------------------------------------
-    
-    
-    
+    int wordSize = 5, numGuesses = 26;
+    bool statsMode = false, wordMode = false, letterMode = false, patternMode = false, verboseMode = false, extensionMode = false;
+    if (setSettings(argc, argv, &wordSize, &numGuesses, &statsMode, &wordMode, &letterMode, &patternMode, &verboseMode, &extensionMode)) {
+        printSettings(&wordSize, &numGuesses, &statsMode, &wordMode, &letterMode, &patternMode);
+    } else {
+        printf("Terminating program...\n");
+        return;
+    }
+
     //-------------------------------------------------------------------
     // TODO - Task III: file-read the word list from dictionary.txt, 
     //                  storing only words of length set by wordSize 
