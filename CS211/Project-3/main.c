@@ -56,6 +56,7 @@ void addWord(char*** words, int* numWords, int* maxWords, char* newWord) {
     *numWords += 1;
 }
 
+
 //-------------------------------------------------------------------
 // TODO - Task V: write the strNumMods() function, which
 //      returns count of character differences between two strings;
@@ -68,9 +69,25 @@ void addWord(char*** words, int* numWords, int* maxWords, char* newWord) {
 //      str1 = magic, str2 = darkmagic, returns 8
 //-------------------------------------------------------------------
 int strNumMods(char* str1, char* str2) {
-    
-    return -1; //modify this
+    char* ptr1 = str1;
+    char* ptr2 = str2;
+    int charDiff = 0;
+    while (*ptr1 != '\0' && *ptr2 != '\0') {
+        charDiff += (*ptr1 != *ptr2);
+        ptr1++;
+        ptr2++;
+    }
+    while (*ptr1 != '\0') {
+        ptr1++;
+        charDiff++;
+    }
+    while (*ptr2 != '\0') {
+        ptr2++;
+        charDiff++;
+    }
+    return charDiff;
 }
+
 
 //-------------------------------------------------------------------
 // TODO - Task VI: write the strDiffInd() function, which
@@ -84,8 +101,15 @@ int strNumMods(char* str1, char* str2) {
 //      str1 = magic, str2 = darkmagic, returns 0
 //-------------------------------------------------------------------
 int strDiffInd(char* str1, char* str2) {
-    
-    return -1; //modify this
+    char* ptr1 = str1;
+    char* ptr2 = str2;
+    while (*ptr1 != '\0' && *ptr2 != '\0') {
+        if (*ptr1 != *ptr2) return (ptr1 - str1);
+        ptr1++;
+        ptr2++;
+    }
+    if (*ptr1 != '\0' || *ptr2 != '\0') return (ptr1 - str1);
+    return strlen(str1);
 }
 
 
@@ -125,6 +149,7 @@ bool setSettings(int argc, char* argv[], int* wordSize, int* numGuesses, bool* s
     return true;
 }
 
+
 void printSettings(int* wordSize, int* numGuesses, bool* statsMode, bool* wordMode, bool* letterMode, bool* patternMode) {
     printf("Game Settings:\n");
     printf("  Word Size = %d\n", *wordSize);
@@ -135,11 +160,240 @@ void printSettings(int* wordSize, int* numGuesses, bool* statsMode, bool* wordMo
     printf("  View Pattern List Mode = %s\n", (*patternMode) ? "ON" : "OFF");
 }
 
+
+bool getGuessedLetter(char* guessedLetter, bool usedLetters[]) {
+    // Get an input from the user:
+    // If input is CAPS: Invalid letter...
+    // If input is already chosen: Letter previously guessed...
+    // If input is #: Terminating game...
+    while (true) {
+        printf("Guess a letter (# to end game): ");
+        scanf(" %c", guessedLetter);
+        printf("\n");
+        if (*guessedLetter >= 'A' && *guessedLetter <= 'Z') {
+            printf("Invalid letter...\n"); 
+            continue;
+        } else if (*guessedLetter == '#') {
+            printf("Terminating game...\n");
+            return false;
+        } else if (usedLetters[*guessedLetter - 'a']){ // Condition: Letter is already guessed
+            printf("Letter previously guessed...\n");
+            continue;
+        }
+        break;
+    }
+    usedLetters[*guessedLetter - 'a'] = true;
+    return true;
+}
+
+
+// buildPatternArray(&patternArray, &numPatterns, &patternArrayCapacity, &guessedLetter, wordList[i], wordSize);
+void buildPatternArray(Pattern** patternArray, int* numPatterns, int* patternArrayCapacity, char* guessedLetter, char* currentWord, int wordSize, bool usedLetters[]) {
+    if (*numPatterns == *patternArrayCapacity) {
+        Pattern* newPatternArray = (Pattern*) malloc(sizeof(Pattern) * (*patternArrayCapacity * 2));
+        for (int i = 0; i < *numPatterns; i++) {
+            newPatternArray[i] = (*patternArray)[i];
+        }
+        free(*patternArray);
+        *patternArray = newPatternArray;
+        *patternArrayCapacity *= 2;
+    }
+
+    // Initialize pattern to "-----"
+    char* pattern = (char*) malloc(sizeof(char) * (wordSize + 1));
+    for (int i = 0; i < wordSize; i++) {
+        pattern[i] = '-';
+    }
+    pattern[wordSize] = '\0';
+
+    // Build pattern, for example "---a--"
+    int changes = 0;
+    for (int i = 0; i < wordSize; i++) {
+        if (currentWord[i] == *guessedLetter) {
+            pattern[i] = *guessedLetter;
+            changes++;
+        }
+    }
+
+    // Check if the pattern already exists in the patternArray, if so, store the index of patternArray.
+    int foundPatternInArray = -1;
+    for (int i = 0; i < *numPatterns; i++) {
+        if (strcmp((*patternArray)[i].pat, pattern) == 0) {
+            foundPatternInArray = i;
+        }
+    }
+
+    // Build the pattern array based on the retrieved info.
+    if (foundPatternInArray == -1) {
+        (*patternArray)[*numPatterns].pat = pattern;
+        (*patternArray)[*numPatterns].changes = changes;
+        (*patternArray)[*numPatterns].count = 1;
+        *numPatterns += 1;
+    } else {
+        (*patternArray)[foundPatternInArray].count += 1;
+    }
+}
+
+
+void printPatternArray(Pattern** patternArray, int* numPatterns, char guessedLetter) {
+    printf("All patterns for letter %c:\n", guessedLetter); 
+    for (int i = 0; i < *numPatterns; i++) {
+        printf("  %s         count = %-4d    changes = %d\n", (*patternArray)[i].pat, (*patternArray)[i].count, (*patternArray)[i].changes);
+    }
+}
+ 
+
+int getNumWinners(bool candidates[], int numCandidates) {
+    int ret = 0;
+    for (int i = 0; i < numCandidates; i++) {
+        ret += candidates[i];
+    }
+    return ret;
+}
+
+
+bool analyzePatternArray(Pattern** patternArray, int* numPatterns, char guessedLetter, char* currentPattern) {
+
+    int winnerIndex = -1, numCandidates = *numPatterns;
+    bool candidates[numCandidates];
+    
+    // FIRST FILTER: We want the pattern/candidate that has the maximum "count" (i.e the pattern that appears the most in patternArray).
+    int maximumCount = 0;
+    for (int i = 0; i < numCandidates; i++) {
+        if (maximumCount < (*patternArray)[i].count)
+            maximumCount = (*patternArray)[i].count;
+    }
+    for (int i = 0; i < numCandidates; i++) {
+        candidates[i] = false;
+        if (maximumCount == (*patternArray)[i].count) {
+            candidates[i] = true;
+        }
+    }
+    
+    // If there are more than one candidate, we need to filter more till we reach one.
+    // SECOND FILTER: We want the pattern with the minimum "changes" (i.e the pattern that has the least changes).
+    int leastChanges = 100000;
+    if (getNumWinners(candidates, numCandidates) > 1) { 
+        for (int i = 0; i < numCandidates; i++) {
+            if (!candidates[i]) continue;
+            if (leastChanges > (*patternArray)[i].changes) {
+                leastChanges = (*patternArray)[i].changes;
+            }
+        }
+        for (int i = 0; i < numCandidates; i++) {
+            if (leastChanges != (*patternArray)[i].changes) {
+                candidates[i] = false;
+            }
+        }
+    }
+
+    // If there are more than one candidate, we need to filter more till we reach one.
+    // THIRD FILTER: Find whose guessed letter appears the closest:
+    // Keep incrementing cur until a single pattern is chosen.  
+    int cur = 0;
+    while (getNumWinners(candidates, numCandidates) > 1) {
+        int temp = 0;
+        for (int i = 0; i < numCandidates; i++) {
+            if (!candidates[i]) continue;
+            if (guessedLetter == (*patternArray)[i].pat[cur]) 
+                temp++;
+        }
+        if (temp < 1) {
+            cur++;
+            continue;
+        } 
+        for (int i = 0; i < numCandidates; i++) {
+            if (!candidates[i]) continue;
+            if (guessedLetter != (*patternArray)[i].pat[cur]) 
+                candidates[i] = false;
+        }
+
+        cur++;
+    }
+
+    // Build the new current pattern.
+    char newCurrentPattern[strlen(currentPattern) + 1];
+    for (int i = 0; i < numCandidates; i++) {
+        if (candidates[i]) {
+            for (int j = 0; j < strlen((*patternArray)[i].pat); j++) {
+                if ((*patternArray)[i].pat[j] == guessedLetter) {
+                    newCurrentPattern[j] = guessedLetter;
+                } else {
+                    newCurrentPattern[j] = currentPattern[j];
+                }
+            }
+            break;
+        }
+    }
+
+    bool ret = (bool) strcmp(newCurrentPattern, currentPattern);
+    strcpy(currentPattern, newCurrentPattern);
+
+    return ret;
+}
+
+
+// void addWord(char*** words, int* numWords, int* maxWords, char* newWord) {
+// recreateWordList(&wordList, guessedLetter, currentPattern);
+        // char** newArray = (char**) malloc(sizeof(char*) * (*maxWords * 2));
+        // for (int i = 0; i < *numWords; i++) {
+        //     newArray[i] = (*words)[i];
+        // } 
+        // free(*words);
+        // *words = newArray;
+        // *maxWords *= 2;
+void freeWordList(char*** words, int* numWords) {
+    for (int i = 0; i < *numWords; i++) {
+        free((*words)[i]);
+    }
+    free(*words);
+}
+
+
+void recreateWordList(char*** words, int* numWords, int* numCapacity, char guessedLetter, char* currentPattern) {
+    int capacity = 4, numNewWords = 0;
+    char** newWordList = (char**) malloc(capacity*sizeof(char*));
+    int numOfLetters = 0;
+    for (int i = 0; i < strlen(currentPattern); i++) {
+        if (currentPattern[i] != '-') numOfLetters++;
+    }
+
+    for (int i = 0; i < *numWords; i++) {
+        bool valid = true;
+        // Find if the guessed letter is in word, then don't add that.
+        // magic, ----- = 5, numOfLetters = 0
+        // magic, -a--- = 4, numOfLetters = 1, magic
+        // if (strNumMods((*words)[i], currentPattern) == numOfLetters) {
+        //     valid = false;
+        // }
+
+        for (int j = 0; (*words)[i][j] != '\0'; j++) {
+            if ((*words)[i][j] == guessedLetter && guessedLetter != currentPattern[j]) {
+                valid = false;
+                break;
+            }
+        }
+        if (valid) {
+            addWord(&newWordList, &numNewWords, &capacity, (*words)[i]);
+        }
+       
+    }
+
+    // Free the entire wordsList
+    freeWordList(words, numWords);
+
+    // Rewire the wordList to newWordList
+    *words = newWordList;
+    *numWords = numNewWords;
+    *numCapacity = capacity;
+}
+
+
 int main(int argc, char* argv[]) {
 
     printf("Welcome to the (Evil) Word Guessing Game!\n\n");
     
-    bool solved = false;
+    // bool solved = false;
     
     //-------------------------------------------------------------------
     // TODO - Task I: handle command-line arguments
@@ -230,7 +484,7 @@ int main(int argc, char* argv[]) {
                 "The longest word %s has %ld chars.\n"
                 "The dictionary contains %d words of length %d.\n"
                 "Max size of the dynamic words array is %d.\n", 
-                dictionarySize, longestWord, strlen(longestWord) - 1, numWords, wordSize, capacity);
+                dictionarySize, longestWord, (long) strlen(longestWord) - 1, numWords, wordSize, capacity);
     } 
     if (wordMode) {
         printf("Words of length %d:\n", wordSize);
@@ -284,6 +538,53 @@ int main(int argc, char* argv[]) {
     //-------------------------------------------------------------------
     
 
+
+    // Once the final pattern has been analyzed, check whether the player guessed right or wrong:
+        // If their guessed letter is not in the pattern, then they are WRONG -> lost one of their lives.
+        // If right: repeat the process.
+
+    char currentPattern[wordSize + 1]; // starts with "---------"
+    bool usedLetters[26]; // tracks all used alphabets
+    for (int i = 0; i < wordSize; i++) {
+        currentPattern[i] = '-';
+    } 
+    currentPattern[wordSize] = '\0';
+    for (int i = 0; i < 26; i++) {
+        usedLetters[i] = false;
+    }
+
+    printf("The word pattern is: %s\n\n", currentPattern);
+    while (numGuesses) {
+        char guessedLetter; 
+        
+        printf("Number of guesses remaining: %d\n", numGuesses);
+
+        if (!getGuessedLetter(&guessedLetter, usedLetters)) return 0;
+
+        // Build a dynamic array of unique pattern structs (capacity of 4 initially, doubles when exceeds)
+        int numPatterns = 0, patternArrayCapacity = 4;
+        Pattern* patternArray = (Pattern*) malloc(patternArrayCapacity * sizeof(Pattern));
+        for (int i = 0; i < numWords; i++) {  // Pattern is built off numwWords and wordList;
+            buildPatternArray(&patternArray, &numPatterns, &patternArrayCapacity, &guessedLetter, wordList[i], wordSize, usedLetters);
+        }
+        printPatternArray(&patternArray, &numPatterns, guessedLetter);
+
+        // Analyze the array of pattern structs: (the idea is to be evil and make the game hardest for the player)
+        // This changes the currentPattern variable.
+        if (analyzePatternArray(&patternArray, &numPatterns, guessedLetter, currentPattern)) {
+            printf("Good guess! The word has at least one %c.\n", guessedLetter);
+        } else {
+            printf("Oops, there are no %c's. You used a guess.\n", guessedLetter);
+            numGuesses--;
+        }
+
+        // Recreate wordList: changes wordList.
+        recreateWordList(&wordList, &numWords, &capacity, guessedLetter, currentPattern);
+
+        printf("The number of possible words remaining: %d\n", numWords);
+        printf("The word pattern is: %s\n\n", currentPattern);
+        free(patternArray);
+    }
     
     //-------------------------------------------------------------------
     // TODO - Task VIII:free all heap-allocated memory to avoid potential 
@@ -293,8 +594,7 @@ int main(int argc, char* argv[]) {
     //                  dynamically heap-allocated, and thus must be 
     //                  tracked and freed
     //-------------------------------------------------------------------
-    
 
-    
+    freeWordList(&wordList, &numWords);
     return 0;
 }
