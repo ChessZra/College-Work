@@ -166,10 +166,6 @@ bool setSettings(int argc, char* argv[], int* wordSize, int* numGuesses,
                             letters.
     @return             :   None | Modifies guessedLetter variable.                   */
 bool getGuessedLetter(char* guessedLetter, bool usedLetters[]) {
-    // Get an input from the user:
-    // If input is CAPS: Invalid letter...
-    // If input is already chosen: Letter previously guessed...
-    // If input is #: Terminating game...
     while (true) {
         printf("Guess a letter (# to end game): ");
         scanf(" %c", guessedLetter);
@@ -405,16 +401,6 @@ void recreateWordList(char*** words, int* numWords, int* numCapacity,
 
     for (int i = 0; i < *numWords; i++) {
         bool valid = true;
-        // guessed letter: o
-        // current word: open
-        // pattern: o---
-        // this loop traverses all the words and checks if the word is still valid or 
-        // not.
-        // valid: still guessable 
-        // remove all instances of o, if you don't see "o" in the current pattern.
-        // if there is another instance of o:
-        //      if you found o and it is not seen in the pattern.
-        // invalid: non-guessable
         int found = 0;
         for (int j = 0; (*words)[i][j] != '\0'; j++) {
             if (currentPattern[j] == guessedLetter) {
@@ -648,14 +634,14 @@ int main(int argc, char* argv[]) {
             if (currentPattern[i] == '-') solved = false;
         }
         freePatternArray(patternArray, numPatterns); 
-    }
+    } // Loop end
+
     if (solved) {
         printf("You solved the word!\nThe word is: %s\nGame over.", currentPattern);
     } else {
         printf("You ran out of guesses and did not solve the word.\nThe word is: %s\n"
                "Game over.", wordList[0]);
     }
-    
     freeWordList(&wordList, &numWords);
     return 0;
 }
