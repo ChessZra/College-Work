@@ -1,7 +1,10 @@
 #include <stdio.h>
 
 int main() {
-    int x = 69;
-    int y = 30;
+    int c[60];
+
+    for (int i = 0; i < 60; i++) {
+        c[i] = i;
+    }
     return 0;
 }
