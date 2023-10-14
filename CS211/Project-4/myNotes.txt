@@ -1,0 +1,16 @@
+For the president to win, the president needs to receive 270 or more electoral votes.
+
+Each state has different number of electoral votes.
+
+To win all the electoral votes per state, it needs to receive the 
+vote amount: (popularVotes // 2 + 1)
+
+
+What's the minimum number of (popular) votes needed to win?
+
+Brute Force Solution:
+Given 50 states:
+    Find all subsets of the states:
+        // for every state, the electoral votes that count is only popularVotes // 2 + 1 (because we are finding the min)
+        For each subset, if the the sum of electoral votes of all states in that subset is >= 270:
+            answer = min(answer, electoral_votes);

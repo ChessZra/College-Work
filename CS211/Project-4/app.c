@@ -63,6 +63,10 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
+    printf("SUCCESSFUL PROGRAM EXECUTION!\n");
+    printf("-------------- TESTING PHASE ---------------\n");
+    return 0;
+
     // if year is not set by command-line arguments, 
     //  then set it using interactive user-input;
     //  year must be between 1828 and 2020, inclusive

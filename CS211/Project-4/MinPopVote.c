@@ -9,9 +9,30 @@ bool setSettings(int argc, char** argv, int* year, bool* fastMode, bool* quietMo
     //------------------------------------------------   
     // TODO: Task 1 - write the setSettings() function
     //------------------------------------------------
-    
     //sample processing of command-line arg...
-    *fastMode = true; //modify or replace this
+    // Data files include: [1828, 2020].csv inclusive
+
+    // Set settings to default value:
+    *year = 0;
+    *fastMode = false;
+    *quietMode = false;
+
+    for (int i = 1; i < argc; i++) {
+        if (strcmp("-f", argv[i]) == 0) {
+            *fastMode = true;
+        } else if (strcmp("-q", argv[i]) == 0) {
+            *quietMode = true;
+        } else if (strcmp("-y", argv[i]) == 0 && i != (argc - 1)) {
+            if (atoi(argv[i + 1]) % 4 == 0 && atoi(argv[i + 1]) >= 1828 && atoi(argv[i + 1]) <= 2020) {
+                *year = atoi(argv[i + 1]);
+            } else {
+                *year = 0;
+            }
+            i += 1;
+        } else {
+            return false;
+        }
+    }
     return true; //modify or replace this
 }
 

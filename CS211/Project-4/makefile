@@ -1,12 +1,12 @@
 build:
-	rm -f app.exe
+	del app.exe
 	gcc app.c MinPopVote.c -o app.exe
 
 run:
-	./app.exe
+	app.exe
 
 run_quiet:
-	./app.exe -q
+	app.exe -q
 
 valgrind:
 	valgrind -s --tool=memcheck --leak-check=yes --track-origins=yes ./app.exe
