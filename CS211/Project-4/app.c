@@ -63,10 +63,6 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
-    printf("SUCCESSFUL PROGRAM EXECUTION!\n");
-    printf("-------------- TESTING PHASE ---------------\n");
-    return 0;
-
     // if year is not set by command-line arguments, 
     //  then set it using interactive user-input;
     //  year must be between 1828 and 2020, inclusive
@@ -114,7 +110,7 @@ int main(int argc, char* argv[]) {
         printf("Invalid filename %s. \nNo file found. \nTerminating program...\n",filename);
         return -1;
     } 
-        
+
     // display full list of States (only if not in quiet mode)
     if (!quietMode) {
         printf("\n");
@@ -123,6 +119,10 @@ int main(int argc, char* argv[]) {
             printState(allStates[i]);
         }
     }
+
+    printf("SUCCESSFUL PROGRAM EXECUTION!\n");
+    printf("-------------- TESTING PHASE ---------------\n");
+    return 0;
 
     // solve the "central question" by calculating the minimum
     //  number of popular votes to win the election

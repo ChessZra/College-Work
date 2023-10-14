@@ -6,24 +6,20 @@
 #include "MinPopVote.h"
 
 bool setSettings(int argc, char** argv, int* year, bool* fastMode, bool* quietMode) {
-    //------------------------------------------------   
-    // TODO: Task 1 - write the setSettings() function
-    //------------------------------------------------
     //sample processing of command-line arg...
     // Data files include: [1828, 2020].csv inclusive
-
     // Set settings to default value:
     *year = 0;
     *fastMode = false;
     *quietMode = false;
-
     for (int i = 1; i < argc; i++) {
         if (strcmp("-f", argv[i]) == 0) {
             *fastMode = true;
         } else if (strcmp("-q", argv[i]) == 0) {
             *quietMode = true;
         } else if (strcmp("-y", argv[i]) == 0 && i != (argc - 1)) {
-            if (atoi(argv[i + 1]) % 4 == 0 && atoi(argv[i + 1]) >= 1828 && atoi(argv[i + 1]) <= 2020) {
+            if (atoi(argv[i + 1]) % 4 == 0 && atoi(argv[i + 1]) >= 1828 && 
+                atoi(argv[i + 1]) <= 2020) {
                 *year = atoi(argv[i + 1]);
             } else {
                 *year = 0;
@@ -33,35 +29,83 @@ bool setSettings(int argc, char** argv, int* year, bool* fastMode, bool* quietMo
             return false;
         }
     }
-    return true; //modify or replace this
+    return true; 
 }
 
 void inFilename(char* filename, int year) {
-    //------------------------------------------------   
-    // TODO: Task 2 - write the inFilename() function
-    //------------------------------------------------
+    snprintf(filename, 50, "data/%d.csv", year);
     return;
 }
 
 void outFilename(char* filename, int year) {
-    //------------------------------------------------   
-    // TODO: Task 2 - write the outFilename() function
-    //------------------------------------------------
+    snprintf(filename, 50, "toWin/%d_win.csv", year);
     return;
 }
 
 bool parseLine(char* line, State* myState) {
-    //------------------------------------------------   
-    // TODO: Task 4 - write the parseLine() function
-    //------------------------------------------------
-    return false; //modify or replace this
+    // General variables:
+    int idx = 0, numberOfCommas = 0, i; 
+    // Temporary variables:
+    char nameOfState[50], postCode[3], electVotes[5], popVotes[15];
+
+    // Check if line is valid:
+    for (i = 0; line[i] != '\0'; i++) {
+        if (line[i] == ',') {
+            numberOfCommas += 1;
+        }
+    }
+    if (numberOfCommas != 3) return false;
+
+    for (i = 0; line[idx] != ','; i++) { // Parse name, (e.g Illinois):
+        nameOfState[i] = line[idx];
+        idx += 1;
+    }
+    nameOfState[i] = '\0';
+    idx += 1;
+
+    for (i = 0; line[idx] != ','; i++) { // Parse code, (e.g IL):
+        postCode[i] = line[idx];
+        idx += 1;
+    }
+    postCode[i] = '\0';
+    idx += 1;
+
+    for (i = 0; line[idx] != ','; i++) { // Parse electoral votes, (e.g 15):
+        electVotes[i] = line[idx];
+        idx += 1;
+    } 
+    electVotes[i] = '\0';
+    idx += 1;
+
+    for (i = 0; line[idx] != '\0' && line[idx] != '\n'; i++) { // Parse popular
+                                                        // votes, (e.g 512521):
+        popVotes[i] = line[idx];
+        idx += 1;
+    }    
+    popVotes[i] = '\0';
+
+    strcpy(myState->name, nameOfState);
+    strcpy(myState->postalCode, postCode);
+    myState->electoralVotes = atoi(electVotes);
+    myState->popularVotes = atoi(popVotes);
+
+    return true;
 }
 
 bool readElectionData(char* filename, State* allStates, int* nStates) {
-    //-----------------------------------------------------   
-    // TODO: Task 5 - write the readElectionData() function
-    //-----------------------------------------------------
-    return true; //modify or replace this
+    FILE* inputFile = fopen(filename, "r");
+    
+    if (inputFile == NULL) 
+        return false;
+
+    char buffer[1024];
+    *nStates = 0;
+    while (fgets(buffer, 1024, inputFile)) {
+        parseLine(buffer, &allStates[*nStates]);
+        *nStates += 1;
+    }
+    
+    return true; 
 }
 
 int totalEVs(State* states, int szStates) {
