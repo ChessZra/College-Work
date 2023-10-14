@@ -104,7 +104,7 @@ bool readElectionData(char* filename, State* allStates, int* nStates) {
         parseLine(buffer, &allStates[*nStates]);
         *nStates += 1;
     }
-    
+
     return true; 
 }
 
@@ -117,7 +117,11 @@ int totalEVs(State* states, int szStates) {
     //                   >> make build_test
     //                   >> make run_test 
     //----------------------------------------------
-    return 0; // modify or replace this line
+    int ret = 0;
+    for (int i = 0; i < szStates; i++) {
+        ret += states[i].electoralVotes;
+    }
+    return ret;
 }
 
 int totalPVs(State* states, int szStates) {
@@ -128,7 +132,11 @@ int totalPVs(State* states, int szStates) {
     //                   >> make build_test
     //                   >> make run_test 
     //--------------------------------------------------
-    return 0; // modify or replace this line
+    int ret = 0;
+    for (int i = 0; i < szStates; i++) {
+        ret += states[i].popularVotes;
+    }
+    return ret;
 }
 
 MinInfo minPopVoteAtLeast(State* states, int szStates, int start, int EVs) {
