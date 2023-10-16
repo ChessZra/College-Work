@@ -2,7 +2,7 @@
 Program 2: Food Web Analysis with Dynamic Memory
 Course: CS 211, Fall 2023, UIC
 System: Advanced zyLab
-Author: John Ezra See
+Author: ChessZra
 - -               - -
 Description: This program analyzes food webs, letting users define predator-prey 
 relationships. It dynamically manages organism data and handles species extinctions,

@@ -1,6 +1,7 @@
 /* -----------------------------------------------------------------------------------
 Program 4: Popular Vote Minimizer Application
 Course: CS 211, Fall 2023, UIC
+Author: ChessZra
 System: Advanced zyLab
 - -               - -
 Description: This program explores the data of the past elections and analyzes the

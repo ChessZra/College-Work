@@ -2,7 +2,7 @@
 Program 3: Evil Word Guessing Game
 Course: CS 211, Fall 2023, UIC
 System: Advanced zyLab
-Author: John Ezra See
+Author: ChessZra
 - -               - -
 Description: This program is an "evil" version of the hangman game. The idea is to
 reduce the possibility of the user winning as much as possible. This is done through
