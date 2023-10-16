@@ -1,3 +1,7 @@
+// File: test.c
+// Description: A unit test file to test the functions located in MinPopVote.c
+// Last modified: 10/15/2023
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,6 +10,7 @@
 
 #include "MinPopVote.h"
 
+// Unit Test: Checks totalEVs() function:
 bool test_totalEVs() {
     State aStates[10];
     int res;
@@ -46,6 +51,8 @@ bool test_totalEVs() {
     return true;
 }
 
+// Unit Test: Checks totalPVs() function
+// Utilizes the arithmetic sequence to predict the answer of 512 states:
 bool test_totalPVs() {
     printf(" Checking totalPVs() for 512 States:\n");
 
@@ -68,6 +75,8 @@ bool test_totalPVs() {
     return true; 
 }
 
+// Unit Test: Checks setSettings() function
+// Checks for both valid and invalid inputs:
 bool test_setSettings() {
     int year = 0;
     bool fastMode = false, quietMode = false;
@@ -94,6 +103,7 @@ bool test_setSettings() {
     return true; 
 }
 
+// Unit Test: Checks inFilename() function:
 bool test_inFilename() {
     char fileName[15];
     
@@ -105,7 +115,6 @@ bool test_inFilename() {
         printf("  Expected: data/2048.csv, actual: %s\n", fileName);
         return false;
     }
-
 
     printf(" Checking year 1844:\n");
     inFilename(fileName, 1844);
@@ -119,6 +128,7 @@ bool test_inFilename() {
     return true;
 }
 
+// Unit Test: Checks outFilename() function:
 bool test_outFilename() {
     char fileName[30];
     
@@ -143,6 +153,8 @@ bool test_outFilename() {
     return true;
 }
 
+// Unit Test: Checks parseLine() function
+// Checks for both valid and invalid inputs:
 bool test_parseLine() {
     char invalidLine[] = "Virginia,VA 17,95539";
     char validLine[] = "Pennsylvania,PA,26,331572";
@@ -186,6 +198,8 @@ bool test_parseLine() {
     return true;
 }
 
+// Unit Test: Checks readElectionData() function
+// Checks if the election data is read properly by analyzing States array:
 bool test_readElectionData() {
     printf(" Testing input file data/1844.csv\n");
     State allStates[51];
@@ -221,20 +235,69 @@ bool test_readElectionData() {
     return true; 
 }
 
+// Unit Test: Checks minPopVoteToWin() function
+// Checks the brute force algorithm:
 bool test_minPVsSlow() {
-    //----------------------------------------------------------------- 
-    // TODO: Task 7 - write your own test case for minPopVoteAtLeast();
-    //                make sure to test all components
-    //-----------------------------------------------------------------
-    return false; //modify this
+    printf(" Testing input with three states:\n");
+    State states[4];
+    strcpy(states[0].name, "Illinois");
+    strcpy(states[0].postalCode, "IL");
+    states[0].electoralVotes = 5;
+    states[0].popularVotes = 50;
+
+    strcpy(states[1].name, "Alabama");
+    strcpy(states[1].postalCode, "AL");
+    states[1].electoralVotes = 8;
+    states[1].popularVotes = 25;
+
+    strcpy(states[2].name, "Texas");
+    strcpy(states[2].postalCode, "TX");
+    states[2].electoralVotes = 20;
+    states[2].popularVotes = 85;
+
+    MinInfo result = minPopVoteToWin(states, 3);
+    if (result.subsetPVs != 43 || result.sufficientEVs == false) {
+        printf("  Incorrect subsetPVs or sufficientEVs value.\n");
+        printf("  Expected result.subsetPVs = 43, result.sufficientEVs = true.\n");
+        printf("  Actual: result.subsetPVs = %d, result.sufficientEVs = %d\n",
+                result.subsetPVs, result.sufficientEVs);
+        return false;
+    } 
+    return true;
 }
 
+// Unit Test: Checks minPopVoteToWinFast() function
+// Checks the optimized algorithm:
 bool test_minPVsFast() {
-    //--------------------------------------------------------------------- 
-    // TODO: Task 8 - write your own test case for minPopVoteAtLeastFast();
-    //                make sure to test all components
-    //---------------------------------------------------------------------
-    return false; //modify this
+    
+    printf(" Testing input with four states:\n");
+    State states2[4];
+    strcpy(states2[0].postalCode, "AA");
+    states2[0].electoralVotes = 5;
+    states2[0].popularVotes = 60;
+
+    strcpy(states2[1].postalCode, "BB");
+    states2[1].electoralVotes = 2;
+    states2[1].popularVotes = 20;
+
+    strcpy(states2[2].postalCode, "CC");
+    states2[2].electoralVotes = 8;
+    states2[2].popularVotes = 70;
+
+    strcpy(states2[3].postalCode, "DD");
+    states2[3].electoralVotes = 3;
+    states2[3].popularVotes = 30;
+
+    MinInfo result = minPopVoteToWinFast(states2, 4);
+    if (result.subsetPVs != 47 || result.sufficientEVs == false) {
+        printf("  Incorrect subsetPVs or sufficientEVs value.\n");
+        printf("  Expected result.subsetPVs = 47, result.sufficientEVs = true.\n");
+        printf("  Actual: result.subsetPVs = %d, result.sufficientEVs = %d\n",
+                result.subsetPVs, result.sufficientEVs);
+        return false;
+    } 
+    
+    return true;
 }
 
 int main() {

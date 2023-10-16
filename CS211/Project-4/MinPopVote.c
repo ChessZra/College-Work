@@ -1,3 +1,7 @@
+// File: MinPopVote.c
+// Description: A helper module for app.c
+// Last modified: 10/15/2023
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -5,8 +9,9 @@
 
 #include "MinPopVote.h"
 
+// Initializes the settings for the program:
 bool setSettings(int argc, char** argv, int* year, bool* fastMode, bool* quietMode) {
-    //sample processing of command-line arg...
+    // Sample processing of command-line arg...
     // Data files include: [1828, 2020].csv inclusive
     // Set settings to default value:
     *year = 0;
@@ -32,16 +37,19 @@ bool setSettings(int argc, char** argv, int* year, bool* fastMode, bool* quietMo
     return true; 
 }
 
+// Changes the input filename parameter based on the given year:
 void inFilename(char* filename, int year) {
     snprintf(filename, 50, "data/%d.csv", year);
     return;
 }
 
+// Changes the output filename parameter based on the given year:
 void outFilename(char* filename, int year) {
     snprintf(filename, 50, "toWin/%d_win.csv", year);
     return;
 }
 
+// A helper function: parses a singular line to create the struct State:
 bool parseLine(char* line, State* myState) {
     // General variables:
     int idx = 0, numberOfCommas = 0, i; 
@@ -92,6 +100,8 @@ bool parseLine(char* line, State* myState) {
     return true;
 }
 
+// The function to build the array of states called allStates by reading the election
+// data located in data/...:
 bool readElectionData(char* filename, State* allStates, int* nStates) {
     FILE* inputFile = fopen(filename, "r");
     
@@ -104,19 +114,12 @@ bool readElectionData(char* filename, State* allStates, int* nStates) {
         parseLine(buffer, &allStates[*nStates]);
         *nStates += 1;
     }
-
+    fclose(inputFile);
     return true; 
 }
 
+// Returns the total electoral votes in the states array:
 int totalEVs(State* states, int szStates) {
-    //----------------------------------------------   
-    // TODO: Task 6 - write the totalEVs() function;
-    //                note test_totalEVs() is 
-    //                provided in test.c to test
-    //                the functionality of totalEVs()
-    //                   >> make build_test
-    //                   >> make run_test 
-    //----------------------------------------------
     int ret = 0;
     for (int i = 0; i < szStates; i++) {
         ret += states[i].electoralVotes;
@@ -124,14 +127,8 @@ int totalEVs(State* states, int szStates) {
     return ret;
 }
 
+// Returns the total popular votes in the states array:
 int totalPVs(State* states, int szStates) {
-    //--------------------------------------------------   
-    // TODO: Task 6 - write the totalPVs() function;
-    //                then, write your own test function 
-    //                test_totalPVs() in test.c
-    //                   >> make build_test
-    //                   >> make run_test 
-    //--------------------------------------------------
     int ret = 0;
     for (int i = 0; i < szStates; i++) {
         ret += states[i].popularVotes;
@@ -139,38 +136,82 @@ int totalPVs(State* states, int szStates) {
     return ret;
 }
 
+// A helper recursive function: utilizes the backtracking algorithm to find the
+// minimum popular vote using the brute force approach:
 MinInfo minPopVoteAtLeast(State* states, int szStates, int start, int EVs) {
-    //----------------------------------------------   
-    // TODO: Task 7 - write minPopVoteAtLeast();
-    //                a recursive helper function;
-    //                returns MinInfo for the subset
-    //                of [states] from index [start]
-    //                to the end with the minimum
-    //                popular vote total that has 
-    //                sufficient [EVs] to win
-    //---------------------------------------------- 
-    MinInfo res; // modify or replace this line
-    return res; // modify or replace this line
+    // Base case: we reached the end of the tree:
+    if (start == szStates || EVs <= 0) {
+        MinInfo emptySubset;
+        emptySubset.szSomeStates = 0;
+        emptySubset.subsetPVs = 0;
+        emptySubset.sufficientEVs = (EVs <= 0);
+        return emptySubset;
+    }
+
+    // Include the current state in the subset:
+    MinInfo include = minPopVoteAtLeast(states, szStates, start + 1,
+                                        EVs - states[start].electoralVotes);
+    include.someStates[include.szSomeStates] = states[start];
+    include.szSomeStates += 1;
+    include.subsetPVs += states[start].popularVotes / 2 + 1;
+
+    // Exclude the current state from the subset:
+    MinInfo exclude = minPopVoteAtLeast(states, szStates, start + 1, EVs);
+    
+    // Compare and return the subset with the minimum popular vote:
+    if (include.sufficientEVs && 
+       (!exclude.sufficientEVs || include.subsetPVs < exclude.subsetPVs)) {
+        return include;
+    } else {
+        return exclude;
+    }
 }
 
+// A wrapper function that gets called to find the minimum popular vote:
 MinInfo minPopVoteToWin(State* states, int szStates) {
     int totEVs = totalEVs(states,szStates);
     int reqEVs = totEVs/2 + 1; // required EVs to win election
     return minPopVoteAtLeast(states, szStates, 0, reqEVs);
 }
 
-MinInfo minPopVoteAtLeastFast(State* states, int szStates, int start, int EVs, MinInfo** memo) {
-    //----------------------------------------------   
-    // TODO: Task 8 - write minPopVoteAtLeastFast();
-    //                start by copying in fully
-    //                functioning code from 
-    //                minPopVoteAtLeast() and make
-    //                additions for memoization
-    //---------------------------------------------- 
-    MinInfo res; // modify or replace this line
-    return res; // modify or replace this line
+// A helper memo function: utilizes dynamic programming (memoization) to efficiently
+// calculate the minimum popular vote:
+MinInfo minPopVoteAtLeastFast(State* states, int szStates, int start, int EVs, 
+                              MinInfo** memo) {
+    // Base case: we reached the end of the tree:
+    if (start == szStates || EVs <= 0) {
+        MinInfo emptySubset;
+        emptySubset.szSomeStates = 0;
+        emptySubset.subsetPVs = 0;
+        emptySubset.sufficientEVs = (EVs <= 0);
+        return emptySubset;
+    }
+
+    // Memoization:
+    if (memo[start][EVs].subsetPVs != -1) return memo[start][EVs];
+
+    // Include the current state in the subset:
+    MinInfo include = minPopVoteAtLeastFast(states, szStates, start + 1,
+                                            EVs - states[start].electoralVotes, 
+                                            memo);
+    include.someStates[include.szSomeStates] = states[start];
+    include.szSomeStates += 1;
+    include.subsetPVs += states[start].popularVotes / 2 + 1;
+    
+    // Exclude the current state from the subset:
+    MinInfo exclude = minPopVoteAtLeastFast(states, szStates, start + 1, EVs, memo);
+
+    if (include.sufficientEVs && 
+       (!exclude.sufficientEVs || include.subsetPVs < exclude.subsetPVs)) {
+        memo[start][EVs] = include;
+        return include;
+    } else {
+        memo[start][EVs] = exclude;
+        return exclude;
+    }
 }
 
+// A wrapper function that gets called to find the minimum popular vote:
 MinInfo minPopVoteToWinFast(State* states, int szStates) {
     int totEVs = totalEVs(states,szStates);
     int reqEVs = totEVs/2 + 1; // required EVs to win election
@@ -183,20 +224,24 @@ MinInfo minPopVoteToWinFast(State* states, int szStates) {
         }
     }
     MinInfo res = minPopVoteAtLeastFast(states, szStates, 0, reqEVs, memo);
-    
-    //----------------------------------------------   
-    // TODO: Task 8 - [memo] will go out of scope 
-    //                upon return, so free all
-    //                heap-allocated memory for 
-    //                [memo] before return 
-    //---------------------------------------------- 
+    for (int i = 0; i < szStates+1; ++i) {
+        free(memo[i]);
+    }
+    free(memo);
 
     return res;
 }
 
-bool writeSubsetData(char* filenameW, int totEVs, int totPVs, int wonEVs, MinInfo toWin) {
-    //-----------------------------------------------------   
-    // TODO: Task 9 - write the writeSubsetData() function
-    //-----------------------------------------------------
-    return false; //modify or replace this
+// Writes the output data after the program execution:
+bool writeSubsetData(char* filenameW, int totEVs, int totPVs, int wonEVs, 
+                     MinInfo toWin) {
+    FILE* outputFile = fopen(filenameW, "w");
+    fprintf(outputFile, "%d,%d,%d,%d\n", totEVs, totPVs, wonEVs, toWin.subsetPVs);
+    for (int i = toWin.szSomeStates - 1; i >= 0; i--) {
+        fprintf(outputFile, "%s,%s,%d,%d\n", toWin.someStates[i].name, 
+                toWin.someStates[i].postalCode, toWin.someStates[i].electoralVotes,
+                toWin.someStates[i].popularVotes / 2 + 1);
+    }
+    fclose(outputFile);
+    return true;
 }
