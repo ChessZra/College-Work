@@ -14,6 +14,7 @@ run: build
 run_test: test
 	./test.exe
 
+# In UNIX operating system do, rm -f main.exe...
 clean:
 	del -f main.exe
 	del -f test.exe
