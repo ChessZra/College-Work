@@ -1,3 +1,6 @@
+# makefile here is ran in my local windows machine
+# This is not dedicated for the zybooks submission:
+
 build: main.c
 	gcc main.c -o main.exe
 
