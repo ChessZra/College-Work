@@ -1,0 +1,16 @@
+build: main.c
+	gcc main.c -o main.exe
+
+test: test.c
+	gcc test.c -o test.exe
+
+# In UNIX operating system do, ./main.exe < input.txt
+run: build
+	.\main.exe < input.txt
+
+run_test: test
+	./test.exe
+
+clean:
+	del -f main.exe
+	del -f test.exe

@@ -1,3 +1,16 @@
+/* -----------------------------------------------------------------------------------
+Program 5: Find the Shortest Word Ladder
+Course: CS 211, Fall 2023, UIC
+System: Advanced zyLab
+Author: ChessZra
+- -               - -
+Description: A word ladder is a sequence of words where each word is formed from the 
+previous one by changing just one letter, while ensuring that each intermediate word 
+is a valid word. This program generates and explores such word ladders, finding a path
+from one given word to another by making incremental changes in the letters, ensuring
+that each intermediate word is a valid word.
+------------------------------------------------------------------------------------- */
+// Preproccesor directives:
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,179 +27,300 @@ typedef struct LadderNode_struct {
     struct LadderNode_struct* next; 
 } LadderNode;
 
+/** countWordsOfLength:                                                               - -
+    Given an input file filled with words, this function counts the number of 
+    occurences of word that are exactly wordSize long.
+    @param filename :   The input file name in C-string.
+    @param wordSize :   The given word size.
+    @return         :   -1 if invalid filename, otherwise, the number (INT) of words 
+                        found.                                                        */
 int countWordsOfLength(char* filename, int wordSize) { 
-    //---------------------------------------------------------
-    // TODO - write countWordsOfLength()    
-    //      open a file with name <filename> and count the 
-    //      number of words in the file that are exactly 
-    //      <wordSize> letters long, where a "word" is ANY set
-    //      of characters that falls between two whitespaces 
-    //      (or tabs, or newlines, etc.). 
-    //          return the count, if filename is valid
-    //          return -1 if the file cannot be opened
-    //---------------------------------------------------------
-    return 0; //modify this
+    int ret = 0;
+    FILE* inputFile = fopen(filename, "r");
+
+    if (inputFile == NULL) return -1;
+
+    char buffer[1024];
+    while(fgets(buffer, 1024, inputFile)) {
+        int curWordLength = 0;
+        for (int i = 0; buffer[i] != '\0' && buffer[i] != '\n'; i++) curWordLength++;
+        if (curWordLength == wordSize) ret++;
+    }
+
+    fclose(inputFile);
+
+    return ret;
 }
 
+/** buildWordArray:                                                                   - -
+    This function builds the pre-allocated words array by filling the array with words 
+    of a specific size.
+    @param filename :   The input file name in C-string.
+    @param words    :   A dynamically heap-allocated array of C-strings.
+    @param numWords :   The number of words to be initialized inside words.
+    @param wordSize :   The size of individual words in words.
+    @return         :   True if successful execution, 
+                        False if valid filename or numWords does not match provided 
+                        file.                                                         */
 bool buildWordArray(char* filename, char** words, int numWords, int wordSize) { 
-    //---------------------------------------------------------
-    // TODO - write buildWordArray()    
-    //      open a file with name <filename> and fill the 
-    //      pre-allocated word array <words> with only words
-    //      that are exactly <wordSize> letters long;
-    //      the file should contain exactly <numWords> words 
-    //      that are the correct number of letters; thus, 
-    //      <words> is pre-allocated as <numWords> char* ptrs, 
-    //      each pointing to a C-string of legnth <wordSize>+1;
-    //          return true iff the file is opened successfully
-    //                      AND the file contains exactly 
-    //                      <numWords> words of exactly 
-    //                      <wordSize> letters, and those words
-    //                      are stored in the <words> array
-    //          return false otherwise
-    //---------------------------------------------------------
-    return false;
+    // Base Case: Return F if invalid file name OR the file does not have numWords.
+    int wordSizeChecker = countWordsOfLength(filename, wordSize);
+    if (wordSizeChecker < 0 || wordSizeChecker != numWords) return false;
+    
+    FILE* inputFile = fopen(filename, "r");
+    char buffer[1024];
+    int idx = 0;
+
+    while(fgets(buffer, 1024, inputFile)) {
+        int curWordLength = 0;
+        for (int i = 0; buffer[i] != '\0' && buffer[i] != '\n'; i++) curWordLength++;
+        buffer[curWordLength] = '\0';
+        if (curWordLength == wordSize) {
+            strcpy(words[idx++], buffer);
+        }
+        
+    }
+    fclose(inputFile);
+    return true;
 }
 
+/** findWord:                                                                         - -
+    This function finds the index of where aWord is located in the words array. This
+    function utilizes the binary-search algorithm. 
+    @param words    :   A dynamically heap-allocated array of C-strings.
+    @param aWord    :   The word to be searched.
+    @param loInd    :   An integer representing the first index of words.
+    @param hiInd    :   An integer representing the last index of words.
+    @return         :   -1 if not found, otherwise return the index                   */
 int findWord(char** words, char* aWord, int loInd, int hiInd) { 
-    //---------------------------------------------------------
-    // TODO - write findWord()
-    //          binary search for string <aWord> in an 
-    //          alphabetically sorted array of strings <words>, 
-    //          only between <loInd> & <hiInd>
-    //              return index of <aWord> if found
-    //              return -1 if not found b/w loInd & hiInd
-    //---------------------------------------------------------
-    return -1; // modify this line
+    while (loInd <= hiInd) {
+        // The midpoint formula is the same as (low + high) / 2, but this handles
+        // edge cases properly.
+        int midInd = loInd + (hiInd - loInd) / 2;
+        int compare = strcmp(aWord, words[midInd]);
+        if (compare == 0) {
+            return midInd;
+        } else if (compare > 0) {
+            loInd++;
+        } else {
+            hiInd--;
+        }
+    }
+    return -1;
 }
 
+/** freeWords:                                                                        - -
+    This function frees the words array from the heap.
+    @param words    :   A dynamically heap-allocated array of C-strings.
+    @param numWords :   The number of strings inside words.
+    @return         :   None                                                          */
 void freeWords(char** words, int numWords) {
-    //---------------------------------------------------------
-    // TODO - write freeWords()
-    //          free up all heap-allocated space for <words>,
-    //          which is an array of <numWords> C-strings
-    //           - free the space allocated for each C-string 
-    //           - then, free the space allocated for the array
-    //                  of pointers, <words>, itself
-    //---------------------------------------------------------
+    for (int i = 0; i < numWords; i++) free(words[i]);
+    free(words);
 }
 
+/** insertWordAtFront:                                                                - -
+    This function expands the given linked list and inserts a new node to the front.
+    @param ladder   :   A pointer to the head of the ladder (linked list).
+    @param newWord  :   The C-string that is to be inserted to the ladder.
+    @return         :   None                                                          */
 void insertWordAtFront(WordNode** ladder, char* newWord) {
-    //---------------------------------------------------------
-    // TODO - write insertWordAtFront()
-    //          allocate space for a new [WordNode], set its 
-    //          [myWord] subitem using <newWord> and insert
-    //          it to the front of <ladder>, which is a 
-    //          pointer-passed-by-pointer as the head node of 
-    //          ladder changes inside this function; 
-    //          <newWord> is a pointer to a C-string from the 
-    //          full word array, already heap-allocated
-    //---------------------------------------------------------
+    WordNode* newWordNode = (WordNode*) malloc(sizeof(WordNode)); 
+    newWordNode->myWord = newWord;
+    newWordNode->next = (*ladder);
+    *ladder = newWordNode;
 }
 
+/** getLadderHeight:                                                                  - -
+    This function returns the height of the ladder.
+    @param ladder   :   The "head"/top of the ladder.
+    @return         :   An integer representing the height of the ladder.             */
 int getLadderHeight(WordNode* ladder) {
     //---------------------------------------------------------
     // TODO - write getLadderHeight()
     //          find & return number of words in <ladder> list
     //---------------------------------------------------------
-    return -1; // modify this line
+    int height = 0;
+    while (ladder != NULL) {
+        height++;
+        ladder = ladder->next;
+    }
+    return height; 
 }
 
+/** copyLadder:                                                                       - -
+    This function hard copies the ladder linked list. This does not allocate new 
+    C-strings but it allocates a new linked list.
+    @param ladder   :   The "head"/top of the ladder.
+    @return         :   The new copied node                                           */
 WordNode* copyLadder(WordNode* ladder) {
-    //---------------------------------------------------------
-    // TODO - write copyLadder()
-    //          make a complete copy of <ladder> and return it;
-    //          the copy ladder must have new space allocated
-    //          for each [WordNode] in <ladder>, BUT the
-    //          C-string pointers to elements of the full word  
-    //          array can be reused; i.e. the actual words do 
-    //          NOT need another allocation here
-    //---------------------------------------------------------
-    return NULL; //modify this
+    if (ladder == NULL) return NULL;
+
+    WordNode* newLadder = (WordNode*) malloc(sizeof(WordNode));
+    WordNode* res = newLadder;
+
+    newLadder->myWord = ladder->myWord;
+    newLadder->next = NULL;
+
+    while (ladder->next != NULL) {
+        // Create the next node:
+        WordNode* nextNode = (WordNode*) malloc(sizeof(WordNode));
+        nextNode->myWord = ladder->next->myWord;
+        nextNode->next = NULL;
+        
+        // Build the nextNode for the newLadder:
+        newLadder->next = nextNode;
+
+        // Increment the original ladder and the new ladder:
+        ladder = ladder->next;
+        newLadder = newLadder->next;
+    }
+    return res; 
 }
 
+/** freeLadder:                                                                       - -
+    This function frees the allocated ladder linked list. This does not free the
+    C-strings that are the subitems of ladder.
+    @param ladder   :   The "head"/top of the ladder.
+    @return         :   None                                                          */
 void freeLadder(WordNode* ladder) {
-    //---------------------------------------------------------
-    // TODO - write freeLadder()
-    //          free up all heap-allocated space for <ladder>;
-    //          this does NOT include the actual words, 
-    //          instead just free up the space that was 
-    //          allocated for each [WordNode]
-    //---------------------------------------------------------
+    while (ladder != NULL) {
+        WordNode* nextTemp = ladder->next;
+        free(ladder);
+        ladder = nextTemp;
+    }
 }
 
+/** insertLadderAtBack:                                                               - -
+    This function builds the linked list of [LadderNode] by appending it at the back.
+    Additionally, this function handles the case where list is initially NULL.
+    @param list         :   This is a linked list of ladders.
+    @param newLadder    :   This represents the head of a single ladder.
+    @return             :   None                                                      */
 void insertLadderAtBack(LadderNode** list, WordNode* newLadder) {
-    //---------------------------------------------------------
-    // TODO - write insertLadderAtBack()
-    //          allocate space for a new [LadderNode], set its 
-    //          [topWord] subitem using <newLadder>; then, find
-    //          the back of <list> and append the newly created
-    //          [LadderNode] to the back; Note that <list> is a 
-    //          pointer-passed-by-pointer, since this function 
-    //          must handle the edge case where <list> is empty
-    //          and the new [LadderNode] becomes the head node
-    //---------------------------------------------------------
+    // Create a new [LadderNode]:
+    LadderNode* newLadderNode = (LadderNode*) malloc(sizeof(LadderNode));
+    newLadderNode->topWord = newLadder;
+    newLadderNode->next = NULL;
+
+    // If the linked list is empty, then set it equal to the newLadderNode:
+    if (*list == NULL) {
+        *list = newLadderNode;
+        return;
+    }
+
+    // With the newly created Node, insert it at the back of the list:
+    LadderNode* cur = *list;
+    while (cur->next) {
+        cur = cur->next;
+    }
+    cur->next = newLadderNode;
 }
 
+/** popLadderFromFront:                                                               - -
+    This function pops and returns the first node in the list.
+    @param list :   This is a linked list of ladders.
+    @return     :   Returns the first node's subitem topWord.                         */
 WordNode* popLadderFromFront(LadderNode** list) {
-    //---------------------------------------------------------
-    // TODO - write popLadderFromFront()
-    //          pop the first Ladder from the front of the list
-    //          by returning the pointer to the head node 
-    //          of <list> AND updating the head node of <list>
-    //          to the next [LadderNode]; Note that <list> is a 
-    //          pointer-passed-by-pointer, since this function 
-    //          updates the head node to be one down the list;
-    //          the [LadderNode] popped off the front must have
-    //          its memory freed in this function, since it 
-    //          will go out of scope, but the ladder itself, 
-    //          i.e. the head [WordNode], should NOT be freed. 
-    //---------------------------------------------------------
-    return NULL; //modify this
+    LadderNode* tempNext = (*list)->next;
+    WordNode* ret = (*list)->topWord;
+    free(*list);
+    *list = tempNext;
+    return ret;
 }
 
+/** freeLadderList:                                                                   - -
+    This frees the all the ladders in the linked list except the C-strings.
+    For each ladder in myList:
+        Free up all the heap-allocated space of WordNode.
+    Then free up the LadderNode itself.
+    @param myList   :   This is a linked list of ladders.
+    @return         :   None                                                          */
 void freeLadderList(LadderNode* myList) {
-    //---------------------------------------------------------
-    // TODO - write freeLadderList()
-    //          free up all heap-allocated space for <myList>;
-    //          for each ladder in <myList>:
-    //           - free the space allocated for each [WordNode] 
-    //                  in the ladder using freeLadder()
-    //           - then, free the space allocated for the 
-    //                  [LadderNode] itself 
-    //---------------------------------------------------------
+    while (myList != NULL) {
+        freeLadder(myList->topWord);
+        LadderNode* tempNext = myList->next;
+        free(myList);
+        myList = tempNext;
+    }
 }
 
+/** isNeighbor:                                                                       - -
+    This function calculates the count of characters that are different comparing two
+    strings. For example:
+        str1 = wands, str2 = wants,     returns 1
+        Thus, they are neighbors because they are only different by 1.
+    @param str1 :   A C-string that possibly represents any word. 
+    @param str2 :   Another C-string that possibly represents any word. 
+    @return     :   Integer representing the number of differences of the strings.    */
+int isNeighbor(char* str1, char* str2) {
+    char* ptr1 = str1;
+    char* ptr2 = str2;
+    int charDiff = 0;
+    while (*ptr1 != '\0' && *ptr2 != '\0') {
+        charDiff += (*ptr1 != *ptr2);
+        ptr1++;
+        ptr2++;
+    }
+    while (*ptr1 != '\0') {
+        ptr1++;
+        charDiff++;
+    }
+    while (*ptr2 != '\0') {
+        ptr2++;
+        charDiff++;
+    }
+    return charDiff;
+}
+
+/** findShortestWordLadder:                                                           - -
+    This function is the main algorithm to find the shortest path to go from one word
+    to another. This utilizes the BFS algorithm to check the combinations layer by
+    layer. 
+    @param words        :   A dynamically heap-allocated array of C-strings.
+    @param usedWord     :   An array that is relative to words- representing used/not.
+    @param numWords     :   The number of words to be initialized inside words.
+    @param wordSize     :   The size of individual words in words. They are the same.
+    @param startWord    :   The word that represents our starting path.
+    @param finalWord    :   The word that is our end-goal.
+    @return             :   The shortest linked list to go from startWord to 
+                            finalWord.                                                */
 WordNode* findShortestWordLadder(   char** words, 
                                     bool* usedWord, 
                                     int numWords, 
                                     int wordSize, 
                                     char* startWord, 
                                     char* finalWord ) {
-    //---------------------------------------------------------
-    // TODO - write findShortestWordLadder()
-    //          run algorithm to find the shortest word ladder
-    //          from <startWord> to <finalWord> in the <words>
-    //          word array, where each word is <wordSize> long 
-    //          and there are <numWords> total words;
-    //          <usedWord> also has size <numWords>, such that
-    //          usedWord[i] is only true if words[i] has 
-    //          previously be entered into a ladder, and should
-    //          therefore not be added to any other ladders; 
-    //          the algorithm creates partial word ladders, 
-    //          which are [WordNode] linked lists, and stores 
-    //          them in a [LadderNode] linked list. 
-    //              return a pointer to the shortest ladder;
-    //              return NULL if no ladder is possible;
-    //                  before return, free all heap-allocated 
-    //                  memory that is created here that is not 
-    //                  the returned ladder
-    //---------------------------------------------------------
-    
-    
+    LadderNode* myList = NULL;
+    WordNode* myLadder = NULL;
+    insertWordAtFront(&myLadder, startWord);
+    insertLadderAtBack(&myList, myLadder);
+    while (myList != NULL) {
+        myLadder = popLadderFromFront(&myList);
+        for (int i = 0; i < numWords; i++) {
+            // words[i] and myLadder->myWord must be neighbors. 
+            // words[i] must not be used.
+            if (isNeighbor(words[i], myLadder->myWord) != 1 || usedWord[i]) {
+                continue;
+            }
+            if (strcmp(words[i], finalWord) == 0) {
+                insertWordAtFront(&myLadder, words[i]);
+                freeLadderList(myList);
+                return myLadder;
+            } else {
+                WordNode* anotherLadder = copyLadder(myLadder);
+                insertWordAtFront(&anotherLadder, words[i]);
+                insertLadderAtBack(&myList, anotherLadder);
+                usedWord[i] = true;
+            }
+        }
+        freeLadder(myLadder);
+    }
+
     return NULL;
 }
 
+// ----------------- everything past this line is not to be changed ------------------ 
 // interactive user-input to set a word; 
 //  ensures sure the word is in the dictionary word array
 void setWord(char** words, int numWords, int wordSize, char* aWord) {
@@ -240,14 +374,12 @@ void printList(LadderNode* list) {
     printf("\n");
 }
 
-
 //-----------------------------------------------------
 // The primary application is fully provided in main(); 
 //  no changes should be made to main()
 //-----------------------------------------------------
 int main() {
     srand((int)time(0));
-    
     printf("\nWelcome to the CS 211 Word Ladder Generator!\n\n");
 
     // set word length using interactive user-input
@@ -274,7 +406,7 @@ int main() {
         printf("\n");
         numWords = countWordsOfLength(dict,wordSize);
     }
-    
+
     // allocate heap memory for the word array; only words with desired length
     char** words = (char**)malloc(numWords*sizeof(char*));
     for (int i = 0; i < numWords; ++i) {
@@ -302,6 +434,7 @@ int main() {
     // build word array (only words with desired length) from dictionary file
     printf("Building array of %d-letter words... ", wordSize); 
     bool status = buildWordArray(dict,words,numWords,wordSize);
+
     if (!status) {
         printf("  ERROR in building word array.\n");
         printf("  File not found or incorrect number of %d-letter words.\n",wordSize);
