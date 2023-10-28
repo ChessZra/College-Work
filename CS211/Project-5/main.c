@@ -136,10 +136,6 @@ void insertWordAtFront(WordNode** ladder, char* newWord) {
     @param ladder   :   The "head"/top of the ladder.
     @return         :   An integer representing the height of the ladder.             */
 int getLadderHeight(WordNode* ladder) {
-    //---------------------------------------------------------
-    // TODO - write getLadderHeight()
-    //          find & return number of words in <ladder> list
-    //---------------------------------------------------------
     int height = 0;
     while (ladder != NULL) {
         height++;
