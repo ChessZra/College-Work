@@ -1,10 +1,13 @@
-//-----------------------------------------
-// Popular Vote Minimizer Application
-// Author: Prof. Scott Reckinger
-// Course: CS 211 - Programming Practicuum
-// Term: Fall 2023
-// Assignment: Project 04
-//-----------------------------------------
+/* -----------------------------------------------------------------------------------
+Program 4: Popular Vote Minimizer Application
+Course: CS 211, Fall 2023, UIC
+Author: ChessZra
+System: Advanced zyLab
+- -               - -
+Description: This program explores the data of the past elections and analyzes the
+minimum popular votes needed for a candidate to win under specific constraints and
+assumptions.
+------------------------------------------------------------------------------------- */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -35,6 +38,9 @@ void printONorOFF(bool flag) {
     }
 }
 
+/** main:                                                                             - -
+    The driver code of the program. This is where the code starts.
+    @return     : integer to signify successful program execution.                    */
 int main(int argc, char* argv[]) {
     printf("Welcome to the Popular Vote Minimizer Application!\n\n");
     
@@ -110,7 +116,7 @@ int main(int argc, char* argv[]) {
         printf("Invalid filename %s. \nNo file found. \nTerminating program...\n",filename);
         return -1;
     } 
-        
+
     // display full list of States (only if not in quiet mode)
     if (!quietMode) {
         printf("\n");
@@ -167,8 +173,6 @@ int main(int argc, char* argv[]) {
     //  Note that minPVsToWin is the minimum popular votes
     //  needed to win the state's electoral votes
     writeSubsetData(filenameW, totEVs, totPVs, wonEVs, toWin);
-
-    printf("\n");
 
     return 0;
 }

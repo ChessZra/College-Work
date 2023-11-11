@@ -2,7 +2,7 @@
 Program 1: Elementary Cellular Automaton
 Course: CS 211, Fall 2023, UIC
 System: Advanced zyLab
-Author: John Ezra See
+Author: ChessZra
 - -               - -
 Description: This program is an abstract version of cellular automation in 
 two dimensions. The rules are specified by the given number. And, specific patterns
