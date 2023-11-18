@@ -2,8 +2,10 @@
 Program 6: Escape the Labyrinth
 Course: CS 211, Fall 2023, UIC
 System: Advanced zyLab
+Author: ChessZra
 - -               - -
-Description: 
+Description: Escape the maze! Twisty and regular maze - figure out your way out through
+the use of gdb. 
 ------------------------------------------------------------------------------------- */
 // Preprocessor Directives:
 #pragma once
