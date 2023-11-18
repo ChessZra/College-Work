@@ -5,7 +5,6 @@ System: Advanced zyLab
 - -               - -
 Description: 
 ------------------------------------------------------------------------------------- */
-
 // Preprocessor Directives:
 #pragma once
 
@@ -105,8 +104,8 @@ public:
   }
     
   /** Copy Operator:                                                                  - -
-      This function defines the copy operator which copies <other> to <this> by cloning
-      the grid's elements and subitems.                                               */
+      This function returns a reference to a new Grid that is a clone of the given
+      grid.                                                                           */
   Grid& operator=(const Grid& other) {
       // If other is the same object as what you're trying to create, just return the object:
       if (this == &other) { 
@@ -176,9 +175,6 @@ public:
     }
       T& ret = Rows[r].Cols[c];
 
-      //-------------------------------------------------
-      // TODO:  Write the parentheses overloaded operator IMPLEMENTED: Unchecked
-      //-------------------------------------------------
       return ret; 
   }
 

@@ -3,6 +3,7 @@
 #include <set>
 #include "grid.h"
 #include "maze.h"
+#include <unordered_set>
 using namespace std;
 
 /* Change constant kYourNetID to store your netID 
@@ -20,22 +21,50 @@ using namespace std;
  * Changing kYourNetID will change which maze you get back, 
  * which might invalidate all your hard work!
  */
-const string kYourNetID = "TODO: Replace this string with your name.";
+const string kYourNetID = "jsee4";
 
 /* Change these constants to contain the paths out of your mazes. */
-const string kPathOutOfRegularMaze = "TODO: Replace this string with your path out of the normal maze.";
-const string kPathOutOfTwistyMaze = "TODO: Replace this string with your path out of the twisty maze.";
+const string kPathOutOfRegularMaze = "EEESNWWWSESSWNSENNESESW";
+const string kPathOutOfTwistyMaze = "SSNEWEWNNSE";
 
 bool isPathToFreedom(MazeCell *start, const string& moves) {
     
-    
-    /* TO DO: Delete this comment and the next few lines, 
-     * then implement this function.
-     */
-    (void) start;
-    (void) moves;
+    if (start == NULL) return false;
+
+    MazeCell* currentPosition = start;
+    unordered_set<string> objectsCollected;
+    int n = moves.size();
+    int i = -1;
+    // Check if the input string includes invalid characters:
+    for (int idx = 0; idx < n; idx++) {
+        if (moves[idx] != 'N' && moves[idx] != 'S' && moves[idx] != 'E' && moves[idx] != 'W') return false;
+    }
+
+    // Check if the maze is possible under two conditions:
+    // 1. The path is valid.
+    // 2. It picks up the Potion, Spellbook and the Wand (i.e the set size is 3).
+    while (currentPosition != NULL && i++ < n) {
+        // Store the objects in a set:
+        string object = currentPosition->whatsHere;
+        if (object.size() > 0) {
+            objectsCollected.insert(object);
+        }
+        // Move the position by one:
+        if (moves[i] == 'N') {
+            if (currentPosition->north == NULL) return false;
+            currentPosition = currentPosition->north;
+        } else if (moves[i] == 'S') {
+            if (currentPosition->south == NULL) return false;
+            currentPosition = currentPosition->south;
+        } else if (moves[i] == 'E') {
+            if (currentPosition->east == NULL) return false;
+            currentPosition = currentPosition->east;
+        } else if (moves[i] == 'W') {
+            if (currentPosition->west == NULL) return false;
+            currentPosition = currentPosition->west;
+        }
+    }
+    if (objectsCollected.size() >= 3) return true;
+
     return false;
-    
-    
-    
 }

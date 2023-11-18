@@ -1,5 +1,5 @@
 build_reg:
-	del ExploreTheRegularLabyrinth.exe
+	rm -f ExploreTheRegularLabyrinth.exe
 	g++ -g -std=c++11 -Wall ExploreTheRegularLabyrinth.cpp -o ExploreTheRegularLabyrinth.exe
 	
 run_reg:
@@ -9,7 +9,7 @@ valgrind_reg:
 	valgrind --tool=memcheck --leak-check=yes ./ExploreTheRegularLabyrinth.exe
 
 build_twisty:
-	del ExploreTheTwistyLabyrinth.exe
+	rm -f ExploreTheTwistyLabyrinth.exe
 	g++ -g -std=c++11 -Wall ExploreTheTwistyLabyrinth.cpp -o ExploreTheTwistyLabyrinth.exe
 	
 run_twisty:
@@ -20,9 +20,9 @@ valgrind_twisty:
 
 build_tests:
 	cp testcasefile/tests.cpp .
-	del tests.exe
+	rm -f tests.exe
 	g++ tests.cpp -o tests.exe -lgtest -lgtest_main -lpthread
-	del tests.cpp
+	rm tests.cpp
 
 run_tests:
 	./tests.exe
