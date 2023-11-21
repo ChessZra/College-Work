@@ -1,0 +1,88 @@
+(gdb) b ExploreTheRegularLabyrinth.cpp:15
+Breakpoint 1 at 0x2c7f: file ExploreTheRegularLabyrinth.cpp, line 17.
+(gdb) run
+Starting program: /usercode/ExploreTheRegularLabyrinth.exe 
+warning: Error disabling address space randomization: Operation not permitted
+
+Breakpoint 1, main () at ExploreTheRegularLabyrinth.cpp:17
+17          if (isPathToFreedom(start, kPathOutOfRegularMaze)) {
+(gdb) i locals
+m = {_vptr.Maze = 0x5640e4c91be0 <vtable for Maze+16>, grid = {
+    _vptr.Grid = 0x5640e4c91c00 <vtable for Grid<MazeCell*>+16>, 
+    Rows = 0x5640e5710f50, NumRows = 4}, numRows = 4, numCols = 4, 
+  kNumTwistyRooms = 12}
+start = 0x5640e5711170
+(gdb) p (*start)
+$1 = {whatsHere = "", north = 0x0, south = 0x5640e57112b0, 
+  east = 0x5640e57111c0, west = 0x0}
+(gdb) p *(start->south)
+$2 = {whatsHere = "", north = 0x5640e5711170, south = 0x0, 
+  east = 0x5640e5711300, west = 0x0}
+(gdb) p *(start)
+$3 = {whatsHere = "", north = 0x0, south = 0x5640e57112b0, 
+  east = 0x5640e57111c0, west = 0x0}
+(gdb) p *(start->south)
+$4 = {whatsHere = "", north = 0x5640e5711170, south = 0x0, 
+  east = 0x5640e5711300, west = 0x0}
+(gdb) p start
+$5 = (MazeCell *) 0x5640e5711170
+(gdb) p *(start->south)
+$6 = {whatsHere = "", north = 0x5640e5711170, south = 0x0, 
+  east = 0x5640e5711300, west = 0x0}
+(gdb) p *(start->south->east
+A syntax error in expression, near `'.
+(gdb) p *(start->south->east)
+$7 = {whatsHere = "", north = 0x0, south = 0x5640e5711440, 
+  east = 0x5640e5711350, west = 0x5640e57112b0}
+(gdb) p *(start)
+$8 = {whatsHere = "", north = 0x0, south = 0x5640e57112b0, 
+  east = 0x5640e57111c0, west = 0x0}
+(gdb) p *(start->east)
+$9 = {whatsHere = "", north = 0x0, south = 0x0, east = 0x5640e5711210, 
+  west = 0x5640e5711170}
+(gdb) p *(start->east->east)
+$10 = {whatsHere = "", north = 0x0, south = 0x0, east = 0x5640e5711260, 
+  west = 0x5640e57111c0}
+(gdb) p *(start->east->east->east)
+$11 = {whatsHere = "", north = 0x0, south = 0x5640e57113a0, east = 0x0, 
+  west = 0x5640e5711210}
+(gdb) p *(start->east->east->east->south)
+$12 = {whatsHere = "Spellbook", north = 0x5640e5711260, south = 0x0, 
+  east = 0x0, west = 0x0}
+(gdb) p *(start->south)
+$13 = {whatsHere = "", north = 0x5640e5711170, south = 0x0, 
+  east = 0x5640e5711300, west = 0x0}
+(gdb) p *(start->south->east)
+$14 = {whatsHere = "", north = 0x0, south = 0x5640e5711440, 
+  east = 0x5640e5711350, west = 0x5640e57112b0}
+(gdb) p *(start->south->east->south)
+$15 = {whatsHere = "", north = 0x5640e5711300, south = 0x5640e5711580, 
+  east = 0x0, west = 0x0}
+(gdb) p *(start->south->east->south->south)
+$16 = {whatsHere = "", north = 0x5640e5711440, south = 0x0, east = 0x0, 
+  west = 0x5640e5711530}
+(gdb) p *(start->south->east->south->south->west)
+$17 = {whatsHere = "", north = 0x5640e57113f0, south = 0x0, 
+  east = 0x5640e5711580, west = 0x0}
+(gdb) p *(start->south->east->south->south->west->north)
+$18 = {whatsHere = "Potion", north = 0x0, south = 0x5640e5711530, east = 0x0, 
+  west = 0x0}
+(gdb) p *(start->south->east)
+$19 = {whatsHere = "", north = 0x0, south = 0x5640e5711440, 
+  east = 0x5640e5711350, west = 0x5640e57112b0}
+(gdb) p *(start->south->east->east)
+$20 = {whatsHere = "", north = 0x0, south = 0x5640e5711490, east = 0x0, 
+  west = 0x5640e5711300}
+(gdb) p *(start->south->east->east->south)
+$21 = {whatsHere = "", north = 0x5640e5711350, south = 0x0, 
+  east = 0x5640e57114e0, west = 0x0}
+(gdb) p *(start->south->east->east->south->east)
+$22 = {whatsHere = "Wand", north = 0x0, south = 0x5640e5711620, east = 0x0, 
+  west = 0x5640e5711490}
+(gdb) p *(start->south->east->east->south->east->south)
+$23 = {whatsHere = "", north = 0x5640e57114e0, south = 0x0, east = 0x0, 
+  west = 0x5640e57115d0}
+(gdb) p *(start->south->east->east->south->east->south->west)
+$24 = {whatsHere = "", north = 0x0, south = 0x0, east = 0x5640e5711620, 
+  west = 0x0}
+(gdb) quit

@@ -1,0 +1,89 @@
+gdb ExploreTheTwistyLabyrinth.exe
+GNU gdb (Ubuntu 9.2-0ubuntu1~20.04.1) 9.2
+Copyright (C) 2020 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from ExploreTheTwistyLabyrinth.exe...
+(gdb) i r
+The program has no registers now.
+(gdb) run
+Starting program: /usercode/ExploreTheTwistyLabyrinth.exe 
+warning: Error disabling address space randomization: Operation not permitted
+You have not escaped!
+[Inferior 1 (process 129) exited normally]
+(gdb) b ExploreTheTwistyLabyrinth.cpp:16
+Breakpoint 1 at 0x558d23f54c5a: file ExploreTheTwistyLabyrinth.cpp, line 18.
+(gdb) run
+Starting program: /usercode/ExploreTheTwistyLabyrinth.exe 
+warning: Error disabling address space randomization: Operation not permitted
+
+Breakpoint 1, main () at ExploreTheTwistyLabyrinth.cpp:18
+18          if (isPathToFreedom(start, kPathOutOfTwistyMaze)) {
+(gdb) i locals
+m = {_vptr.Maze = 0x55b58fc06bd0 <vtable for Maze+16>, grid = {
+    _vptr.Grid = 0x55b58fc06bf0 <vtable for Grid<MazeCell*>+16>, 
+    Rows = 0x55b58fda4f20, NumRows = 4}, numRows = 4, numCols = 4, 
+  kNumTwistyRooms = 12}
+start = 0x55b58fda5030
+(gdb) p *(start)
+$1 = {whatsHere = "", north = 0x55b58fda5660, south = 0x55b58fda5720, 
+  east = 0x55b58fda5a30, west = 0x55b58fda5900}
+(gdb) p start
+$2 = (MazeCell *) 0x55b58fda5030
+(gdb) p *(start)
+$3 = {whatsHere = "", north = 0x55b58fda5660, south = 0x55b58fda5720, 
+  east = 0x55b58fda5a30, west = 0x55b58fda5900}
+(gdb) p *(start->north)
+$4 = {whatsHere = "", north = 0x55b58fda5860, south = 0x55b58fda5770, 
+  east = 0x55b58fda5030, west = 0x55b58fda59e0}
+(gdb) p *(start->north->north)
+$5 = {whatsHere = "", north = 0x55b58fda5660, south = 0x0, 
+  east = 0x55b58fda5a30, west = 0x0}
+(gdb) p *(start->north)
+$6 = {whatsHere = "", north = 0x55b58fda5860, south = 0x55b58fda5770, 
+  east = 0x55b58fda5030, west = 0x55b58fda59e0}
+(gdb) p *(start->north->west)
+$7 = {whatsHere = "", north = 0x0, south = 0x55b58fda5720, 
+  east = 0x55b58fda5660, west = 0x55b58fda5a30}
+(gdb) p *(start->north->south)
+$8 = {whatsHere = "", north = 0x0, south = 0x55b58fda57c0, 
+  east = 0x55b58fda58b0, west = 0x55b58fda5660}
+(gdb) p *(start->north)
+$9 = {whatsHere = "", north = 0x55b58fda5860, south = 0x55b58fda5770, 
+  east = 0x55b58fda5030, west = 0x55b58fda59e0}
+(gdb) p *(start->north->south)
+$10 = {whatsHere = "", north = 0x0, south = 0x55b58fda57c0, 
+  east = 0x55b58fda58b0, west = 0x55b58fda5660}
+(gdb) p *(start->north->south->south)
+$11 = {whatsHere = "", north = 0x0, south = 0x0, east = 0x0, 
+  west = 0x55b58fda5770}
+(gdb) p *(start->north->south->east)
+$12 = {whatsHere = "Wand", north = 0x0, south = 0x55b58fda5770, east = 0x0, 
+  west = 0x0}
+(gdb) p *(start->east)
+$13 = {whatsHere = "", north = 0x0, south = 0x55b58fda59e0, 
+  east = 0x55b58fda5030, west = 0x55b58fda5860}
+(gdb) p *(start->west)
+$14 = {whatsHere = "", north = 0x55b58fda5030, south = 0x0, 
+  east = 0x55b58fda56d0, west = 0x0}
+(gdb) p *(start->west->east)
+$15 = {whatsHere = "Spellbook", north = 0x0, south = 0x0, east = 0x0, 
+  west = 0x55b58fda5900}
+(gdb) p *(start->south)
+$16 = {whatsHere = "", north = 0x0, south = 0x55b58fda5810, 
+  east = 0x55b58fda5030, west = 0x55b58fda59e0}
+(gdb) p *(start->south->south)
+$17 = {whatsHere = "Potion", north = 0x55b58fda5720, south = 0x0, east = 0x0, 
+  west = 0x0}
+(gdb) quit
