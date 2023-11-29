@@ -1,9 +1,12 @@
-//-------------------------------------------------
-// TODO:  Copy in your Grid class OR replace this 
-//          file with grid.h from Project 06.
-//          This class is needed for this Project,
-//          but it is not tested independently.
-//-------------------------------------------------
+/* -----------------------------------------------------------------------------------
+Program 7: Outlast the Baddies & Avoid the Abyss
+Course: CS 211, Fall 2023, UIC
+Author: ChessZra
+System: Advanced zyLab
+- -               - -
+Description: This is the header file for the Grid class.
+------------------------------------------------------------------------------------- */
+// Preprocessor Directives:
 
 #pragma once
 
@@ -109,7 +112,8 @@ public:
       This function returns a reference to a new Grid that is a clone of the given
       grid.                                                                           */
   Grid& operator=(const Grid& other) {
-      // If other is the same object as what you're trying to create, just return the object:
+      // If other is the same object as what you're trying to create, just return the 
+      // object:
       if (this == &other) { 
           return *this;
       }
@@ -137,7 +141,6 @@ public:
               Rows[r].Cols[c] = other.Rows[r].Cols[c];
           }
       }
-   
       return *this;
   }
 

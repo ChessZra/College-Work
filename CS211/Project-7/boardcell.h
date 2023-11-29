@@ -1,12 +1,19 @@
+/* -----------------------------------------------------------------------------------
+Program 7: Outlast the Baddies & Avoid the Abyss
+Course: CS 211, Fall 2023, UIC
+Author: ChessZra
+System: Advanced zyLab
+- -               - -
+Description: This is a header file for the types that inherit BoardCell including 
+Monster, Bat, Abyss, Wall, Nothing, and EscapeLadder.
+------------------------------------------------------------------------------------- */
 #ifndef _BOARDCELL_H
 #define _BOARDCELL_H
 
 using namespace std;
 
 // First, the BoardCell abstract base class 
-
 class BoardCell {
-	
     public:  
 		BoardCell() {} // default contstructor (do nothing)
         virtual ~BoardCell() {} // destructor (do nothing)
@@ -48,16 +55,14 @@ class BoardCell {
 
 }; // BoardCell (abstract base class)
 
-// Then, all the derived classes
 
+// Then, all the derived classes
 class Hero: public BoardCell {
-	
     public:
     	Hero(size_t r, size_t c) {
             setRow(r);
             setCol(c);
         }
-        
         virtual bool isHero( ) {return true;}
         virtual bool isStatic( ) {return false;}
         virtual char display( ) {return 'H';}
@@ -67,9 +72,7 @@ class Hero: public BoardCell {
         }
     	
         virtual void attemptMoveTo(size_t& newR, size_t& newC, size_t hRow, size_t hCol) {
-            //------------------------------------------------------------------------
-            // TODO: write attemptMoveTo() for Hero 
-            //      
+            //------------------------------------------------------------------------ 
             //      Hero's attempted move is determined by the nextMove data member 
             //      analyze nextMove to determine attempted new position for Hero
             //          'q' = up and left       'w' = up        'e' = up and right
@@ -115,19 +118,16 @@ class Hero: public BoardCell {
 
     private:
         char nextMove;
-
 }; // Hero
 
 
 class Monster: public BoardCell {
-    
     public:
 		Monster(size_t r, size_t c) {
             setRow(r);
             setCol(c);
             power = 1;
         }
-        
         virtual bool isBaddie( ) {return true;}
         virtual bool isStatic( ) {return false;}
         
@@ -199,8 +199,8 @@ class Monster: public BoardCell {
     
     private:
         int power; // power = 1 for Monster, power = 2 for SuperMonster
-
 }; // Monster
+
 
 class Bat: public BoardCell {
     public:
@@ -221,8 +221,8 @@ class Bat: public BoardCell {
             newR = this->getRow();
             newC = this->getCol();     
         }
-
 }; // Bat
+
 
 class Abyss: public BoardCell {
 	public:
@@ -234,6 +234,7 @@ class Abyss: public BoardCell {
         virtual bool isHole( ) {return true;}
 }; // Abyss
 
+
 class Wall: public BoardCell {
 	public:
     	Wall(size_t r, size_t c) {
@@ -244,6 +245,7 @@ class Wall: public BoardCell {
     	virtual bool isBarrier( ) {return true;}
 }; // Wall
 
+
 class Nothing: public BoardCell {
 	public:
     	Nothing(size_t r, size_t c) {
@@ -253,6 +255,7 @@ class Nothing: public BoardCell {
         virtual char display( ) {return ' ';}
     	virtual bool isSpace( ) {return true;}
 }; // Nothing
+
 
 class EscapeLadder: public BoardCell {
 	public:

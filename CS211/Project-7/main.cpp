@@ -1,3 +1,14 @@
+/* -----------------------------------------------------------------------------------
+Program 7: Outlast the Baddies & Avoid the Abyss
+Course: CS 211, Fall 2023, UIC
+Author: ChessZra
+System: Advanced zyLab
+- -               - -
+Description: This program is a 2D board game. You play as a hero in a randomly 
+generated map. Your goal is to survive and escape. There will be different monsters 
+that will be trying to kill you, try your best to dodge them!
+------------------------------------------------------------------------------------- */
+// Preprocessor Directives:
 #include <cstdlib>
 #include <iostream>
 #include <string>
@@ -59,7 +70,6 @@ int main( ) {
     cout << "Enter a seed for the random number generator (-1 to use system time): ";
     cin >> seed;
     cout << endl;
-    
     if (seed < 0) {
         myBoard.setupBoard(time(0));
     } else {
@@ -83,5 +93,4 @@ int main( ) {
     cout << "Game Over." << endl;
 	
 	return 0;
-	
 } // main
