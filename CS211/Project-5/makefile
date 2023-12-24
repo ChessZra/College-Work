@@ -7,9 +7,9 @@ build: main.c
 test: test.c
 	gcc test.c -o test.exe
 
-# In UNIX operating system do, ./main.exe < input.txt
+# In a UNIX operating system do, ./main.exe < input.txt
 run: build
-	.\main.exe < input.txt
+	.\main.exe
 
 run_test: test
 	./test.exe
