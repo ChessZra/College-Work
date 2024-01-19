@@ -1,14 +1,41 @@
-int pinRed = 12;
+int pinOnBoard = LED_BUILTIN; // Green LED
+int pinRed = 12; // Red LED
+int pinGreen = 11; // Green LED;
+
+unsigned long previousMillis = 0; // Variable to store previous time
+const long interval = 500; // Interval at which to blink.
+
+int onBoardState = HIGH;
+int redState = LOW;
+int greenState = LOW;
 
 void setup() {
-  // put your setup code here, to run once:
   pinMode(pinRed, OUTPUT);
+  pinMode(pinOnBoard, OUTPUT);
+  pinMode(pinGreen, OUTPUT);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  digitalWrite(pinRed, HIGH);
-  delay(1000);
-  digitalWrite(pinRed, LOW);
-  delay(1000);
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= interval) {
+    previousMillis = currentMillis;
+
+    if (onBoardState == HIGH) { // Turn Red on:
+      redState = HIGH;
+      onBoardState = LOW;
+      greenState = LOW;
+    } else if (redState == HIGH) { // Turn Green on:
+      redState = LOW;
+      onBoardState = LOW;
+      greenState = HIGH;
+    } else if (greenState == HIGH) { // Turn onBoard on:
+      redState = LOW;
+      onBoardState = HIGH;
+      greenState = LOW; 
+    }
+
+    digitalWrite(pinOnBoard, onBoardState);
+    digitalWrite(pinRed, redState);
+    digitalWrite(pinGreen, greenState);
+  } 
 }
