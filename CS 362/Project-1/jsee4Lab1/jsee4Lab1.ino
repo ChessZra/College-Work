@@ -1,3 +1,21 @@
+/* jsee4Lab1.ino */
+/* -----------------------------------------------------------------------------------
+ >> Assignment details and provided code are created and owned by Patrick Troy.
+ >> University of Illinois Chicago - CS 362, Spring 2024
+ >> -----------------------------------------------------------------------------------
+ >> Course : Computer Design
+ >> Author : John Ezra See (668942698, jsee4)
+ >> System : Windows 11 w/ Arduino IDE
+ >> References: https://docs.arduino.cc/
+ - -                             - -
+ >> Project/Lab Name    : Lab 1: 3 way blink
+ >> Brief Description   : This code allows three LED's to alternate between a given
+                          interval.
+ >> Assumptions         : None
+ >> Date demonstrated   :
+ >> Teaching Assistant  :
+------------------------------------------------------------------------------------- */
+// Global variables:
 int pinOnBoard = LED_BUILTIN; // Green LED
 int pinRed = 12; // Red LED
 int pinGreen = 11; // Green LED;
@@ -17,6 +35,7 @@ void setup() {
 
 void loop() {
   unsigned long currentMillis = millis();
+    
   if (currentMillis - previousMillis >= interval) {
     previousMillis = currentMillis;
 
