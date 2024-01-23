@@ -9,7 +9,9 @@
  >> References: https://docs.arduino.cc/
  - -                             - -
  >> Project/Lab Name    : Lab 2: Three Bit Counter
- >> Brief Description   : 
+ >> Brief Description   : The arduino consists of three leds which represent each 
+                          single bit. Two buttons used to increment/decrement a 1-7
+                          value represented by the state of the LED.
  >> Assumptions         : None
  >> Date demonstrated   :
  >> Teaching Assistant  :
@@ -43,8 +45,8 @@ void setup() {
 }
 
 void loop() {
-  if (millis() - lastDebounceTime <= debounceDelay) return; // Within the delay, don't do anything...
-
+  if (millis() - lastDebounceTime <= debounceDelay) return; // Within the delay, don't 
+                                                            // do anything...
   incrementState = digitalRead(incrementPin);
   decrementState = digitalRead(decrementPin);
 
@@ -53,7 +55,8 @@ void loop() {
 
   if (incrementPressed) value++;
   if (decrementPressed) value--;
-  if (incrementPressed || decrementPressed) lastDebounceTime = millis(); // Reset debounce time when button is pressed.
+  if (incrementPressed || decrementPressed) lastDebounceTime = millis(); // Reset 
+                                              // debounce time when button is pressed.
 
   if (value > 7) value = 7;
   if (value < 0) value = 0;
