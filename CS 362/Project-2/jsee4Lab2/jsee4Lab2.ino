@@ -18,11 +18,11 @@
 ------------------------------------------------------------------------------------- */
 // Global variables:
 // Constants/Pins:
-const int incrementPin = 1;  // the number of the pushbutton pin
-const int decrementPin = 2;
-const int firstBit = 13;    // the number of the LED pin
-const int secondBit = 12;
-const int thirdBit = 11;
+const int incrementPin = 1; // Input
+const int decrementPin = 2; // Input
+const int firstBit = 13;    // Output
+const int secondBit = 12;   // Output
+const int thirdBit = 11;    // Output
 
 // Changing variables:
 int incrementState = 0;  // variable for reading the pushbutton status
@@ -41,7 +41,6 @@ void setup() {
   pinMode(thirdBit, OUTPUT);
   pinMode(incrementPin, INPUT);
   pinMode(decrementPin, INPUT);
-  // Serial.begin(9600);
 }
 
 void loop() {
@@ -67,5 +66,4 @@ void loop() {
   
   prevIncrementState = incrementState;
   prevDecrementState = decrementState;
-
 }
