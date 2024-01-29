@@ -52,13 +52,10 @@ void loop() {
   bool incrementPressed = incrementState == HIGH && prevIncrementState != HIGH;
   bool decrementPressed = decrementState == HIGH && prevDecrementState != HIGH;
 
-  if (incrementPressed) value++;
-  if (decrementPressed) value--;
+  if (incrementPressed && value < 7) value++;
+  if (decrementPressed && value > 0) value--;
   if (incrementPressed || decrementPressed) lastDebounceTime = millis(); // Reset 
                                               // debounce time when button is pressed.
-
-  if (value > 7) value = 7;
-  if (value < 0) value = 0;
 
   digitalWrite(firstBit, (value & 0x1) >= 1);
   digitalWrite(secondBit, (value & 0x2) >= 1);
