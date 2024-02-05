@@ -15,8 +15,8 @@
  >> Brief Description   : The arduino consists of a 16x2 LCD. The first line will 
  >>                       scroll through the quote. The second line is just my name.
  >> Assumptions         : None
- >> Date demonstrated   : 
- >> Teaching Assistant  : 
+ >> Date demonstrated   : 02/05/2024
+ >> Teaching Assistant  : KAZ
 ------------------------------------------------------------------------------------- */
 // include the library code:
 #include <LiquidCrystal.h>
@@ -48,5 +48,5 @@ void loop() {
   lcd.print(window);
 
   low += 1;
-  delay(250);
+  delay(300);
 }
