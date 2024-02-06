@@ -1,7 +1,9 @@
 # Fdb version 4
-["pdflatex"] 1707087369 "c:/Users/johne/Documents/Projects/College-Work/CS301/Homework/Homework-2/homework-02-template.tex" "homework-02-template.pdf" "homework-02-template" 1707087370 0
+["pdflatex"] 1707258310 "c:/Users/johne/Documents/Projects/College-Work/CS301/Homework/Homework-2/homework-02-template.tex" "homework-02-template.pdf" "homework-02-template" 1707258312 0
   "C:/Users/johne/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1706731758 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/johne/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1694275278 24142035 2dfaba5a4399837fbe91ce10acd83817 ""
+  "C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc" 1256925840 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
+  "C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc" 1256925840 2840 216e6e45ad352e2456e1149f28885bee ""
   "C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc" 1256925840 2327 9d6df24f9c4f7368395224341a95523a ""
   "C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1233951854 916 f87d7c45f9c908e672703b83b72241a3 ""
   "C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msam7.tfm" 1233951854 928 2dc8d444221b7a635bb58038579b861a ""
@@ -21,8 +23,13 @@
   "C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/rm-lmr6.tfm" 1256925840 11836 e3b6ce3e601aec94f64a536e7f4224d5 ""
   "C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/rm-lmr8.tfm" 1256925840 11864 309fd7f43e4a0ba39f6f7644d76e8edf ""
   "C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb" 1256925840 121021 836464b5fe0c782d94085eb083550ccc ""
+  "C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb" 1256925840 30388 702fae6a5f0e6e9c48a1d872b442ffcf ""
+  "C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb" 1256925840 30635 833ec815d446ec453a4913fc26d24cbc ""
   "C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb" 1256925840 119235 05e5c8d6d60439433e50047898c2c0e0 ""
   "C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb" 1256925840 113634 9384aebdf26f9881e046a4b5574566db ""
+  "C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb" 1256925840 122174 a2d5e73f396ddbeb3bdf5c79aea0993d ""
+  "C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb" 1256925840 27863 09ce3735688ffde955e72da27c95b61a ""
+  "C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb" 1256925840 27802 5c876bb2c4040caaf035d60bd74a86bd ""
   "C:/Users/johne/AppData/Local/Programs/MiKTeX/tex/context/base/mkii/supp-pdf.mkii" 1580390158 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "C:/Users/johne/AppData/Local/Programs/MiKTeX/tex/generic/pgf/basiclayer/pgfcore.code.tex" 1673775190 1016 1c2b89187d12a2768764b83b4945667c ""
   "C:/Users/johne/AppData/Local/Programs/MiKTeX/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex" 1673775190 43820 1fef971b75380574ab35a0d37fd92608 ""
@@ -147,9 +154,9 @@
   "C:/Users/johne/AppData/Local/Programs/MiKTeX/tex/latex/tools/enumerate.sty" 1686252040 3468 a25a09d5c0a232a2d82e47496071c7fa ""
   "C:/Users/johne/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/x11nam.def" 1656233290 9124 8aaebcf7eff7655936dd67b677fbd2b0 ""
   "C:/Users/johne/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1656233290 56148 51a9a8571c07b9921892ae11063ae853 ""
-  "c:/Users/johne/Documents/Projects/College-Work/CS301/Homework/Homework-2/homework-02-template.tex" 1707087360 2809 58a487c61d01890854f550f310fb8029 ""
-  "homework-02-template.aux" 1707087370 32 ab05033ccbb38b00a31b200ccedf8001 "pdflatex"
-  "homework-02-template.tex" 1707087360 2809 58a487c61d01890854f550f310fb8029 ""
+  "c:/Users/johne/Documents/Projects/College-Work/CS301/Homework/Homework-2/homework-02-template.tex" 1707258309 8780 65a4adad40b075def9b7c2b55fb3b5f4 ""
+  "homework-02-template.aux" 1707258311 32 ab05033ccbb38b00a31b200ccedf8001 "pdflatex"
+  "homework-02-template.tex" 1707258309 8780 65a4adad40b075def9b7c2b55fb3b5f4 ""
   (generated)
   "homework-02-template.aux"
   "homework-02-template.log"

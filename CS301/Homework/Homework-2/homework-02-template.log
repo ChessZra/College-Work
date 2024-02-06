@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.9.9)  4 FEB 2024 16:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.9.9)  6 FEB 2024 16:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -535,55 +535,55 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 \c@lstlisting=\count313
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 94.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 90.
  (C:\Users\johne\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 94.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 90.
  (C:\Users\johne\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 94.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 90.
  (C:\Users\johne\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 94.
+(Font)              <10.95> on input line 90.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 94.
+(Font)              <8> on input line 90.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 94.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 94.
+(Font)              <6> on input line 90.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 90.
  (C:\Users\johne\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (C:\Users\johne\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 94.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 90.
  (C:\Users\johne\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (C:\Users\johne\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ) [1
 
-{C:/Users/johne/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}] [2] [3] (homework-02-template.aux)
+{C:/Users/johne/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}] [2] [3] (homework-02-template.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 20023 strings out of 475248
- 416772 string characters out of 5757814
- 1918801 words of memory out of 5000000
- 41195 multiletter control sequences out of 15000+600000
- 577351 words of font info for 65 fonts, out of 8000000 for 9000
+ 20219 strings out of 475248
+ 421239 string characters out of 5757814
+ 1935801 words of memory out of 5000000
+ 41385 multiletter control sequences out of 15000+600000
+ 577517 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,5n,87p,1090b,265s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb>
-Output written on homework-02-template.pdf (3 pages, 77329 bytes).
+ 84i,8n,87p,1090b,746s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb>
+Output written on homework-02-template.pdf (3 pages, 137994 bytes).
 PDF statistics:
- 31 PDF objects out of 1000 (max. 8388607)
+ 58 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  10253 words of extra memory for PDF output out of 12000 (max. 10000000)
 
