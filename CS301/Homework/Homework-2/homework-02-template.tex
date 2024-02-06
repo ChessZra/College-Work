@@ -215,6 +215,6 @@ auto
 \end{question}
 
 \begin{question}{More than Regular}
-    Suppose, for the sake of contradiction, that A is regular. Then by definition, there is a DFA M for which there is a pumping lumma, p. Let $s = 0^p1^{(p + 1)}$. By the pumping lumma, we can divide s into x, y, z where $|xy| \le p$ and $|y| \ge 1$. Then $y = 0^k$ represent the number of 0's for $0 < k \le p$. Pumping up gives us $xy^2z = 0^{(p + k)}1^{(p + 1)}.$ Since $k \ge 1$, then $p + k \ge p + 1$. Therefore, the number of 0's will be greater than or equal to the number of 1's Thus, there is a contradiction because $xy^2z \notin A$.
+    Suppose, for the sake of contradiction, that A is regular. Then by definition, there is a DFA M for which there is a pumping lumma, p. Let $s = 0^p1^{(p + 1)}$. By the pumping lumma, we can divide s into x, y, z where $|xy| \le p$ and $|y| \ge 1$. Then $y = 0^k$ represent the number of 0's for $0 < k \le p$. Pumping up gives us $xy^2z = 0^{(p + k)}1^{(p + 1)}.$ Since $k \ge 1$, then $p + k \ge p + 1$. Therefore, the number of 0's will be greater than or equal to the number of 1's Thus, there is a contradiction because $xy^2z \notin A$. Thus, A cannot be regular.
 \end{question}
 \end{document}
