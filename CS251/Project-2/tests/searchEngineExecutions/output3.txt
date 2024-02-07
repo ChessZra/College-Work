@@ -1,0 +1,83 @@
+Stand by while building index...
+Indexed 85 pages containing 7032 unique terms
+
+Enter query sentence (press enter to quit): Found 16 matching pages
+https://cs.uic.edu/news-stories/andres-tapia-receives-scholarships-to-attend-tapia-conference-great-minds-in-stem-conference/
+https://cs.uic.edu/news-stories/computer-science-assistant-professor-chris-kanich-wins-graduate-mentoring-award/
+https://cs.uic.edu/news-stories/computer-science-students-earn-research-student-scholarships-to-attend-grace-hopper-celebration/
+https://cs.uic.edu/news-stories/cs-department-welcomes-three-new-faculty-members/
+https://cs.uic.edu/news-stories/cs-students-lead-edt-robot-team-to-semifinals-at-engineering-competition/
+https://cs.uic.edu/news-stories/cs-welcomes-13-new-faculty-members/
+https://cs.uic.edu/news-stories/engineering-students-learn-autonomous-vehicles-in-new-multidisciplinary-course/
+https://cs.uic.edu/news-stories/making-music-out-of-numbers-lessons-in-break-through-techs-cs-100-summer-course/
+https://cs.uic.edu/news-stories/meet-jovad-uribe-a-junior-in-uics-new-data-science-program/
+https://cs.uic.edu/news-stories/ms-students-win-mobility-hackathon-chicago-with-feel-your-city-platform/
+https://cs.uic.edu/news-stories/reaping-the-benefits-of-an-internship-experience/
+https://cs.uic.edu/news-stories/senior-dane-zieman-challenges-fellow-cs-students-to-prepare-for-technical-interviews/
+https://cs.uic.edu/news-stories/uic-aims-to-break-through-gender-gap-in-computer-science/
+https://cs.uic.edu/news-stories/uic-receives-explorecsr-grant-from-google/
+https://cs.uic.edu/news-stories/uic-receives-ongoing-funding-to-improve-diversity-in-computer-science/
+https://cs.uic.edu/news-stories/wearable-technology-course-expands-to-meet-demand/
+
+Enter query sentence (press enter to quit): Found 2 matching pages
+https://cs.uic.edu/news-stories/uic-aims-to-break-through-gender-gap-in-computer-science/
+https://cs.uic.edu/news-stories/wearable-technology-course-expands-to-meet-demand/
+
+Enter query sentence (press enter to quit): Found 14 matching pages
+https://cs.uic.edu/news-stories/andres-tapia-receives-scholarships-to-attend-tapia-conference-great-minds-in-stem-conference/
+https://cs.uic.edu/news-stories/computer-science-assistant-professor-chris-kanich-wins-graduate-mentoring-award/
+https://cs.uic.edu/news-stories/computer-science-students-earn-research-student-scholarships-to-attend-grace-hopper-celebration/
+https://cs.uic.edu/news-stories/cs-department-welcomes-three-new-faculty-members/
+https://cs.uic.edu/news-stories/cs-students-lead-edt-robot-team-to-semifinals-at-engineering-competition/
+https://cs.uic.edu/news-stories/cs-welcomes-13-new-faculty-members/
+https://cs.uic.edu/news-stories/engineering-students-learn-autonomous-vehicles-in-new-multidisciplinary-course/
+https://cs.uic.edu/news-stories/making-music-out-of-numbers-lessons-in-break-through-techs-cs-100-summer-course/
+https://cs.uic.edu/news-stories/meet-jovad-uribe-a-junior-in-uics-new-data-science-program/
+https://cs.uic.edu/news-stories/ms-students-win-mobility-hackathon-chicago-with-feel-your-city-platform/
+https://cs.uic.edu/news-stories/reaping-the-benefits-of-an-internship-experience/
+https://cs.uic.edu/news-stories/senior-dane-zieman-challenges-fellow-cs-students-to-prepare-for-technical-interviews/
+https://cs.uic.edu/news-stories/uic-receives-explorecsr-grant-from-google/
+https://cs.uic.edu/news-stories/uic-receives-ongoing-funding-to-improve-diversity-in-computer-science/
+
+Enter query sentence (press enter to quit): Found 9 matching pages
+https://cs.uic.edu/news-stories/biaffet-app-can-typos-give-insight-into-your-mental-health/
+https://cs.uic.edu/news-stories/board-grants-key-approvals-for-uics-new-health-care-engineering-buildings/
+https://cs.uic.edu/news-stories/cecilia-avila-uic-cs-20-wins-get-chicago-fellowship/
+https://cs.uic.edu/news-stories/computer-science-instructor-credits-course-success-to-online-learning/
+https://cs.uic.edu/news-stories/evl-to-be-featured-in-chicago-new-media-1973-1992-exhibition/
+https://cs.uic.edu/news-stories/inspiring-grads-discovering-passion-for-computer-science-pays-off/
+https://cs.uic.edu/news-stories/nsf-awards-uic-1-5m-for-new-data-science-institute/
+https://cs.uic.edu/news-stories/uics-electronic-visiualization-lab-is-helping-reimagine-live-stage-performance/
+https://cs.uic.edu/news-stories/university-scholar-barbara-di-eugenio/
+
+Enter query sentence (press enter to quit): Found 2 matching pages
+https://cs.uic.edu/news-stories/uic-aims-to-break-through-gender-gap-in-computer-science/
+https://cs.uic.edu/news-stories/wearable-technology-course-expands-to-meet-demand/
+
+Enter query sentence (press enter to quit): Found 11 matching pages
+https://cs.uic.edu/news-stories/board-grants-key-approvals-for-uics-new-health-care-engineering-buildings/
+https://cs.uic.edu/news-stories/break-through-tech-chicago-announces-strategic-expert-as-new-director/
+https://cs.uic.edu/news-stories/engineering-students-learn-autonomous-vehicles-in-new-multidisciplinary-course/
+https://cs.uic.edu/news-stories/foursquare-visits-uic-plans-to-expand-its-growth-in-chicago/
+https://cs.uic.edu/news-stories/googles-hispanic-leadership-summit-chicago-tailor-made-for-some-uic-computer-science-students/
+https://cs.uic.edu/news-stories/maxine-brown-director-of-uics-electronic-visualization-laboratory-retires-after-34-years/
+https://cs.uic.edu/news-stories/microsoft-ai-for-earth-adds-wild-me-to-50m-project-initiative/
+https://cs.uic.edu/news-stories/more-than-60-k-12-teachers-from-the-chicago-area-attended-cs-ed-camp-hosted-by-csta-and-the-uic-cs-department/
+https://cs.uic.edu/news-stories/uic-aims-to-break-through-gender-gap-in-computer-science/
+https://cs.uic.edu/news-stories/uic-college-of-engineering-researchers-selected-for-discovery-partners-institute-seed-funding/
+https://cs.uic.edu/news-stories/wearable-technology-course-expands-to-meet-demand/
+
+Enter query sentence (press enter to quit): Found 9 matching pages
+https://cs.uic.edu/news-stories/board-grants-key-approvals-for-uics-new-health-care-engineering-buildings/
+https://cs.uic.edu/news-stories/break-through-tech-chicago-announces-strategic-expert-as-new-director/
+https://cs.uic.edu/news-stories/engineering-students-learn-autonomous-vehicles-in-new-multidisciplinary-course/
+https://cs.uic.edu/news-stories/foursquare-visits-uic-plans-to-expand-its-growth-in-chicago/
+https://cs.uic.edu/news-stories/maxine-brown-director-of-uics-electronic-visualization-laboratory-retires-after-34-years/
+https://cs.uic.edu/news-stories/microsoft-ai-for-earth-adds-wild-me-to-50m-project-initiative/
+https://cs.uic.edu/news-stories/uic-aims-to-break-through-gender-gap-in-computer-science/
+https://cs.uic.edu/news-stories/uic-college-of-engineering-researchers-selected-for-discovery-partners-institute-seed-funding/
+https://cs.uic.edu/news-stories/wearable-technology-course-expands-to-meet-demand/
+
+Enter query sentence (press enter to quit): Found 0 matching pages
+
+Enter query sentence (press enter to quit): Thank you for searching!

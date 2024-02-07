@@ -1,0 +1,49 @@
+=============================== SAMPLE ===============================
+www.example.com
+to be ora not to be
+www.otherexample.com
+want to be free
+
+map<string, set<string>> expected = {
+    {"to", {"www.example.com", "www.otherexample.com"}},
+    {"be", {"www.example.com", "www.otherexample.com"}},
+    {"ora", {"www.example.com"}},
+    {"not", {"www.example.com"}},
+    {"want", {"www.otherexample.com"}},
+    {"free", {"www.otherexample.com"}},
+};
+
+
+=============================== LAB ACTIVITY ===============================
+www.shoppinglist.com
+EGGS! milk, fish,      @  bread cheese
+www.rainbow.org
+red ~green~ orange, yellow + blue (indigo) &violet
+www.dr.seuss.net
+One Fish Two Fish Red fish Blue fish !!!
+www.bigbadwolf.com
+I'm not trying to eat you
+
+map<string, set<string>> expected = {
+    {"eggs", {"www.shoppinglist.com"}},
+    {"milk", {"www.shoppinglist.com"}},
+    {"fish", {"www.shoppinglist.com", "www.dr.seuss.net"}},
+    {"bread", {"www.shoppinglist.com"}},
+    {"cheese", {"www.shoppinglist.com"}},
+
+    {"red", {"www.rainbow.org", "www.dr.seuss.net"}},
+    {"green", {"www.rainbow.org"}},
+    {"orange", {"www.rainbow.org"}},
+    {"yellow", {"www.rainbow.org"}},
+    {"blue", {"www.rainbow.org", "www.dr.seuss.net"}},
+    {"indigo", {"www.rainbow.org"}},
+    {"violet", {"www.rainbow.org"}},
+    {"one", {"www.dr.seuss.net"}},
+    {"two", {"www.dr.seuss.net"}},
+    {"i'm", {"www.bigbadwolf.com"}},
+    {"not", {"www.bigbadwolf.com"}},
+    {"trying", {"www.bigbadwolf.com"}},
+    {"to", {"www.bigbadwolf.com"}},
+    {"eat", {"www.bigbadwolf.com"}},
+    {"you", {"www.bigbadwolf.com"}},
+};

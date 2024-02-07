@@ -1,0 +1,7 @@
+Invalid filename.
+Stand by while building index...
+Indexed 0 pages containing 0 unique terms
+
+Enter query sentence (press enter to quit): Found 0 matching pages
+
+Enter query sentence (press enter to quit): Thank you for searching!

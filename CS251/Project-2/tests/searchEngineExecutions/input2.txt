@@ -1,0 +1,7 @@
+cplusplus.txt
+vector
+vector +container
+vector +container +pointer
+vector +container -pointer
+vector bool ratio
+L +ratio
