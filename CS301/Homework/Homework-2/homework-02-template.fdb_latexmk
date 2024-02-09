@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1707258687 "c:/Users/johne/Documents/Projects/College-Work/CS301/Homework/Homework-2/homework-02-template.tex" "homework-02-template.pdf" "homework-02-template" 1707258689 0
+["pdflatex"] 1707455164 "c:/Users/johne/Documents/Projects/College-Work/CS301/Homework/Homework-2/homework-02-template.tex" "homework-02-template.pdf" "homework-02-template" 1707455166 0
   "C:/Users/johne/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1706731758 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/johne/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1694275278 24142035 2dfaba5a4399837fbe91ce10acd83817 ""
   "C:/Users/johne/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc" 1256925840 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -154,9 +154,9 @@
   "C:/Users/johne/AppData/Local/Programs/MiKTeX/tex/latex/tools/enumerate.sty" 1686252040 3468 a25a09d5c0a232a2d82e47496071c7fa ""
   "C:/Users/johne/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/x11nam.def" 1656233290 9124 8aaebcf7eff7655936dd67b677fbd2b0 ""
   "C:/Users/johne/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1656233290 56148 51a9a8571c07b9921892ae11063ae853 ""
-  "c:/Users/johne/Documents/Projects/College-Work/CS301/Homework/Homework-2/homework-02-template.tex" 1707258687 8807 e20a825a7a3e7f534b54885367eebb88 ""
-  "homework-02-template.aux" 1707258689 32 ab05033ccbb38b00a31b200ccedf8001 "pdflatex"
-  "homework-02-template.tex" 1707258687 8807 e20a825a7a3e7f534b54885367eebb88 ""
+  "c:/Users/johne/Documents/Projects/College-Work/CS301/Homework/Homework-2/homework-02-template.tex" 1707455163 8807 e20a825a7a3e7f534b54885367eebb88 ""
+  "homework-02-template.aux" 1707455166 32 ab05033ccbb38b00a31b200ccedf8001 "pdflatex"
+  "homework-02-template.tex" 1707455163 8807 e20a825a7a3e7f534b54885367eebb88 ""
   (generated)
   "homework-02-template.aux"
   "homework-02-template.log"
