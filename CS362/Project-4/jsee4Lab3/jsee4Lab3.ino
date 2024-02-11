@@ -16,13 +16,13 @@
  >> Date demonstrated   : 02/12/2024
  >> Teaching Assistant  : 
 ------------------------------------------------------------------------------------- */
-// include the library code:
+// Preprocessor Directives:
 #include <LiquidCrystal.h>
+
 // Global variables:
 const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
-int photoPin = A0;
-int light;
+int photoPin = A0, light;
 
 void setup() {
   lcd.begin(16, 2);
