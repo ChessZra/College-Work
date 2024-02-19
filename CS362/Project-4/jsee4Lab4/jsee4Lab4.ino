@@ -56,7 +56,6 @@ void loop() {
 
     previousMillis = currentMillis;
   }
-    // Serial.println(light);
     // Display the time:
     lcd.setCursor(0, 1);
     lcd.print(millis() / 1000);
