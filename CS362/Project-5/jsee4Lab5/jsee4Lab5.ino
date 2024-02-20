@@ -15,8 +15,8 @@
  >>                       by the number of LEDS that are turned on. As well as
  >>                       a potentiometer that controls the pitch and timing of the buzzer.
  >> Assumptions         : None
- >> Date demonstrated   : 02/18/2024
- >> Teaching Assistant  : 
+ >> Date demonstrated   : 02/19/2024
+ >> Teaching Assistant  : Jon
 ------------------------------------------------------------------------------------- */
 // Global Variables:
 int ledPin1 = 8, ledPin2 = 9, ledPin3 = 10, ledPin4 = 11;
@@ -27,7 +27,7 @@ int l1State, l2State, l3State, l4State;
 
 int potPin = A1, potVal, prevPotState = -1, curPotState;
 int buzzerPin = 7;
-int soundDelay[] = {-1, 8000, 4000, 2000, 1000, 500, 0}; // -1 indicates no sound
+int soundDelay[] = {-1, 9000, 5000, 3000, 2000, 1500, 0}; // -1 indicates no sound
 int soundPitch[] = {-1, 523, 587, 659, 698, 784, 880}; // C4, D4, E4, F4, G4, A4
 unsigned long lastSounded;
 
@@ -45,16 +45,16 @@ void loop() {
 
   if (currentMillis - previousMillis >= interval) {
     light = analogRead(photoPin);
-    if (light <= 150) {
-      l1State = HIGH; l2State = HIGH; l3State = HIGH; l4State = HIGH;
-    } else if (light <= 300) {
-      l1State = HIGH; l2State = HIGH; l3State = HIGH; l4State = LOW;
-    } else if (light <= 400) {
-      l1State = HIGH; l2State = HIGH; l3State = LOW; l4State = LOW;
+    if (light <= 350) {
+      l1State = HIGH; l2State = HIGH; l3State = HIGH; l4State = HIGH; // 4 lights
+    } else if (light <= 500) {
+      l1State = HIGH; l2State = HIGH; l3State = HIGH; l4State = LOW; // 3 lights
     } else if (light <= 700) {
-      l1State = HIGH; l2State = LOW; l3State = LOW; l4State = LOW;
-    } else {
-      l1State = LOW; l2State = LOW; l3State = LOW; l4State = LOW;
+      l1State = HIGH; l2State = HIGH; l3State = LOW; l4State = LOW; // 2 lights
+    } else if (light <= 900) {
+      l1State = HIGH; l2State = LOW; l3State = LOW; l4State = LOW; // 1 light
+    } else { 
+      l1State = LOW; l2State = LOW; l3State = LOW; l4State = LOW; // 0 light
     }
     digitalWrite(ledPin1, l1State);
     digitalWrite(ledPin2, l2State);
@@ -72,7 +72,7 @@ void loop() {
   }
 
   if (currentMillis - lastSounded >= soundDelay[curPotState] && curPotState != 0) {
-    tone(buzzerPin, soundPitch[curPotState], 200);
+    tone(buzzerPin, soundPitch[curPotState], 1000);
     lastSounded = currentMillis;
   }
 }
