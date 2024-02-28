@@ -18,8 +18,8 @@
  >>                       system. The arduino is able to read in time and date inputs
  >>                       and displays it into the LCD.
  >> Assumptions         : None
- >> Date demonstrated   : 
- >> Teaching Assistant  : 
+ >> Date demonstrated   : 02/26/2024
+ >> Teaching Assistant  : Jon
 ------------------------------------------------------------------------------------- */
 // include the library code:
 #include <LiquidCrystal.h>
@@ -96,7 +96,7 @@ bool parseDate() {
   yr = atoi(yearStr);
 
   // Validate month, day, and year
-  if (mon < 1 || mon > 12 || d < 1 || d > 31 || yr < 1900 || yr > 9999)
+  if (mon < 1 || mon > 12 || d < 1 || d > 31 || yr < 1000 || yr > 9999)
     return false;
   // Validate day according to the month
   if ((mon == 4 || mon == 6 || mon == 9 || mon == 11) && d > 30)
