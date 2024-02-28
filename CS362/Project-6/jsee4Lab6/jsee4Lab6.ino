@@ -147,7 +147,6 @@ bool parseTime() {
 // day/month
 // • times right before the end of a year (12/31/23 @ 23:59:45) to show change of day/year
 // • times right before leap day (2/28/24 @ 23:59:45) to show inclusion of leap day 
-
 void loop() {
   // Get input from the computer:
   if (Serial.available() > 0) {
