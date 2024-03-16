@@ -9,21 +9,21 @@ TEST(EMPTYTEST, Test) {
 }
 
 TEST(SIZE, Size) {
-	// Empty PQ:
-	prqueue<string> emptyPQ;
+    // Empty PQ:
+    prqueue<string> emptyPQ;
 
-	// One element in PQ:
-	prqueue<string> singlePQ;
-	singlePQ.enqueue("LonelyGuy", 5);
+    // One element in PQ:
+    prqueue<string> singlePQ;
+    singlePQ.enqueue("LonelyGuy", 5);
 
-	// Multiple elements in PQ:
+    // Multiple elements in PQ:
     prqueue<string> names;
     names.enqueue("Dolores", 5);
     names.enqueue("Bernard", 4);
     names.enqueue("Arnold", 8);
     names.enqueue("Ford", 2);
-	names.enqueue("Jasmine", 6);
-	names.enqueue("Carlos", 11);
+    names.enqueue("Jasmine", 6);
+    names.enqueue("Carlos", 11);
 
     EXPECT_EQ(0, emptyPQ.size());
     EXPECT_EQ(1, singlePQ.size());
@@ -32,39 +32,39 @@ TEST(SIZE, Size) {
 
 
 TEST(ENQUEUE, Enqueue) {
-	// One element in PQ:
-	prqueue<string> singlePQ;
-	singlePQ.enqueue("LonelyGuy", 5);
+    // One element in PQ:
+    prqueue<string> singlePQ;
+    singlePQ.enqueue("LonelyGuy", 5);
 
-	// Multiple elements in PQ:
+    // Multiple elements in PQ:
     prqueue<string> names;
     names.enqueue("Dolores", 5);
     names.enqueue("Bernard", 4);
     names.enqueue("Arnold", 8);
     names.enqueue("Ford", 2);
-	names.enqueue("Jasmine", 6);
-	names.enqueue("Carlos", 11);
+    names.enqueue("Jasmine", 6);
+    names.enqueue("Carlos", 11);
 
     EXPECT_EQ("LonelyGuy", singlePQ.peek());
     EXPECT_EQ("Ford", names.peek());
 }
 
 TEST(ASSTRING, AsString) {
-	// Empty PQ:
-	prqueue<string> emptyPQ;
+    // Empty PQ:
+    prqueue<string> emptyPQ;
 
-	// One element in PQ:
-	prqueue<string> singlePQ;
-	singlePQ.enqueue("LonelyGuy", 5);
+    // One element in PQ:
+    prqueue<string> singlePQ;
+    singlePQ.enqueue("LonelyGuy", 5);
 
-	// Multiple elements in PQ:
+    // Multiple elements in PQ:
     prqueue<string> names;
     names.enqueue("Dolores", 5);
     names.enqueue("Bernard", 4);
     names.enqueue("Arnold", 8);
     names.enqueue("Ford", 2);
-	names.enqueue("Jasmine", 6);
-	names.enqueue("Carlos", 11);
+    names.enqueue("Jasmine", 6);
+    names.enqueue("Carlos", 11);
 
     EXPECT_EQ("", emptyPQ.as_string());
     EXPECT_EQ("5 value: LonelyGuy\n", singlePQ.as_string());
@@ -81,20 +81,20 @@ TEST(ASSTRING, AsString) {
 
 TEST(CLEAR, Clear) {
     // Empty PQ:
-	prqueue<string> emptyPQ;
+    prqueue<string> emptyPQ;
 
-	// One element in PQ:
-	prqueue<string> singlePQ;
-	singlePQ.enqueue("LonelyGuy", 5);
+    // One element in PQ:
+    prqueue<string> singlePQ;
+    singlePQ.enqueue("LonelyGuy", 5);
 
-	// Multiple elements in PQ:
+    // Multiple elements in PQ:
     prqueue<string> names;
     names.enqueue("Dolores", 5);
     names.enqueue("Bernard", 4);
     names.enqueue("Arnold", 8);
     names.enqueue("Ford", 2);
-	names.enqueue("Jasmine", 6);
-	names.enqueue("Carlos", 11);
+    names.enqueue("Jasmine", 6);
+    names.enqueue("Carlos", 11);
 
     emptyPQ.clear();
     singlePQ.clear();
@@ -110,21 +110,21 @@ TEST(CLEAR, Clear) {
 }
 
 TEST(DEQUEUE, Dequeue) {
-	// Empty PQ:
-	prqueue<string> emptyPQ;
+    // Empty PQ:
+    prqueue<string> emptyPQ;
 
-	// One element in PQ:
-	prqueue<string> singlePQ;
-	singlePQ.enqueue("LonelyGuy", 5);
+    // One element in PQ:
+    prqueue<string> singlePQ;
+    singlePQ.enqueue("LonelyGuy", 5);
 
-	// Multiple elements in PQ:
+    // Multiple elements in PQ:
     prqueue<string> names;
     names.enqueue("Dolores", 5);
     names.enqueue("Bernard", 4);
     names.enqueue("Arnold", 8);
     names.enqueue("Ford", 2);
-	names.enqueue("Jasmine", 6);
-	names.enqueue("Carlos", 11);
+    names.enqueue("Jasmine", 6);
+    names.enqueue("Carlos", 11);
 
     EXPECT_EQ(string(), emptyPQ.dequeue());
     EXPECT_EQ(0, emptyPQ.size());
@@ -175,8 +175,8 @@ TEST(DEQUEUE, Dequeue) {
     random.enqueue("r2", 2);
     random.enqueue("r5", 5);
     random.enqueue("r6", 6);
-	random.enqueue("r1", 1);
-	random.enqueue("r3", 3);
+    random.enqueue("r1", 1);
+    random.enqueue("r3", 3);
     map<int, string> mp3 = {
         {1, "r1"},
         {2, "r2"},
@@ -196,21 +196,21 @@ TEST(DEQUEUE, Dequeue) {
 }
 
 TEST(PEEK, Peek) {
-	// Empty PQ:
-	prqueue<string> emptyPQ;
+    // Empty PQ:
+    prqueue<string> emptyPQ;
 
-	// One element in PQ:
-	prqueue<string> singlePQ;
-	singlePQ.enqueue("LonelyGuy", 5);
+    // One element in PQ:
+    prqueue<string> singlePQ;
+    singlePQ.enqueue("LonelyGuy", 5);
 
-	// Multiple elements in PQ:
+    // Multiple elements in PQ:
     prqueue<string> names;
     names.enqueue("Dolores", 5);
     names.enqueue("Bernard", 4);
     names.enqueue("Arnold", 8);
     names.enqueue("Ford", 2);
-	names.enqueue("Jasmine", 6);
-	names.enqueue("Carlos", 11);
+    names.enqueue("Jasmine", 6);
+    names.enqueue("Carlos", 11);
 
     EXPECT_EQ(string(), emptyPQ.peek());
     EXPECT_EQ("LonelyGuy", singlePQ.peek());
