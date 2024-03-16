@@ -25,13 +25,61 @@ class prqueue {
     NODE* temp;  // Optional
 
     // TODO_STUDENT: add private helper function definitions here
+    void asStringHelper (NODE* cur, ostream& output) const {
+        if (cur == nullptr) return;
+
+        this->asStringHelper(cur->left, output);
+
+        output << cur->priority << " value: " << cur->value << endl;
+
+        this->asStringHelper(cur->right, output); 
+    }
+
+    // Helper function for ~prqueue():
+    // Helper function for the destructor which frees all the nodes.
+    // This runs a post-order traversal.
+    void freeAllNodes(NODE* cur) {
+        if (cur == nullptr) return;
+
+        this->freeAllNodes(cur->left);
+        this->freeAllNodes(cur->right);
+
+        delete cur;
+    }
+
+    // Helper function for enqueue():
+    // Recursive function that inserts the new node in the priority queue.
+    // This helper function gets called when the priority queue is non-empty.
+    void enqueueHelper(NODE* newNode, NODE* cur) {
+        // Iterate while you haven't inserted the node.
+        while (true) {
+            // If the new node is less, go left:
+            if (newNode->priority <= cur->priority) {
+                if (cur->left == nullptr) {
+                    newNode->parent = cur;
+                    cur->left = newNode;
+                    break;
+                }
+                cur = cur->left;
+            } else if (newNode->priority > cur->priority) { // If the new node
+                                                            // is greater, go right:
+                if (cur->right == nullptr) {
+                    newNode->parent = cur;
+                    cur->right = newNode;
+                    break;
+                }
+                cur = cur->right;
+            }
+        }
+    }
 
    public:
     /// Creates an empty `prqueue`.
     ///
     /// Runs in O(1).
-    prqueue() {
-        // TODO_STUDENT
+    prqueue() { 
+        this->sz = 0;
+        this->root = nullptr;
     }
 
     /// Copy constructor.
@@ -59,16 +107,19 @@ class prqueue {
     ///
     /// Runs in O(N), where N is the number of values.
     void clear() {
-        // TODO_STUDENT
+        NODE* cur = root;
+        this->freeAllNodes(cur);
+        this->sz = 0;
+        this->root = nullptr;
     }
 
     /// Destructor, cleans up all memory associated with `prqueue`.
     ///
     /// Runs in O(N), where N is the number of values.
     ~prqueue() {
-        // TODO_STUDENT
+        this->clear();
     }
-
+    
     /// Adds `value` to the `prqueue` with the given `priority`.
     ///
     /// Uses the priority to determine the location in the underlying tree.
@@ -76,7 +127,22 @@ class prqueue {
     /// Runs in O(H + M), where H is the height of the tree, and M is
     /// the number of duplicate priorities.
     void enqueue(T value, int priority) {
-        // TODO_STUDENT
+        NODE* newNode = new NODE;
+        newNode->priority = priority;
+        newNode->value = value;
+        newNode->left = nullptr;
+        newNode->right = nullptr;
+        newNode->parent = nullptr;
+
+        if (this->sz == 0) {
+            newNode->parent = nullptr;
+            this->root = newNode;
+        } else {
+            NODE* cur = root;
+            this->enqueueHelper(newNode, cur);
+        }
+
+        this->sz++;
     }
 
     /// Returns the value with the smallest priority in the `prqueue`, but does
@@ -87,7 +153,12 @@ class prqueue {
     /// Runs in O(H + M), where H is the height of the tree, and M is
     /// the number of duplicate priorities.
     T peek() const {
-        // TODO_STUDENT
+        if (this->sz == 0) return T{};
+        NODE* cur = root;
+        while (cur->left) {
+            cur = cur->left;
+        }
+        return cur->value;
     }
 
     /// Returns the value with the smallest priority in the `prqueue` and
@@ -98,14 +169,36 @@ class prqueue {
     /// Runs in O(H + M), where H is the height of the tree, and M is
     /// the number of duplicate priorities.
     T dequeue() {
-        // TODO_STUDENT
+        if (this->sz == 0) return T{};
+        NODE* cur = root;
+        while (cur->left) {
+            cur = cur->left;
+        }
+
+        if (cur == this->root) {
+            if (cur->right) {
+                this->root = cur->right;
+                cur->right->parent = nullptr;
+            } else {
+                this->root = nullptr;
+            }
+        } else {
+            cur->parent->left = cur->right; // Set its predecessor's child to cur->right.
+            if (cur->right)
+                cur->right->parent = cur->parent; // Set cur->right's parent to predecessor.
+        }
+        T ret = cur->value;
+        delete cur;
+
+        this->sz--;
+        return ret;
     }
 
     /// Returns the number of elements in the `prqueue`.
     ///
     /// Runs in O(1).
     size_t size() const {
-        // TODO_STUDENT
+        return this->sz;
     }
 
     /// Resets internal state for an iterative inorder traversal.
@@ -164,7 +257,11 @@ class prqueue {
     ///
     /// Runs in O(N), where N is the number of values.
     string as_string() const {
-        // TODO_STUDENT
+        NODE* cur = this->root;
+        ostringstream output;
+        this->asStringHelper(cur, output);
+
+        return output.str();
     }
 
     /// Checks if the contents of `this` and `other` are equivalent.
