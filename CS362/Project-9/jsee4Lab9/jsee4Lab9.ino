@@ -12,7 +12,7 @@
  >>             https://www.arduino.cc/reference/en/libraries/liquidcrystal/
  - -                             - -
  >> Project/Lab Name    : Lab 9 - RGB LED
- >> Brief Description   : This program uses the RGB LED and separate R-G-B LEDS.
+ >> Brief Description   : This program uses the RGB LED and separate R-G-B LEDS!
  >> Assumptions         : None
  >> Date demonstrated   : 03/27/24
  >> Teaching Assistant  : Jon
