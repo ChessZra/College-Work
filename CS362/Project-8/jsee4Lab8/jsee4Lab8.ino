@@ -15,7 +15,7 @@
  >> Project/Lab Name    : Lab 8 - Interrupt Service Routines (ISR)
  >> Brief Description   : This program demonstrates the ISR functionality on the arduino 
  >>                       board by utilizing a few bush buttons and a single 16x2 LCD 
- >>                       screen.
+ >>                       screen!
  >> Assumptions         : None
  >> Date demonstrated   : 03/25/2024
  >> Teaching Assistant  : Amir
