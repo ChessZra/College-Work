@@ -7,6 +7,8 @@
 \usepackage[x11names, rgb]{xcolor}
 \usepackage{graphicx}
 \usepackage{tikz}
+\usepackage{pdfpages}
+\graphicspath{ {./img/} }
 \usetikzlibrary{decorations,arrows,shapes,automata,positioning}
 \tikzset{
 ->, % makes the edges directed
@@ -86,14 +88,29 @@ auto
 \header
 
 \begin{question}{Double It}
+    M = "On input w, \\
+    1. If the string is empty, reject. \\ 
+    2. Move head until we see a "b" then mark it with a "y". Then, go back to the beginning of the string. If non found, go to step 6. \\
+    3. Move head until we see an "a" then mark it with an "x". If non found, reject. \\
+    4. Repeat, move head until we see an "a" then mark it with an "x". Then, go back to the beginning. If non found, reject. \\
+    5. Go to step 2. \\
+    6. Move head until we see an "a". If we find an "a", accept. Otherwise, reject." \\
 
+    The TM halts because the algorithm rejects unwanted strings, so there is no possibility of an infinite "loop".
 \end{question}
 
 \begin{question}{Now Double It Again}
-
+    \newcommand{\img}[2]{\begin{center}\includegraphics[scale=#1]{#2}\end{center}}
+    >> \img{0.5}{Attachment.png}
 \end{question}
 
+
 \begin{question}{ALL of It, ALLways, ALL Over the Place}
-    
+    M = "On input B, \\
+    1. Determine whether B is an appropriateley encoded DFA. \\
+    2. Verify that for each state, it is also a final state. \\
+    3. If at any point, there is a state that is not a final state, reject. \\
+    4. If all states are visited and the conditions are met, accept." \\ \\
+    This algorithm halts because the DFA has finite states which means the algorithm will eventually halt.
 \end{question}
 \end{document}
