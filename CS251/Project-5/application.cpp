@@ -22,6 +22,14 @@
 using namespace std;
 using namespace tinyxml2;
 
+class prioritize {
+   public:
+    bool operator()(const pair<long long, double>& p1,
+                    const pair<long long, double>& p2) const {
+        return p1.second > p2.second;
+    }
+};
+
 double INF = numeric_limits<double>::max();
 
 graph<long long, double> buildGraph(
@@ -30,7 +38,42 @@ graph<long long, double> buildGraph(
     const vector<BuildingInfo>& Buildings) {
     graph<long long, double> G;
 
-    // TODO_STUDENT
+    // Build the vertices composed of the Node IDs and building IDs ::
+    // Firstly, let's add the nodes.
+    for (const auto pair: Nodes) {
+        G.addVertex(pair.first);
+    }
+    // Then, we can add the buildings...
+    for (size_t i = 0; i < Buildings.size(); i++) {
+        G.addVertex(Buildings[i].Coords.ID);
+    }
+
+    // Build the edges ::
+    // For each footway, build it such that it's bidirectional.
+    for (size_t i = 0; i < Footways.size(); i++) {
+        for (size_t j = 0; j < (Footways[i].Nodes.size() - 1); j++) {
+            long long firstID = Footways[i].Nodes[j];
+            long long secondID = Footways[i].Nodes[j + 1];
+            double weight = distBetween2Points(Nodes.at(firstID).Lat, Nodes.at(firstID).Lon,
+                                               Nodes.at(secondID).Lat, Nodes.at(secondID).Lon);
+            G.addEdge(firstID, secondID, weight);
+            G.addEdge(secondID, firstID, weight);
+        }
+    }
+    // For each building, build an edge from a building node to
+    // any node that is on a footway and 0.041 miles
+    for (size_t i = 0; i < Buildings.size(); i++) {
+        double lat2 = Buildings[i].Coords.Lat;
+        double lon2 = Buildings[i].Coords.Lon;
+        long long buildingID = Buildings[i].Coords.ID;
+        for (const auto pair: Nodes) {
+            double weight = distBetween2Points(pair.second.Lat, pair.second.Lon, lat2, lon2);
+            if (pair.second.OnFootway && weight <= 0.041) {     
+                G.addEdge(buildingID, pair.first, weight);
+                G.addEdge(pair.first, buildingID, weight);
+            }
+        }
+    }
 
     return G;
 }
@@ -40,9 +83,62 @@ vector<long long> dijkstra(
     long long start,
     long long target,
     const set<long long>& ignoreNodes) {
+    if (start == target) return {start};
     vector<long long> path;
 
-    // TODO_STUDENT
+    priority_queue<pair<long long, double>,
+                    vector<pair<long long, double>>,
+                    prioritize> pq;
+
+    unordered_map<long long, double> distances;
+    unordered_map<long long, long long> predecessors; // to: from
+    vector<long long> vertices = G.getVertices();
+
+    // Initialize all nodes to be infinity ::
+    for (size_t i = 0; i < vertices.size(); i++) {
+        distances[vertices[i]] = INF;
+    }
+    
+    // Initialize the pq with start ::
+    pq.push(make_pair(start, 0));
+    distances[start] = 0;
+
+    // Perform dikjstra's algorithm ::
+    while (!pq.empty()) {
+        // Dequeue the minimum element:
+        long long currentNode = pq.top().first;
+        pq.pop();
+
+        // Update neighbor weights:
+        for (const auto& nextNode: G.neighbors(currentNode)) {
+            if (ignoreNodes.find(nextNode) != ignoreNodes.end() && nextNode != target) continue;
+            double edgeWeight;
+            G.getWeight(currentNode, nextNode, edgeWeight);
+            double totalWeight = distances[currentNode] + edgeWeight;
+
+            if (totalWeight < distances[nextNode]) {
+                distances[nextNode] = totalWeight;
+                predecessors[nextNode] = currentNode;
+                // We insert even if nextNode's ID already exists there:
+                pq.push(make_pair(nextNode, totalWeight));
+            }
+        }
+    }
+    
+    if (distances[target] == INF) return {};
+
+    // Format the path ::
+    vector<long long> reversedPath;
+    long long cur = target;
+    while (cur != start) {
+        long long next = predecessors[cur];
+        reversedPath.push_back(cur);
+        cur = next;
+    }
+    reversedPath.push_back(cur);
+    for (int i = reversedPath.size() - 1; i >= 0; i--) {
+        path.push_back(reversedPath[i]);
+    }
 
     return path;
 }

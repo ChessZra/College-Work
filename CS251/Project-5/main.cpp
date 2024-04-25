@@ -65,6 +65,7 @@ int main() {
   cout << "# of buildings: " << Buildings.size() << endl;
 
   // Build graph from input data
+  cout << "GOT HERE LOLOL!" << endl;
   graph<long long, double> G = buildGraph(Nodes, Footways, Buildings);
 
   // More stats

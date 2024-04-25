@@ -14,19 +14,23 @@ using namespace std;
 template <typename VertexT, typename WeightT>
 class graph {
    private:
-    // TODO_STUDENT
+        map<VertexT, map<VertexT, WeightT>> mp;
+        size_t numVertices;
 
    public:
     /// Default constructor
     graph() {
-        // TODO_STUDENT
+        this->numVertices = 0;
     }
 
     /// @brief Add the vertex `v` to the graph, must run in at most O(log |V|).
     /// @param v
     /// @return true if successfully added; false if it existed already
     bool addVertex(VertexT v) {
-        // TODO_STUDENT
+        // If the vertex already exists, return false.
+        if (mp.count(v) > 0) return false;
+        mp[v] = {};
+        this->numVertices++;
         return true;
     }
 
@@ -37,7 +41,8 @@ class graph {
     /// @return true if successfully added or overwritten;
     ///         false if either vertices isn't in graph
     bool addEdge(VertexT from, VertexT to, WeightT weight) {
-        // TODO_STUDENT
+        if (mp.count(from) == 0 || mp.count(to) == 0) return false;
+        mp[from][to] = weight;
         return true;
     }
 
@@ -48,34 +53,39 @@ class graph {
     /// @return true if the edge exists, and `weight` is set;
     ///         false if the edge does not exist
     bool getWeight(VertexT from, VertexT to, WeightT& weight) const {
-        // TODO_STUDENT
-        return true;
+        if (mp.count(from) > 0 && mp.at(from).count(to) > 0) {
+            weight = mp.at(from).at(to);
+            return true;
+        }
+        return false;
     }
 
     /// @brief Get the out-neighbors of `v`. Must run in at most O(|V|).
     /// @param v
     /// @return vertices that v has an edge to
     set<VertexT> neighbors(VertexT v) const {
-        set<VertexT> S;
-        // TODO_STUDENT
+        set<VertexT> S; 
+        const map<VertexT, WeightT>& neighborNodes = mp.at(v);
+        for (const auto it: neighborNodes) S.insert(it.first);
         return S;
     }
 
     /// @brief Return a vector containing all vertices in the graph
     vector<VertexT> getVertices() const {
-        // TODO_STUDENT
-        return vector<VertexT>{};
+        vector<VertexT> ret;
+        for (const auto& pair: mp) ret.push_back(pair.first);
+        return ret;
     }
 
     /// @brief Get the number of vertices in the graph. Runs in O(1).
     size_t NumVertices() const {
-        // TODO_STUDENT
-        return 0;
+        return this->numVertices;
     }
 
     /// @brief Get the number of directed edges in the graph. Runs in at most O(|V|).
     size_t NumEdges() const {
-        // TODO_STUDENT
-        return 0;
+        size_t ret = 0;
+        for (auto pair: mp) ret += pair.second.size();
+        return ret;
     }
 };
