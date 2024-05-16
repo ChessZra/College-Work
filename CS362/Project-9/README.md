@@ -1,1 +1,1 @@
-I forgot to take a video during finals :(
+I forgot to take a video during finals..
