@@ -12,13 +12,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 /*
 	MyMoney **(1 error in the constructor)**:
-		2 unit tests per public method
+		**2 unit tests per public method**
 		**test both constructors (several cases)**
 		**parameterized test to check if cashValues contains all values loaded by in the readvalues()**
 		**use assertion assertArrayEquals() to check if interestValues array contains the all of the values loaded in by the readInValues()**
 		**Test whether it's initialized or not**
  */
-
 class MyMoneyTest {
 	
 	static MyMoney hasCash;

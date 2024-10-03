@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="MyMoneyTest" time="0.07" tests="13" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="MyMoneyTest" time="0.066" tests="13" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
     <property name="java.specification.version" value="11"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="C:\Users\Ezra\Documents\Projects\Playground\java\HomeworkTwo\target\test-classes;C:\Users\Ezra\Documents\Projects\Playground\java\HomeworkTwo\target\classes;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter\5.9.1\junit-jupiter-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.1\junit-jupiter-api-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Ezra\.m2\repository\org\junit\platform\junit-platform-commons\1.9.1\junit-platform-commons-1.9.1.jar;C:\Users\Ezra\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.1\junit-jupiter-params-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.1\junit-jupiter-engine-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\junit\platform\junit-platform-engine\1.9.1\junit-platform-engine-1.9.1.jar;"/>
+    <property name="java.class.path" value="C:\Users\Ezra\Documents\Projects\College-Work\CS342\Homework\Homework-2\target\test-classes;C:\Users\Ezra\Documents\Projects\College-Work\CS342\Homework\Homework-2\target\classes;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter\5.9.1\junit-jupiter-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.1\junit-jupiter-api-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Ezra\.m2\repository\org\junit\platform\junit-platform-commons\1.9.1\junit-platform-commons-1.9.1.jar;C:\Users\Ezra\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.1\junit-jupiter-params-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.1\junit-jupiter-engine-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\junit\platform\junit-platform-engine\1.9.1\junit-platform-engine-1.9.1.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -17,9 +17,9 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11\bin"/>
-    <property name="sun.java.command" value="C:\Users\Ezra\AppData\Local\Temp\surefire977020541592534057\surefirebooter13070457049251916836.jar C:\Users\Ezra\AppData\Local\Temp\surefire977020541592534057 2024-10-02T19-59-23_865-jvmRun1 surefire4808366150030434453tmp surefire_010627523554297263013tmp"/>
+    <property name="sun.java.command" value="C:\Users\Ezra\AppData\Local\Temp\surefire17886521149412556861\surefirebooter2375958031548728977.jar C:\Users\Ezra\AppData\Local\Temp\surefire17886521149412556861 2024-10-02T20-29-08_791-jvmRun1 surefire282898369521787756tmp surefire_015094026845660445996tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="C:\Users\Ezra\Documents\Projects\Playground\java\HomeworkTwo\target\test-classes;C:\Users\Ezra\Documents\Projects\Playground\java\HomeworkTwo\target\classes;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter\5.9.1\junit-jupiter-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.1\junit-jupiter-api-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Ezra\.m2\repository\org\junit\platform\junit-platform-commons\1.9.1\junit-platform-commons-1.9.1.jar;C:\Users\Ezra\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.1\junit-jupiter-params-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.1\junit-jupiter-engine-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\junit\platform\junit-platform-engine\1.9.1\junit-platform-engine-1.9.1.jar;"/>
+    <property name="surefire.test.class.path" value="C:\Users\Ezra\Documents\Projects\College-Work\CS342\Homework\Homework-2\target\test-classes;C:\Users\Ezra\Documents\Projects\College-Work\CS342\Homework\Homework-2\target\classes;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter\5.9.1\junit-jupiter-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.1\junit-jupiter-api-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Ezra\.m2\repository\org\junit\platform\junit-platform-commons\1.9.1\junit-platform-commons-1.9.1.jar;C:\Users\Ezra\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.1\junit-jupiter-params-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.1\junit-jupiter-engine-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\junit\platform\junit-platform-engine\1.9.1\junit-platform-engine-1.9.1.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\Ezra"/>
     <property name="user.language" value="en"/>
@@ -27,13 +27,13 @@
     <property name="java.version.date" value="2018-09-25"/>
     <property name="java.home" value="C:\Program Files\Java\jdk-11"/>
     <property name="file.separator" value="\"/>
-    <property name="basedir" value="C:\Users\Ezra\Documents\Projects\Playground\java\HomeworkTwo"/>
+    <property name="basedir" value="C:\Users\Ezra\Documents\Projects\College-Work\CS342\Homework\Homework-2"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\Ezra\AppData\Local\Temp\surefire977020541592534057\surefirebooter13070457049251916836.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Ezra\AppData\Local\Temp\surefire17886521149412556861\surefirebooter2375958031548728977.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11+28"/>
@@ -48,7 +48,7 @@
     <property name="java.vendor.url.bug" value="http://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\Ezra\AppData\Local\Temp\"/>
     <property name="java.version" value="11"/>
-    <property name="user.dir" value="C:\Users\Ezra\Documents\Projects\Playground\java\HomeworkTwo"/>
+    <property name="user.dir" value="C:\Users\Ezra\Documents\Projects\College-Work\CS342\Homework\Homework-2"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
@@ -63,14 +63,14 @@
   <testcase name="lumpSum_VariableRate1" classname="MyMoneyTest" time="0.008"/>
   <testcase name="lumpSum_VariableRate2" classname="MyMoneyTest" time="0"/>
   <testcase name="lumpSum_ConstantRate1" classname="MyMoneyTest" time="0"/>
-  <testcase name="lumpSum_ConstantRate2" classname="MyMoneyTest" time="0.001"/>
-  <testcase name="testHasInterest" classname="MyMoneyTest" time="0.001"/>
-  <testcase name="testReadInFile{String}[1]" classname="MyMoneyTest" time="0.014"/>
+  <testcase name="lumpSum_ConstantRate2" classname="MyMoneyTest" time="0"/>
+  <testcase name="testHasInterest" classname="MyMoneyTest" time="0"/>
+  <testcase name="testReadInFile{String}[1]" classname="MyMoneyTest" time="0.015"/>
   <testcase name="testReadInFile{String}[2]" classname="MyMoneyTest" time="0.001"/>
   <testcase name="compoundSavings_variableContribution1" classname="MyMoneyTest" time="0"/>
   <testcase name="compoundSavings_variableContribution2" classname="MyMoneyTest" time="0"/>
-  <testcase name="testHasBoth" classname="MyMoneyTest" time="0.001"/>
+  <testcase name="testHasBoth" classname="MyMoneyTest" time="0"/>
   <testcase name="testHasCash" classname="MyMoneyTest" time="0"/>
-  <testcase name="compoundSavings_sameContribution1" classname="MyMoneyTest" time="0.003"/>
-  <testcase name="compoundSavings_sameContribution2" classname="MyMoneyTest" time="0.001"/>
+  <testcase name="compoundSavings_sameContribution1" classname="MyMoneyTest" time="0.001"/>
+  <testcase name="compoundSavings_sameContribution2" classname="MyMoneyTest" time="0"/>
 </testsuite>
