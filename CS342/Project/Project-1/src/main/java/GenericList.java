@@ -1,14 +1,19 @@
+/* GenericList.java */
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public abstract class GenericList<T> implements Iterable<T> {
+    // Private Data Members:
     private Node<T> head;
     private int length = 0;
 
+    // Abstract Functions:
     public abstract void add(T data);
 
     public abstract T delete();
 
+    // Nested class:
+    // Node represents a single node in the list.
     public class Node<E> {
         E data;
         int code;
@@ -21,42 +26,17 @@ public abstract class GenericList<T> implements Iterable<T> {
         }
     }
 
-    public class GenericListIterator implements Iterator<T> {
-        private int index = 0;
-
-        @Override
-        public boolean hasNext() {
-            return index < length;
-        }
-
-        @Override
-        public T next() {
-            return get(index);
-        }
-    }
-
-    public class GenericListDescendingIterator implements Iterator<T> {
-        private int index = length - 1;
-
-        @Override
-        public boolean hasNext() {
-            return index >= 0;
-        }
-
-        @Override
-        public T next() {
-            return get(index);
-        }
-    }
-
+    // Iterator function (descending):
     public Iterator<T> descendingIterator() {
-        return new GenericListDescendingIterator();
+        return new ReverseGLLIterator<T>(this);
     }
 
+    // Iterator function (ascending):
     public Iterator<T> iterator() {
-        return new GenericListIterator();
+        return new GLLIterator<T>(this);
     }
 
+    // Prints the list in every new line:
     public void print() {
         if (getLength() == 0) {
             System.out.println("Empty List");
@@ -69,6 +49,7 @@ public abstract class GenericList<T> implements Iterable<T> {
         }
     }
 
+    // Converts the list into an ArrayList then returns it:
     public ArrayList<T> dumpList() {
         ArrayList<T> res = new ArrayList<>();
         Node<T> cur = head;
@@ -79,8 +60,9 @@ public abstract class GenericList<T> implements Iterable<T> {
         return res;
     }
 
+    // Get the element at specified index:
     public T get(int index) {
-        if (index >= getLength()) return null;
+        if (index >= getLength() || index < 0) return null;
         Node<T> cur = head;
         int pos = 0;
         while (pos < index) {
@@ -90,8 +72,9 @@ public abstract class GenericList<T> implements Iterable<T> {
         return cur.data;
     }
 
+    // Set the element at specified index:
     public T set(int index, T element) {
-        if (index >= getLength()) return null;
+        if (index >= getLength() || index < 0) return null;
 
         Node<T> cur = head;
         int pos = 0;
@@ -104,18 +87,22 @@ public abstract class GenericList<T> implements Iterable<T> {
         return old;
     }
 
+    // Getter function for length:
     public int getLength() {
         return this.length;
     }
 
+    // Setter function for length:
     public void setLength(int length) {
         this.length = length;
     }
 
+    // Getter function for head:
     public Node<T> getHead() {
         return this.head;
     }
 
+    // Setter function for head;
     public void setHead(Node<T> head) {
         this.head = head;
     }
