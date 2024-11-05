@@ -1,0 +1,19 @@
+.card-container {
+    -fx-pref-width: 75;
+    -fx-pref-height: 100;
+}
+
+.border {
+	-fx-background-color: green;
+}
+
+.output {
+    -fx-background-color: white;       
+    -fx-background-radius: 0;       
+    -fx-opacity: 1.0;                 
+    -fx-text-fill: black;              
+}
+
+.label {
+    -fx-font-weight: bold;  
+}
