@@ -8,27 +8,40 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
 
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id = "gameRoot" styleClass="border" fx:controller = "GameController">
 
-
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id = "root2" styleClass="border" fx:controller = "MyController">
+    <top>
+        <MenuBar fx:id="MenuBar">
+            <Menu text="Options">
+                <MenuItem text="Exit" onAction="#exitGame" />
+                <MenuItem text="Fresh Start" onAction="#resetGame" />
+                <MenuItem text="NewLook" onAction="#changeTheme" />
+            </Menu>
+        </MenuBar>
+    </top>
 
     <left>
         <VBox fx:id="leftVBox" alignment="CENTER" spacing="10">
+            <TextField fx:id="moneyTextField1" promptText="Your money: $0" disable="true" styleClass="output"/>
             <Label text="ANTE"/>
             <TextField fx:id="anteBetTextField1" promptText="Enter your bet"/>
 
             <Label text="PAIR PLUS"/>
             <TextField fx:id="pairPlusTextField1" promptText="Enter your bet"/>
 
-            <Button text="PLAY" onAction="#playButtonPlayer1"/>
-            <Button text="FOLD" onAction="#foldButtonPlayer1"/>
-            <Button text="READY" onAction="#readyButtonPlayer1"/>
+            <Button fx:id="playButtonPlayer1" text="PLAY" onAction="#playButtonPlayer1OnAction" disable="true"/>
+            <Button fx:id="foldButtonPlayer1" text="FOLD" onAction="#foldButtonPlayer1OnAction" disable="true"/>
+            <Button fx:id="readyButtonPlayer1" text="READY" onAction="#readyButtonPlayer1OnAction"/>
         </VBox>
     </left>
 
     <center>
         <VBox fx:id="centerVBox" alignment="CENTER" spacing="10">
+            <Label fx:id="dealerOutput"/>
             <Label text="DEALER"/>
             <HBox alignment="CENTER" spacing="10">
                 <ImageView fx:id="dealerCard1Image" fitWidth="75" fitHeight="100"/>
@@ -36,7 +49,7 @@
                 <ImageView fx:id="dealerCard3Image" fitWidth="75" fitHeight="100"/>
             </HBox>
 
-            <HBox alignment="CENTER" spacing="100">
+            <HBox alignment="CENTER" spacing="33">
                 <VBox alignment="CENTER" spacing="10">
                     <Label text="Player 1"/>
                     <HBox alignment="CENTER" spacing="10">
@@ -44,9 +57,11 @@
                         <ImageView fx:id="player1Card2Image" fitWidth="75" fitHeight="100"/>
                         <ImageView fx:id="player1Card3Image" fitWidth="75" fitHeight="100"/>
                     </HBox>
-                    <TextField fx:id="outputTextFieldPlayer1" promptText="Output" disable="true" styleClass="output"/>
-                    <TextField fx:id="winningsTextFieldPlayer1" promptText="Winnings" disable="true" styleClass="output"/>
+                    <TextField fx:id="anteWinningsTextFieldPlayer1" promptText="Ante + Play Winnings:" disable="true" styleClass="output"/>
+                    <TextField fx:id="pairPlusWinningsTextFieldPlayer1" promptText="Pair Plus Winnings:" disable="true" styleClass="output"/>
                 </VBox>
+
+                <Button fx:id="nextRoundButton" text="Next Round" onAction="#nextRoundButtonOnAction" disable="true"/>
 
                 <VBox alignment="CENTER" spacing="10">
                     <Label text="Player 2"/>
@@ -55,8 +70,8 @@
                         <ImageView fx:id="player2Card2Image" fitWidth="75" fitHeight="100"/>
                         <ImageView fx:id="player2Card3Image" fitWidth="75" fitHeight="100"/>
                     </HBox>
-                    <TextField fx:id="outputTextFieldPlayer2" promptText="Output" disable="true" styleClass="output"/>
-                    <TextField fx:id="winningsTextFieldPlayer2" promptText="Winnings" disable="true" styleClass="output"/>
+                    <TextField fx:id="anteWinningsTextFieldPlayer2" promptText="Ante + Play Winnings:" disable="true" styleClass="output"/>
+                    <TextField fx:id="pairPlusWinningsTextFieldPlayer2" promptText="Pair Plus Winnings:" disable="true" styleClass="output"/>
                 </VBox>
             </HBox>
 
@@ -65,21 +80,22 @@
 
     <right>
         <VBox fx:id="rightVBox" alignment="CENTER" spacing="10">
+            <TextField fx:id="moneyTextField2" promptText="Your money: $0" disable="true" styleClass="output"/>
             <Label text="ANTE"/>
             <TextField fx:id="anteBetTextField2" promptText="Enter your bet"/>
 
             <Label text="PAIR PLUS"/>
             <TextField fx:id="pairPlusTextField2" promptText="Enter your bet"/>
 
-            <Button text="PLAY" onAction="#playButtonPlayer2"/>
-            <Button text="FOLD" onAction="#foldButtonPlayer2"/>
-            <Button text="READY" onAction="#readyButtonPlayer2"/>
+            <Button fx:id="playButtonPlayer2" text="PLAY" onAction="#playButtonPlayer2OnAction" disable="true"/>
+            <Button fx:id="foldButtonPlayer2" text="FOLD" onAction="#foldButtonPlayer2OnAction" disable="true"/>
+            <Button fx:id="readyButtonPlayer2" text="READY" onAction="#readyButtonPlayer2OnAction"/>
         </VBox>
     </right>
 
-    <bottom>
-        <Button text="Options" onAction="#optionButton"/>
-    </bottom>
+    <!-- <bottom>
+        <Button text="Options" onAction="#optionButtonOnAction"/>
+    </bottom> -->
 
 </BorderPane>
 

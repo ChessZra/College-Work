@@ -1,39 +1,35 @@
 .border {
-    -fx-background-color: #1e1e2e;
+    -fx-background-color: #1a472a;  
     -fx-padding: 20px;
 }
 
 #leftVBox, #rightVBox, #centerVBox {
     -fx-padding: 15px;
-    -fx-background-color: rgba(49, 50, 68, 0.7);
+    -fx-background-color: rgba(255, 255, 255, 0.1);
     -fx-background-radius: 10px;
-    -fx-border-color: #89b4fa;  
+    -fx-border-color: #gold;
     -fx-border-radius: 10px;
     -fx-border-width: 2px;
 }
 
 .label {
-    -fx-text-fill: #cdd6f4;  
+    -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
 }
 
 .button {
-    -fx-background-color: #313244;  
-    -fx-text-fill: #cdd6f4;
+    -fx-background-color: #c9b037; 
+    -fx-text-fill: black;
     -fx-font-weight: bold;
     -fx-min-width: 100px;
     -fx-padding: 10px;
     -fx-background-radius: 5px;
-    -fx-border-color: #89b4fa;
-    -fx-border-width: 1px;
-    -fx-border-radius: 5px;
 }
 
 .button:hover {
-    -fx-background-color: #45475a;
+    -fx-background-color: #dfc242;
     -fx-cursor: hand;
-    -fx-border-color: #b4befe;  
 }
 
 .button:disabled {
@@ -59,44 +55,39 @@
 }
 
 .text-field {
-    -fx-background-color: #313244;
-    -fx-text-fill: #cdd6f4;
+    -fx-background-color: white;
     -fx-background-radius: 5px;
     -fx-padding: 5px;
     -fx-font-size: 13px;
-    -fx-border-color: #89b4fa;
-    -fx-border-width: 1px;
-    -fx-border-radius: 5px;
 }
 
 .output {
-    -fx-background-color: #313244;
-    -fx-text-fill: #fab387;  
+    -fx-background-color: #f0f0f0;
+    -fx-text-fill: #333333;
     -fx-font-weight: bold;
 }
 
 #nextRoundButton {
-    -fx-background-color: #209fb5; 
-    -fx-border-color: #94e2d5;
-    -fx-text-fill: #cdd6f4;
+    -fx-background-color: #3498db; 
+    -fx-text-fill: white;
 }
 
 #nextRoundButton:hover {
-    -fx-background-color: #25b4cc;
+    -fx-background-color: #2980b9;
 }
 
 .bottom .button {
-    -fx-background-color: #585b70;
+    -fx-background-color: #95a5a6;
     -fx-min-width: 150px;
-    -fx-border-color: #a6adc8;
 }
 
-.bottom .button:hover {
-    -fx-background-color: #6c7086;
+#dealerOutput {
+    -fx-font-size: 16px;
+    -fx-text-fill: #f1c40f;
 }
 
 .menu-bar {
-    -fx-background-color: #1e1e2e;
+    -fx-background-color: #1a472a;
 }
 
 .menu-bar .menu .label {

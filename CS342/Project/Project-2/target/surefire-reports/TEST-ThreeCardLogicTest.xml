@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="MyTest" time="0.004" tests="24" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="ThreeCardLogicTest" time="0.003" tests="24" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -17,7 +17,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11\bin"/>
-    <property name="sun.java.command" value="C:\Users\Ezra\AppData\Local\Temp\surefire4018383613196502737\surefirebooter2719732954449375067.jar C:\Users\Ezra\AppData\Local\Temp\surefire4018383613196502737 2024-11-06T07-15-10_804-jvmRun1 surefire18070203192454957429tmp surefire_08401355489393714045tmp"/>
+    <property name="sun.java.command" value="C:\Users\Ezra\AppData\Local\Temp\surefire7466830294482283929\surefirebooter8384525897826369945.jar C:\Users\Ezra\AppData\Local\Temp\surefire7466830294482283929 2024-11-06T07-36-03_396-jvmRun1 surefire17044127905073454343tmp surefire_07329230576403610417tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Ezra\Documents\Projects\College-Work\CS342\Project\Project-2\target\test-classes;C:\Users\Ezra\Documents\Projects\College-Work\CS342\Project\Project-2\target\classes;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter\5.9.1\junit-jupiter-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.1\junit-jupiter-api-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Ezra\.m2\repository\org\junit\platform\junit-platform-commons\1.9.1\junit-platform-commons-1.9.1.jar;C:\Users\Ezra\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.1\junit-jupiter-params-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.1\junit-jupiter-engine-5.9.1.jar;C:\Users\Ezra\.m2\repository\org\junit\platform\junit-platform-engine\1.9.1\junit-platform-engine-1.9.1.jar;C:\Users\Ezra\.m2\repository\org\openjfx\javafx-controls\19.0.2.1\javafx-controls-19.0.2.1.jar;C:\Users\Ezra\.m2\repository\org\openjfx\javafx-controls\19.0.2.1\javafx-controls-19.0.2.1-win.jar;C:\Users\Ezra\.m2\repository\org\openjfx\javafx-graphics\19.0.2.1\javafx-graphics-19.0.2.1.jar;C:\Users\Ezra\.m2\repository\org\openjfx\javafx-graphics\19.0.2.1\javafx-graphics-19.0.2.1-win.jar;C:\Users\Ezra\.m2\repository\org\openjfx\javafx-base\19.0.2.1\javafx-base-19.0.2.1.jar;C:\Users\Ezra\.m2\repository\org\openjfx\javafx-base\19.0.2.1\javafx-base-19.0.2.1-win.jar;C:\Users\Ezra\.m2\repository\org\openjfx\javafx-fxml\19.0.2.1\javafx-fxml-19.0.2.1.jar;C:\Users\Ezra\.m2\repository\org\openjfx\javafx-fxml\19.0.2.1\javafx-fxml-19.0.2.1-win.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -33,7 +33,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\Ezra\AppData\Local\Temp\surefire4018383613196502737\surefirebooter2719732954449375067.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Ezra\AppData\Local\Temp\surefire7466830294482283929\surefirebooter8384525897826369945.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11+28"/>
@@ -60,28 +60,28 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="StraightTest" classname="MyTest" time="0.001"/>
-  <testcase name="CompareSameTypePairTest" classname="MyTest" time="0"/>
-  <testcase name="HighHandTest" classname="MyTest" time="0"/>
-  <testcase name="CompareInvalidTest" classname="MyTest" time="0"/>
-  <testcase name="CompareSameTypeStraightTest" classname="MyTest" time="0"/>
-  <testcase name="PairPlusThreeOfAKindTest" classname="MyTest" time="0"/>
-  <testcase name="PairPlusInvalidBetTest" classname="MyTest" time="0"/>
-  <testcase name="CompareDifferentTypesTest" classname="MyTest" time="0"/>
-  <testcase name="PairPlusEmptyHandTest" classname="MyTest" time="0"/>
-  <testcase name="PairPlusFlushTest" classname="MyTest" time="0"/>
-  <testcase name="CompareHandsTieTest" classname="MyTest" time="0"/>
-  <testcase name="ThreeOfAKindTest" classname="MyTest" time="0"/>
-  <testcase name="PairPlusPairTest" classname="MyTest" time="0"/>
-  <testcase name="CompareSameTypeTest" classname="MyTest" time="0"/>
-  <testcase name="PairPlusStraightTest" classname="MyTest" time="0"/>
-  <testcase name="EdgeCasesTest" classname="MyTest" time="0"/>
-  <testcase name="isDealerQualifiedTest" classname="MyTest" time="0"/>
-  <testcase name="PairTest" classname="MyTest" time="0"/>
-  <testcase name="FlushTest" classname="MyTest" time="0.001"/>
-  <testcase name="StraightFlushTest" classname="MyTest" time="0"/>
-  <testcase name="PairPlusHighCardTest" classname="MyTest" time="0"/>
-  <testcase name="CompareSameTypePairTest2" classname="MyTest" time="0.001"/>
-  <testcase name="CompareSameTypePairTest3" classname="MyTest" time="0"/>
-  <testcase name="PairPlusStraightFlushTest" classname="MyTest" time="0"/>
+  <testcase name="StraightTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="CompareSameTypePairTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="HighHandTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="CompareInvalidTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="CompareSameTypeStraightTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="PairPlusThreeOfAKindTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="PairPlusInvalidBetTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="CompareDifferentTypesTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="PairPlusEmptyHandTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="PairPlusFlushTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="CompareHandsTieTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="ThreeOfAKindTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="PairPlusPairTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="CompareSameTypeTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="PairPlusStraightTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="EdgeCasesTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="isDealerQualifiedTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="PairTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="FlushTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="StraightFlushTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="PairPlusHighCardTest" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="CompareSameTypePairTest2" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="CompareSameTypePairTest3" classname="ThreeCardLogicTest" time="0"/>
+  <testcase name="PairPlusStraightFlushTest" classname="ThreeCardLogicTest" time="0"/>
 </testsuite>

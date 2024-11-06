@@ -31,11 +31,24 @@ public class ThreeCardLogic {
             then the third highest etc. High card is also used to break ties when the high 
             hands both have the same type of hand (pair, flush, straight, etc).
         */
-
         // Sort the hand to have an easier time in decreasing order:
         player.sort((a, b) -> b.value - a.value);
         dealer.sort((a, b) -> b.value - a.value);
 
+        // This doesn't work for a pair / two-of-a-kind.
+        if (evalHand(player) == 5) {
+            if (player.get(1).value == dealer.get(1).value) {
+                // If they are the same value-pair, then compare using high hands.
+            } else if (player.get(1).value < dealer.get(1).value) {
+                return 1; // Dealer wins because its pair value is greater
+            } else {
+                return 2; // Player wins because its pair value is greater
+            }
+        }
+
+        // Sort the hand to have an easier time in decreasing order:
+        player.sort((a, b) -> b.value - a.value);
+        dealer.sort((a, b) -> b.value - a.value);
         for (int i = 0; i < player.size(); i++) {
             int playerHighestCard = player.get(i).value;
             int dealerHighestCard = dealer.get(i).value;
@@ -47,8 +60,28 @@ public class ThreeCardLogic {
         }
         return 0; // Ties
     }
+    
+    // Public methods::
+    /* Returns 1 if there is a queen or higher, else 0*/
+    public static int isDealerQualified(ArrayList<Card> dealer) {
+        int highestCard = 0;
+        for (Card c : dealer) {
+            highestCard = Math.max(highestCard, c.value);
+        }
+        if (highestCard >= 12) return 1;
+        return 0;
+    }
 
-    // Public methods:
+    /* This accepts a string and returns the integer equivalent. If
+       invalid, then the integer is treated as 0; */
+    public static int parseStringToInt(String str) {
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
     public static int evalHand(ArrayList<Card> hand) {
         /*
         This class represents the logic in the game. The method evalHand will return an integer
@@ -105,7 +138,7 @@ public class ThreeCardLogic {
         player lost the Pair Plus bet, it will just return 0.
         */
         int handType = evalHand(hand);
-
+        
         if (handType == 0 || bet <= 0) return 0; 
 
         if (handType == 1) {

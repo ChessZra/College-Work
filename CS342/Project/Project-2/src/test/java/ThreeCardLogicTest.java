@@ -13,7 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.BeforeEach;
 import java.util.ArrayList;
 
-class MyTest {
+class ThreeCardLogicTest {
     
     private ArrayList<Card> hand;
     private int bet;
@@ -242,7 +242,7 @@ class MyTest {
         player.add(new Card('S', 14)); // Ace
         player.add(new Card('D', 3));
         player.add(new Card('H', 6));
-        
+
         // Player wins because Ace > Queen
         assertEquals(2, ThreeCardLogic.compareHands(dealer, player));
     }
@@ -283,6 +283,51 @@ class MyTest {
         
         // Both pairs but dealer wins because on their third card, 10 > 9:
         assertEquals(1, ThreeCardLogic.compareHands(dealer, player));
+    }
+
+    @Test
+    void CompareSameTypePairTest3() {
+        ArrayList<Card> dealer = new ArrayList<>();
+        ArrayList<Card> player = new ArrayList<>();
+        
+        // Dealer pair
+        dealer.add(new Card('H', 13));
+        dealer.add(new Card('D', 13));
+        dealer.add(new Card('S', 5)); 
+        
+        // Player pair
+        player.add(new Card('S', 3));
+        player.add(new Card('C', 3));
+        player.add(new Card('H', 14));
+        
+        // Both pairs but dealer wins because it has a higher pair..
+        assertEquals(1, ThreeCardLogic.compareHands(dealer, player));
+
+        dealer.clear();
+        dealer.add(new Card('H', 13));
+        dealer.add(new Card('D', 13));
+        dealer.add(new Card('S', 5)); 
+
+        player.clear();
+        player.add(new Card('S', 7));
+        player.add(new Card('C', 13));
+        player.add(new Card('H', 13));
+
+        // Both pairs are the same value, but next higher card is 7 > 5, so player wins:
+        assertEquals(2, ThreeCardLogic.compareHands(dealer, player));
+
+        dealer.clear();
+        dealer.add(new Card('H', 13));
+        dealer.add(new Card('D', 13));
+        dealer.add(new Card('S', 7)); 
+
+        player.clear();
+        player.add(new Card('S', 7));
+        player.add(new Card('C', 13));
+        player.add(new Card('H', 13));
+
+        // Tie:
+        assertEquals(0, ThreeCardLogic.compareHands(dealer, player));
     }
 
     @Test
@@ -340,5 +385,34 @@ class MyTest {
         player.add(new Card('H', 12));
         
         assertEquals(0, ThreeCardLogic.compareHands(dealer, player));
+    }
+
+    // Test ThreeCardLogic.isDealerQualified():
+    @Test
+    void isDealerQualifiedTest() {
+        ArrayList<Card> dealer = new ArrayList<>();
+
+        // Dealer's highest card is 6
+        dealer.add(new Card('H', 4));
+        dealer.add(new Card('D', 5));
+        dealer.add(new Card('S', 6));
+
+        assertEquals(0, ThreeCardLogic.isDealerQualified(dealer));
+
+        dealer.clear();
+        // Dealer's highest card is 12 (queen)
+        dealer.add(new Card('H', 4));
+        dealer.add(new Card('D', 5));
+        dealer.add(new Card('S', 12));
+
+        assertEquals(1, ThreeCardLogic.isDealerQualified(dealer));
+
+        dealer.clear();
+        // Dealer's highest card is 11 (jack)
+        dealer.add(new Card('H', 4));
+        dealer.add(new Card('D', 5));
+        dealer.add(new Card('S', 11));
+
+        assertEquals(0, ThreeCardLogic.isDealerQualified(dealer));
     }
 }

@@ -10,6 +10,11 @@ public class Dealer {
         dealersHand = new ArrayList<>();
     }
 
+    // Removes the top most card on the deck (like a stack)
+    public Card getCardFromTheDeck() {
+        return theDeck.remove(theDeck.size() - 1);
+    }
+
     public ArrayList<Card> dealHand() {
         int deckSize = theDeck.size();
 
@@ -19,24 +24,20 @@ public class Dealer {
             theDeck.newDeck();
         }
         
-        // TO DO:
-        // Should we clear it or return it to the bottom of the deck?
-        dealersHand.clear();
-        
+        ArrayList<Card> newHand = new ArrayList<>();
+
         // Deal three cards from the top of the deck:
         for (int i = 0; i < 3; i++) {
-            dealersHand.add(theDeck.remove(theDeck.size() - 1));
+            newHand.add(getCardFromTheDeck());
         }
         
-        /*
+        /* Print Statements below remaining:: 
         for (int i = 0; i < 3; i++) {
-            System.out.println("dealers hand card " + (i + 1) + " is " + dealersHand.get(i).suit + " " + dealersHand.get(i).value);
+            System.out.println("new hand card " + (i + 1) + " is " + newHand.get(i).suit + " " + newHand.get(i).value);
         }
-
-        // Verify that the deck should be 49
         System.out.println("test size  " + theDeck.size());
         */
 
-        return dealersHand;
+        return newHand;
     }   
 }

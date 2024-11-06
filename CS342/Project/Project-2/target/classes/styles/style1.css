@@ -1,0 +1,33 @@
+.vbox {
+    -fx-background-color: rgba(54, 50, 50, 0.568);  
+    -fx-padding: 20px;
+}
+
+.button {
+    -fx-background-color: #34495e;  
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-min-width: 150px;
+    -fx-min-height: 40px;
+    -fx-background-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #465c70; 
+}
+
+#playButton {
+    -fx-background-color: #40a02b;  
+}
+
+#playButton:hover {
+    -fx-background-color: #45b331;
+}
+
+#quitButton {
+    -fx-background-color: #d20f39; 
+}
+
+#quitButton:hover {
+    -fx-background-color: #e91e63;
+}
