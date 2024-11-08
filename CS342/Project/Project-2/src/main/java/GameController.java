@@ -24,9 +24,14 @@ public class GameController implements Initializable {
 	@FXML
 	private VBox root;
 
+    /* Exit Screen FXML Decorators */
+	@FXML
+	private VBox exitRoot;
+
     /* Main Game FXML Decorators */ 
     @FXML
-    private BorderPane gameRoot;
+    private static BorderPane gameRoot;
+
     @FXML
     private VBox leftVBox;
     @FXML
@@ -257,7 +262,7 @@ public class GameController implements Initializable {
 
     // A callback function - once the dealer's cards have been revealed 
     private void evaluateGame() {
-        System.out.println("Game evaluation starts!");
+        // System.out.println("Game evaluation starts!");
         // Check if anyone folded:
         if (playerOne.decisionState == 2) {
             anteWinningsTextFieldPlayer1.setText("Fold - lost your ante bet.");
@@ -299,7 +304,7 @@ public class GameController implements Initializable {
                 1 if the dealer hand won
                 2 if the player hand won */
         int playerOneDealerWinner = ThreeCardLogic.compareHands(theDealer.dealersHand, playerOne.hand);
-        System.out.println("Player One vs Dealer status:" + playerOneDealerWinner);
+        // System.out.println("Player One vs Dealer status:" + playerOneDealerWinner);
         if (playerOne.decisionState == 1) { 
             if (playerOneDealerWinner == 0) { // Tie breaker, everything is given back
                 playerOne.anteWinnings = 0;
@@ -315,7 +320,7 @@ public class GameController implements Initializable {
         }
 
         int playerTwoDealerWinner = ThreeCardLogic.compareHands(theDealer.dealersHand, playerTwo.hand);
-        System.out.println("Player Two vs Dealer status:" + playerTwoDealerWinner);
+        // System.out.println("Player Two vs Dealer status:" + playerTwoDealerWinner);
         if (playerTwo.decisionState == 1) { 
             if (playerTwoDealerWinner == 0) { // Tie breaker, everything is given back
                 playerTwo.anteWinnings = 0;
@@ -423,16 +428,16 @@ public class GameController implements Initializable {
     /* Event handlers for the main menu: 
     */ 
     public void menuPlayButtonClick(ActionEvent e) throws IOException {
-        System.out.println("Menu Play button clicked");
+        // System.out.println("Menu Play button clicked");
         // Get instance of the loader class
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Game.fxml"));
-        gameRoot = loader.load(); // Load view into parent
-        gameRoot.getStylesheets().add("/styles/style2.css");
-        root.getScene().setRoot(gameRoot); // update scene graph
+        GameController.gameRoot = loader.load(); // Load view into parent
+        GameController.gameRoot.getStylesheets().add("/styles/style2.css");
+        root.getScene().setRoot(GameController.gameRoot); // update scene graph
 	}
 
     public void menuQuitButtonClick(ActionEvent e) throws IOException {
-        System.out.println("Quit button clicked");
+        // System.out.println("Quit button clicked");
         // Get the Stage and close it
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
@@ -441,7 +446,7 @@ public class GameController implements Initializable {
     /* Event handlers for the game: 
     */ 
     public void playButtonPlayer1OnAction(ActionEvent e) throws IOException {
-        System.out.println("Play Player 1");
+        // System.out.println("Play Player 1");
         // Invalid, we are not expecting their decision:
         if (playerOne.decisionState != 0) return;
 
@@ -450,7 +455,7 @@ public class GameController implements Initializable {
     }
 
     public void foldButtonPlayer1OnAction(ActionEvent e) throws IOException {
-        System.out.println("Fold Player 1");
+        // System.out.println("Fold Player 1");
 
         // Invalid, we are not expecting their decision:
         if (playerOne.decisionState != 0) return;
@@ -477,11 +482,11 @@ public class GameController implements Initializable {
 
         checkBothPlayerReadyStatus();
         
-        System.out.println("Ready Player 1 status: " + playerOne.readyState);
+        //  System.out.println("Ready Player 1 status: " + playerOne.readyState);
     }
 
     public void playButtonPlayer2OnAction(ActionEvent e) throws IOException {
-        System.out.println("Play Player 2");
+        // System.out.println("Play Player 2");
         // Invalid, we are not expecting their decision:
         if (playerTwo.decisionState != 0) return;
 
@@ -490,7 +495,7 @@ public class GameController implements Initializable {
     }
 
     public void foldButtonPlayer2OnAction(ActionEvent e) throws IOException {
-        System.out.println("Fold Player 2");
+        // System.out.println("Fold Player 2");
 
         // Invalid, we are not expecting their decision:
         if (playerTwo.decisionState != 0) return;
@@ -517,26 +522,26 @@ public class GameController implements Initializable {
 
         checkBothPlayerReadyStatus();
         
-        System.out.println("Ready Player 2 status: " + playerTwo.readyState);
+        // System.out.println("Ready Player 2 status: " + playerTwo.readyState);
     }
 
     public void nextRoundButtonOnAction(ActionEvent e) throws IOException {
-        System.out.println("Next round clicked");
+        // System.out.println("Next round clicked");
         setupNewRound();
         nextRoundButton.setDisable(true);
     }
 
     public void exitGame(ActionEvent e) throws IOException {
-        System.out.println("exitGame clicked");
+        // System.out.println("exitGame clicked");
         // Get instance of the loader class
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Menu.fxml"));
-        root = loader.load(); // Load view into parent
-        root.getStylesheets().add("/styles/style1.css");
-        gameRoot.getScene().setRoot(root); // update scene grap
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Exit.fxml"));
+        exitRoot = loader.load(); // Load view into parent
+        exitRoot.getStylesheets().add("/styles/style1.css");
+        GameController.gameRoot.getScene().setRoot(exitRoot); // update scene
     }
 
     public void resetGame(ActionEvent e) throws IOException {
-        System.out.println("resetGame clicked");
+        // System.out.println("resetGame clicked");
         playerOne.totalWinnings = 0;
         playerTwo.totalWinnings = 0;
         dealerWasQualifiedPreviously = true;
@@ -544,16 +549,22 @@ public class GameController implements Initializable {
     }
 
     public void changeTheme(ActionEvent e) throws IOException {
-        System.out.println("changeTheme clicked " + currentStyle);
+        // System.out.println("changeTheme clicked " + currentStyle);
         String newStyle = (currentStyle == 1) ? "/styles/style3.css" : "/styles/style2.css";
         String oldStyle = (currentStyle == 1) ? "/styles/style2.css" : "/styles/style3.css";
     
         // Remove the old stylesheet
-        gameRoot.getStylesheets().remove(oldStyle);
+        GameController.gameRoot.getStylesheets().remove(oldStyle);
     
         // Add the new stylesheet
-        gameRoot.getStylesheets().add(newStyle);
+        GameController.gameRoot.getStylesheets().add(newStyle);
     
         currentStyle = 1 - currentStyle;
     }
+
+    /* Event handlers for the exit screen: 
+    */ 
+    public void continueButtonClick(ActionEvent e) throws IOException {
+        exitRoot.getScene().setRoot(GameController.gameRoot); // update scene graph
+	}
 }

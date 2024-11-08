@@ -28,6 +28,10 @@
     -fx-background-color: #d20f39; 
 }
 
+#continueButton {
+    -fx-background-color: rgb(70, 106, 206); 
+}
+
 #quitButton:hover {
     -fx-background-color: #e91e63;
 }

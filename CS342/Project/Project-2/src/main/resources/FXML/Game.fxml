@@ -93,9 +93,5 @@
         </VBox>
     </right>
 
-    <!-- <bottom>
-        <Button text="Options" onAction="#optionButtonOnAction"/>
-    </bottom> -->
-
 </BorderPane>
 
