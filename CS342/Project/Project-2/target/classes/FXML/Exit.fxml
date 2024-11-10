@@ -5,5 +5,5 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="vbox" fx:controller="GameController" fx:id="exitRoot" alignment="CENTER" spacing="10">
     <Button fx:id="continueButton" text="CONTINUE" onAction="#continueButtonClick"/>
-    <Button fx:id="quitButton" text="QUIT" onAction="#menuQuitButtonClick"/>
+    <Button fx:id="quitButton" text="QUIT" onAction="#exitQuitButtonClick"/>
 </VBox>

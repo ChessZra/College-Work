@@ -567,4 +567,11 @@ public class GameController implements Initializable {
     public void continueButtonClick(ActionEvent e) throws IOException {
         exitRoot.getScene().setRoot(GameController.gameRoot); // update scene graph
 	}
+
+    public void exitQuitButtonClick(ActionEvent e) throws IOException {
+        // System.out.println("Quit button clicked");
+        // Get the Stage and close it
+        Stage stage = (Stage) exitRoot.getScene().getWindow();
+        stage.close();
+    }
 }
