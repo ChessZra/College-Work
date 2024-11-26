@@ -1,0 +1,19 @@
+.border {
+    -fx-background-color: #472d14;  
+    -fx-padding: 20px;
+}
+
+#leftVBox {
+    -fx-padding: 15px;
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 10px;
+    -fx-border-color: #gold;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+}
+
+.label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
