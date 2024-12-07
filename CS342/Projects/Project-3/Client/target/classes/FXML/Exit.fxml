@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="vbox" fx:controller="GameController" fx:id="exitRoot" alignment="CENTER" spacing="10">
+    <Button fx:id="continueButton" text="CONTINUE" onAction="#continueButtonClick"/>
+    <Button fx:id="quitButton" text="QUIT" onAction="#exitQuitButtonClick"/>
+</VBox>

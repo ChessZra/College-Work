@@ -1,0 +1,13 @@
+.vbox {
+    -fx-background-color: rgb(255, 255, 255);  
+    -fx-padding: 20px;
+}
+
+.button {
+    -fx-background-color: #2582ce;  
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-min-width: 150px;
+    -fx-min-height: 40px;
+    -fx-background-radius: 5px;
+}

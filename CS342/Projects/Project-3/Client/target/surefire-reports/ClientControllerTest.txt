@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+Test set: ClientControllerTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 4.422 s <<< FAILURE! - in ClientControllerTest
+testDefaultIP  Time elapsed: 2.356 s  <<< ERROR!
+java.lang.ExceptionInInitializerError
+	at ClientControllerTest.testDefaultIP(MyTest.java:28)
+Caused by: java.lang.IllegalStateException: Toolkit not initialized
+	at ClientControllerTest.testDefaultIP(MyTest.java:28)
+
+testConnectToServer  Time elapsed: 2.04 s  <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class javafx.scene.control.Button
+	at ClientControllerTest.testConnectToServer(MyTest.java:9)
+

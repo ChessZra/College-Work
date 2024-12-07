@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane 
+    xmlns:fx="http://javafx.com/fxml" 
+    fx:controller="ClientController"
+    styleClass="welcome-background"
+    fx:id="root">
+    
+    <VBox 
+        alignment="CENTER" 
+        spacing="20" 
+        style="-fx-background-color: rgba(255, 255, 255, 0.7); 
+               -fx-background-radius: 15; 
+               -fx-padding: 30;">
+        
+        <Label text="Poker Game" 
+               style="-fx-font-size: 36px; 
+                      -fx-font-weight: bold; 
+                      -fx-text-fill: #2c3e50;"/>
+        
+        <Label text="Welcome to Three Card Poker" 
+               style="-fx-font-size: 16px; 
+                      -fx-text-fill: #34495e;"/>
+        
+        <VBox spacing="10" alignment="CENTER">
+            <Label text="Port Number" 
+                   style="-fx-font-weight: bold;"/>
+            <TextField 
+                fx:id="portTextField" 
+                promptText="Enter port number" 
+                style="-fx-max-width: 250;"/>
+            
+            <Label text="IP Address (empty for local)" 
+                   style="-fx-font-weight: bold;"/>
+            <TextField 
+                fx:id="ipTextField" 
+                promptText="Enter IP address" 
+                style="-fx-max-width: 250;"/>
+        </VBox>
+        
+        <Button 
+            text="GO" 
+            onAction="#goButtonOnAction"
+            style="-fx-background-color: #3498db; 
+                   -fx-text-fill: white; 
+                   -fx-font-size: 16px; 
+                   -fx-padding: 10 20; 
+                   -fx-background-radius: 5;"/>
+    </VBox>
+</StackPane>

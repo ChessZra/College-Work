@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="ServerController" 
+      fx:id="root" 
+      alignment="CENTER" 
+      spacing="20" 
+      styleClass="vbox"
+      style="-fx-padding: 20;">
+    
+    <Label text="Poker Server Program GUI" 
+           style="-fx-font-weight: bold;" 
+           styleClass="title">
+        <font>
+            <Font name="System Bold" size="18"/>
+        </font>
+    </Label>
+    
+    <Label text="Port Number" 
+           style="-fx-alignment: center-left;"/>
+    
+    <TextField fx:id="portTextField" 
+               promptText="Enter port number" 
+               style="-fx-max-width: 200;"/>
+    
+    <Button fx:id="goButton" 
+            text="GO" 
+            onAction="#goButtonOnAction" 
+            style="-fx-min-width: 100;"/>
+    
+    <HBox alignment="BOTTOM_RIGHT" 
+          style="-fx-padding: 20 0 0 0;">
+        <Button fx:id="exitButton" 
+                text="EXIT" 
+                onAction="#exitButtonOnAction" 
+                style="-fx-min-width: 100;"/>
+    </HBox>
+</VBox>
