@@ -1,0 +1,12 @@
+HTTP/1.1 200 OK
+Content-Length: 98
+
+Write a lot of data on the first time to make sure the second write is not combined with the first
+HTTP/1.1 200 OK
+Content-Length: 17
+
+Write little data
+HTTP/1.1 200 OK
+Content-Length: 17
+
+Write little data

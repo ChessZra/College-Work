@@ -1,0 +1,5 @@
+HTTP/1.1 200 OK
+Content-Length: 44
+
+GET: /echo HTTP/1.1
+Val: GET /echo HTTP/1.1
