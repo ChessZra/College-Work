@@ -1,0 +1,14 @@
+cs361sh> tests/03-search-1-path:
+01.env
+01.expected
+01.in
+02.env
+02.expected
+02.in
+03.env
+03.expected
+03.in
+04.env
+04.expected
+04.in
+cs361sh> 

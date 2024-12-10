@@ -1,0 +1,8 @@
+echo This is CS361 >4.out
+/bin/echo This also is CS361 >44.out
+sed -i s/361/361-Fall-2024/g 4.out 44.out
+cat 4.out
+cat 44.out
+rm 4.out 44.out
+file 4.out
+file 44.out

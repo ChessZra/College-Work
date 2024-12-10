@@ -1,0 +1,4 @@
+/bin/echo This is a test >file.out
+file file.out
+rm file.out
+file file.out

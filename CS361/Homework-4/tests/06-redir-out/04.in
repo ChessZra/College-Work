@@ -1,0 +1,5 @@
+file t3.txt
+echo What about this other test instead? >t3.txt
+file t3.txt
+md5sum t3.txt
+rm t3.txt

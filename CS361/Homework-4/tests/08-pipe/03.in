@@ -1,0 +1,4 @@
+cat tests/08-pipe/02.in|md5sum >t10.txt
+cat t10.txt
+cat <t10.txt
+rm t10.txt

@@ -1,0 +1,5 @@
+file t3.txt
+echo some data some data >t3.txt
+md5sum t3.txt
+md5sum t2t2t1.txt
+rm t3.txt

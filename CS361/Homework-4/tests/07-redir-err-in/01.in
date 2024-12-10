@@ -1,0 +1,3 @@
+ls 361 2>file.err
+cat file.err
+rm -v file.err

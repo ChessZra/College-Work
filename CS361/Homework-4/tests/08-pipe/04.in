@@ -1,0 +1,1 @@
+rm t10t10.txt 2>/dev/null;echo What a long test this is|sed s/long/interesting/g|sed s/test/course/g|sed s/this/CS361/g >t10t10.txt;cat -n<t10t10.txt;/usr/bin/wc t10t10.txt;rm t10t10.txt

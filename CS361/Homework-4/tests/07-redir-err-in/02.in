@@ -1,0 +1,6 @@
+file 02.err
+ls 02 2>02.err
+file 02.err
+cat 02.err
+rm 02.err
+

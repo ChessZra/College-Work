@@ -1,0 +1,8 @@
+md5sum tests/07-redir-err-in/01.in - tests/07-redir-err-in/03.in tests/07-redir-err-in/361.in <tests/07-redir-err-in/02.in >test5.out 2>test5.err
+file test5.err
+file test5.out
+cat test5.err
+cat test5.out
+rm test5.out test5.err
+file test5.err
+file test5.out

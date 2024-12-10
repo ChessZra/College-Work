@@ -1,0 +1,2 @@
+echo This is yet another test|sed s/y/361/g|sed s/the/361/g|grep 361
+

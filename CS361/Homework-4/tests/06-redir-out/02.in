@@ -1,0 +1,6 @@
+/bin/echo This is a test >file2.out
+cat file2.out
+file file2.out
+/usr/bin/wc file2.out
+rm file2.out
+file file2.out

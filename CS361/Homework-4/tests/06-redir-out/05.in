@@ -1,0 +1,7 @@
+file file
+echo Hello >file;echo World >file;echo ! >file
+file file
+md5sum file
+cat file
+rm file
+

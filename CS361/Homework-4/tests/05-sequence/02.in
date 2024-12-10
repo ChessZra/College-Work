@@ -1,0 +1,1 @@
+file notafile;/bin/echo hello world;tail tests/01_wc/06.in;file tests/05-sequence/01.env

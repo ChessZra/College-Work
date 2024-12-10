@@ -1,0 +1,13 @@
+cs361sh> file1: cannot open `file1' (No such file or directory)
+cs361sh> file2: cannot open `file2' (No such file or directory)
+cs361sh> file3: cannot open `file3' (No such file or directory)
+cs361sh> cs361sh> file1: ASCII text
+file2: ASCII text
+file3: ASCII text
+cs361sh> 09f7e02f1290be211da707a266f153b3  file1
+52f83ff6877e42f613bcd2444c22528c  file2
+8183aa57a23658efe7ba7aebe60816bc  file3
+cs361sh> Hello
+World
+!
+cs361sh> cs361sh> cs361sh> 

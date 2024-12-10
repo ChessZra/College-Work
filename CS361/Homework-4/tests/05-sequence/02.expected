@@ -1,0 +1,9 @@
+cs361sh> notafile: cannot open `notafile' (No such file or directory)
+hello world
+wc
+wc wc wc
+hello test
+
+wc
+tests/05-sequence/01.env: empty
+cs361sh> 

@@ -1,0 +1,9 @@
+cs361sh> cs361sh> test5.err: ASCII text
+cs361sh> test5.out: ASCII text
+cs361sh> md5sum: tests/07-redir-err-in/361.in: No such file or directory
+cs361sh> 6597ccfbbdec7f7b749c710f3b192839  tests/07-redir-err-in/01.in
+a9dc8dbff40f4ba4903ee45584243dbc  -
+0edf9014a3461a2fc3d11eac1f0733a0  tests/07-redir-err-in/03.in
+cs361sh> cs361sh> test5.err: cannot open `test5.err' (No such file or directory)
+cs361sh> test5.out: cannot open `test5.out' (No such file or directory)
+cs361sh> 

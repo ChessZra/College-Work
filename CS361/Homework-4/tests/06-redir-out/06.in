@@ -1,0 +1,9 @@
+file file1
+file file2
+file file3
+echo Hello >file1;echo World >file2;echo ! >file3
+file file1;file file2;file file3
+md5sum file1;md5sum file2;md5sum file3
+cat file1;cat file2;cat file3
+rm file1;rm file2;rm file3
+
