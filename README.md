@@ -13,11 +13,14 @@ Welcome to my repository, which contains the coursework and projects I've comple
 ### **Fall 2024 (FA24)**
 
 - **CS341: Programming Language Design and Implementation**  
-  
+  To be added
+
 - **CS454: Principles of Concurrent Programming**  
+  To be added
 
 - **CS455: Introduction to High Performance Computing**  
-
+  To be added
+  
 ---
 
 ### **Fall 2024 (FA24)**
