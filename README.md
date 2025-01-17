@@ -12,6 +12,16 @@ Welcome to my repository, which contains the coursework and projects I've comple
 
 ### **Fall 2024 (FA24)**
 
+- **CS341: Programming Language Design and Implementation**  
+  
+- **CS454: Principles of Concurrent Programming**  
+
+- **CS455: Introduction to High Performance Computing**  
+
+---
+
+### **Fall 2024 (FA24)**
+
 - **CS342: Software Design**  
   Focused on software design principles, design patterns, and practices to create scalable and maintainable systems.
   
