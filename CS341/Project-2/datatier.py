@@ -6,7 +6,6 @@
 #
 import sqlite3
 
-
 ##################################################################
 #
 # select_one_row:
@@ -24,7 +23,15 @@ import sqlite3
 #          - None if an error occurs (with a message printed).
 #
 def select_one_row(dbConn, sql, parameters = None):
-   pass
+   try:
+      cursor = dbConn.cursor()
+      res = cursor.execute(sql, parameters or ()).fetchone()
+      if res is None:
+         return ()
+      return res
+   except Exception as e:
+      print(f"select_one_row failed: {e}")
+      return None
 
 
 ##################################################################
@@ -43,8 +50,15 @@ def select_one_row(dbConn, sql, parameters = None):
 #          - None if an error occurs (with a message printed).
 #
 def select_n_rows(dbConn, sql, parameters = None):
-   pass
-
+   try:
+      cursor = dbConn.cursor()
+      res = cursor.execute(sql, parameters or ()).fetchall()
+      if res is None:
+         return ()
+      return res
+   except Exception as e:
+      print(f"select_n_rows failed: {e}")
+      return None
 
 ##################################################################
 #
@@ -57,7 +71,7 @@ def select_n_rows(dbConn, sql, parameters = None):
 # Action queries are typically "insert", "update", 
 # and "delete".
 # The query can be parameterized, in which case pass 
-# the values as a list via parameters; this parameter 
+# the values as a list via parameters; this parameter    
 # is optional.
 #
 # Returns: - the number of rows modified by the query, or
@@ -67,4 +81,11 @@ def select_n_rows(dbConn, sql, parameters = None):
 #          the database.
 #
 def perform_action(dbConn, sql, parameters = None):
-   pass
+   try:
+      cursor = dbConn.cursor()
+      cursor.execute(sql, parameters or ())
+      dbConn.commit()
+      return cursor.rowcount
+   except Exception as e:
+      print(f"perform_action failed: {e}")
+      return -1
