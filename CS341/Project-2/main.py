@@ -4,6 +4,7 @@
 import sqlite3
 import objecttier
 
+dbConn = sqlite3.connect("MovieLens-100K.db")
 ##################################################################  
 #
 # main
@@ -32,7 +33,15 @@ print("or x to exit the program.")
 cmd = input("Your choice --> ")
 print()
 
-
-
+obj = objecttier.get_movie_details(dbConn, 603)
+print(obj.Title)
+print(obj.Release_Date)
+print(obj.Runtime)
+print(obj.Original_Language)
+print(obj.Budget)
+print(obj.Revenue)
+print(obj.Num_Reviews)
+print(obj.Avg_Rating)
+print(obj.Tagline)
 
 print("Exiting program.")

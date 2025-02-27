@@ -18,7 +18,22 @@ import datatier
 #   Release_Year: string
 #
 class Movie:
-   pass
+   def __init__(self, movie_id, title, release_year):
+      self._movie_id = movie_id
+      self._title = title
+      self._release_year = release_year
+   
+   @property
+   def Movie_ID(self):
+      return self._movie_id
+   
+   @property
+   def Title(self):
+      return self._title
+
+   @property
+   def Release_Year(self):
+      return self._release_year
 
 ##################################################################
 #
@@ -32,8 +47,19 @@ class Movie:
 #   Num_Reviews: int
 #   Avg_Rating: float
 #
-class MovieRating:
-   pass
+class MovieRating(Movie):
+   def __init__(self, movie_id, title, release_year, num_reviews, avg_rating):
+      super().__init__(movie_id, title, release_year)
+      self._num_reviews = num_reviews
+      self._avg_rating = avg_rating
+   
+   @property
+   def Num_Reviews(self):
+      return self._num_reviews
+   
+   @property
+   def Avg_Rating(self):
+      return self._avg_rating
 
 ##################################################################
 #
@@ -52,9 +78,41 @@ class MovieRating:
 #   Avg_Rating: float
 #   Tagline: string
 #
-class MovieDetails:
-   pass
+class MovieDetails(MovieRating):
+   def __init__(self, movie_id, title, release_date, runtime, orig_lang, budget, revenue, num_reviews, avg_rating, tagline):
+      release_year = release_date.split("-")[0] if release_date else None 
+      super().__init__(movie_id, title, release_year, num_reviews, avg_rating)
+      self._tagline = tagline
+      self._revenue = revenue
+      self._release_date = release_date
+      self._runtime = runtime
+      self._orig_lang = orig_lang 
+      self._budget = budget
+   
+   @property
+   def Tagline(self):
+      return self._tagline
+   
+   @property
+   def Revenue(self):
+      return self._revenue
+   
+   @property
+   def Release_Date(self):
+      return self._release_date
 
+   @property 
+   def Runtime(self):
+      return self._runtime
+
+   @property
+   def Original_Language(self):
+      return self._orig_lang
+
+   @property 
+   def Budget(self):
+      return self._budget
+   
 ##################################################################
 # 
 # num_movies:
@@ -63,8 +121,17 @@ class MovieDetails:
 #          -1 if an error occurs
 # 
 def num_movies(dbConn):
-   pass
-
+   try:
+      sql = """
+      select count(*)
+      from Movies
+      """
+      res = datatier.select_n_rows(dbConn, sql)
+      return res[0][0]
+   except Exception as e:
+      print(f"num_movies failed: {e}")
+      return -1
+   
 ##################################################################
 # 
 # num_reviews:
@@ -73,7 +140,16 @@ def num_movies(dbConn):
 #          -1 if an error occurs
 #
 def num_reviews(dbConn):
-   pass
+   try:
+      sql = """
+      select count(*)
+      from Ratings
+      """
+      res = datatier.select_n_rows(dbConn, sql)
+      return res[0][0]
+   except Exception as e:
+      print(f"num_movies failed: {e}")
+      return -1
 
 ##################################################################
 #
@@ -90,7 +166,21 @@ def num_reviews(dbConn):
 #          an error message is already output).
 #
 def get_movies(dbConn, pattern):
-   pass
+   try:
+      sql = """
+         select Movie_ID, Title, strftime("%Y", Release_Date) 
+         from Movies
+         where Title like ?
+         order by Movie_ID
+      """
+      res = datatier.select_n_rows(dbConn, sql, parameters=(pattern,))
+      return_list = []
+      for movie_id, title, year in res:
+         return_list.append(Movie(movie_id, title, year))
+      return return_list
+   except Exception as e:
+      print(f"num_movies failed: {e}")
+      return -1
 
 ##################################################################
 #
@@ -108,8 +198,24 @@ def get_movies(dbConn, pattern):
 #          an error message is already output).
 #
 def get_movie_details(dbConn, movie_id):
-   pass
-         
+   try:
+      sql = """
+         select m.Movie_ID, Title, strftime("%Y-%m-%d", Release_Date), Runtime, Original_Language, Budget, Revenue, count(*) as Num_Reviews, avg(r.Rating) as Avg_Rating, Tagline
+         from Movies m
+         join Ratings r on m.Movie_ID = r.Movie_ID
+         join Movie_Taglines mt on m.Movie_ID = mt.Movie_ID
+         where m.Movie_ID = ?
+         group by m.Movie_ID
+      """
+      res = datatier.select_n_rows(dbConn, sql, parameters=(movie_id,))
+      if res is None or (res and len(res) == 0):
+         return None
+      details = res[0]
+      mov, tit, rel, run, orig, bud, rev, num, avg, tag = details
+      return MovieDetails(mov, tit, rel, run, orig, bud, rev, num, avg, tag)
+   except Exception as e:
+      print(f"num_movies failed: {e}")
+      return -1
 
 ##################################################################
 #
@@ -129,7 +235,6 @@ def get_movie_details(dbConn, movie_id):
 #
 def get_top_N_movies(dbConn, N, min_num_reviews):
    pass
-
 
 ##################################################################
 #
