@@ -4,7 +4,6 @@
 import sqlite3
 import objecttier
 
-dbConn = sqlite3.connect("MovieLens-100K.db")
 ##################################################################  
 #
 # main
@@ -17,22 +16,38 @@ print("aspects of the MovieLens database.")
 print()
 
 dbName = input("Enter the name of the database you would like to use: ")
+dbConn = sqlite3.connect("MovieLens-100K.db")
 
 print()
 print("Successfully connected to the database!")
 
-print()
-print("Select a menu option: ")
-print("  1. Print general statistics about the database")
-print("  2. Find movies matching a pattern for the name")
-print("  3. Find details of a movie by movie ID")
-print("  4. Top N movies by average rating, with a minimum number of reviews")
-print("  5. Add a new review for a movie")
-print("  6. Set the tagline of a movie")
-print("or x to exit the program.")
-cmd = input("Your choice --> ")
-print()
+while True:
+    print()
+    print("Select a menu option: ")
+    print("  1. Print general statistics about the database")
+    print("  2. Find movies matching a pattern for the name")
+    print("  3. Find details of a movie by movie ID")
+    print("  4. Top N movies by average rating, with a minimum number of reviews")
+    print("  5. Add a new review for a movie")
+    print("  6. Set the tagline of a movie")
+    print("or x to exit the program.")
 
-print(objecttier.get_movie_details(dbConn, 1686))
+    cmd = input("Your choice --> ")
+
+    if cmd == 'x':
+        break
+
+    try:
+        choice = int(cmd)
+        if choice <= 0 or choice >= 7:
+            raise Exception
+        
+        if choice == 1:
+            # Print general statistics
+            pass
+        elif choice == 2:
+            pass
+    except Exception as e:
+        print("\nError, unknown command, try again...")
 
 print("Exiting program.")
