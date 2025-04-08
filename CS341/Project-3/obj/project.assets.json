@@ -113,11 +113,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\johne\\Documents\\Projects\\College-Work\\CS341\\Project-3\\Project-3.fsproj",
+      "projectUniqueName": "C:\\Users\\johne\\College-Work\\CS341\\Project-3\\Project-3.fsproj",
       "projectName": "Project-3",
-      "projectPath": "C:\\Users\\johne\\Documents\\Projects\\College-Work\\CS341\\Project-3\\Project-3.fsproj",
+      "projectPath": "C:\\Users\\johne\\College-Work\\CS341\\Project-3\\Project-3.fsproj",
       "packagesPath": "C:\\Users\\johne\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\johne\\Documents\\Projects\\College-Work\\CS341\\Project-3\\obj\\",
+      "outputPath": "C:\\Users\\johne\\College-Work\\CS341\\Project-3\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\johne\\AppData\\Roaming\\NuGet\\NuGet.Config"
