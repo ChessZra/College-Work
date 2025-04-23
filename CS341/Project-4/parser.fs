@@ -41,15 +41,88 @@ module parser =
     else
       failwith ("expecting " + expected_token + ", but found " + next_token)
 
+  let beginswith (pattern: string) (literal: string) =
+    literal.StartsWith pattern
+
+  let expr_value tokens = 
+    let next_token = List.head tokens
+
+    if beginswith "str_literal:" next_token then 
+      matchToken "str_literal:" tokens
+    else if beginswith "int_literal:" next_token then
+      matchToken "int_literal:" tokens
+    else if next_token = "false" then
+      matchToken "false" tokens
+    else if next_token = "true" then
+      matchToken "true" tokens
+    else if next_token = "identifier:" then
+      matchToken "identifier:" tokens
+    else 
+      failwith ("expecting literal, but found " + next_token)
+
+  let private output_value tokens = 
+    let next_token = List.head tokens
+    if next_token = "endl" then
+      matchToken "endl" tokens
+    else
+      expr_value tokens
+
+  let private output tokens = 
+    let T1 = matchToken "cout" tokens
+    let T2 = matchToken "<<" T1
+    let T3 = output_value T2
+    matchToken ";" T3
+
+  let private empty tokens = 
+    matchToken ";" tokens
+
+  let private vardec1 tokens = 
+    matchToken "int" tokens
+    
+  
+  let rec private stmt tokens = 
+    let next_token = List.head tokens
+    if next_token = ";" then
+      empty tokens
+    else if next_token = "int" then 
+      vardec1 tokens
+    else if next_token = "cin" then
+      input tokens
+    else if next_token = "cout" then
+      output tokens
+    else if beginswith "identifier:" next_token
+      assignment tokens 
+    else if next_token = "if" then 
+      ifstmt tokens
+    else
+      failwith ("expecting statement, but found " + next_token) 
+
+  let rec private morestmts tokens = 
+    let next_token = List.head tokens
+    if next_token = "}" then // This is a bit ambiguous...
+      tokens
+    else 
+      let T1 = stmt tokens
+      morestmts T1
+
+  let private stmts tokens = 
+    let T1 = stmt tokens
+    morestmts T1
+
   //
   // simpleC
   //
   let private simpleC tokens = 
-    // 
-    // TODO: Start here by filling it in and
-    //       creating your other functions!
-    //
-    matchToken "$" tokens
+
+    let T1 = matchToken "void" tokens
+    let T2 = matchToken "main" T1
+    let T3 = matchToken "(" T2
+    let T4 = matchToken ")" T3
+    let T5 = matchToken "{" T4
+    let T6 = stmts T5
+    let T7 = matchToken "}" T6
+    let T8 = matchToken "$" T7
+    T8
 
 
   //
