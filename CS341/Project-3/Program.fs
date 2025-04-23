@@ -4,7 +4,7 @@
 // Brief Description: This project allows the user to analyze 
 // statistics about divvy rides in Chicago such as the users, their gender, etc.
 
-// --------------------------------------------------------------
+// -------------------------------------------------------------
 // 
 // ParseLine and ParseInput
 //
