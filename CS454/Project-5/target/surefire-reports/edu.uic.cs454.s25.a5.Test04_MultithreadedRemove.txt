@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: edu.uic.cs454.s25.a5.Test04_MultithreadedRemove
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.06 s -- in edu.uic.cs454.s25.a5.Test04_MultithreadedRemove

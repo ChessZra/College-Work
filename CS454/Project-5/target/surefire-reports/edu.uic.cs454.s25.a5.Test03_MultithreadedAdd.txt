@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: edu.uic.cs454.s25.a5.Test03_MultithreadedAdd
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 27.61 s -- in edu.uic.cs454.s25.a5.Test03_MultithreadedAdd
