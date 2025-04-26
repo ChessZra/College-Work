@@ -1,0 +1,10 @@
+I found this project tricky for the most part. There are many places in the code which
+could be causing instability like out-of-bound errors, wrong ghost rows, wrong barriers, etc.
+In my experience, I struggled the most with instability happening on the barriers where the processes
+get divided. To debug, I tried isolating every single function and I performed a lot of tests. I 
+narrowed down the problem to either InitBarrier() or BounceBackStream() which I fixed eventually.
+
+The MPI approach seems slightly faster than the OpenMP version in Project 1. Some possible
+optimizations in the future would be incorporating a hybrid project (OpenMP and MPI.h).
+
+Overall, this project was a bit hard but I learned a lot from the obstacles I faced.
