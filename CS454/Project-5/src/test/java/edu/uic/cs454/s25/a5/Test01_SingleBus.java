@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Test01_SingleBus {
+    
     @Test
     public void testBusIdentity() {
         Depot depot = Depot.createDepot();
