@@ -1,0 +1,19 @@
+# John Ezra See
+# P01 - OpenMP
+# 03/11/2025
+# I certify that this is my work and, where appropriate, an extension of the starter code provided for the assignment.
+
+computation.png and speedup.png are located in  `./data` 
+
+Reflection: 
+This project was fun. I spent more time analyzing the code, reflecting on possible optimizations, and trial and error approaches, and
+seeing what worked more than the changes I made for the final code. Some optimizations were really straightforward. For example, in Collide ()
+and bounceBackStream(), each iteration was independent so parallelizing them is straightforward. I encountered a bug / data-race for stream()
+when I tried to do the same approach, parallelizing it was tricky and would involve multiple copies of data which I decided to be not worth it. Instead, I optimized it by reducing four different loops to just a single loop. 
+
+I spent a couple of hours trying a specific approach in which I refactored the code from having many different pointers that store the directions to 
+a struct that holds an array of size 9 which contains all the directions. That means I had to change pretty much the entire code.
+I thought that this would improve cache hits but it was slower at the end of the day - so I decided not to use it.
+
+Making the graph was pretty fun and a bit inconsistent at times - suspicion is the CS455 machine causing it. Overall, results
+still made sense and I'm pretty happy with how it turned out.
