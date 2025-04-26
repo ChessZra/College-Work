@@ -6,7 +6,6 @@ import org.junit.Test;
 import java.util.concurrent.locks.Lock;
 
 public class Test01_SingleThreadedLock {
-
     @Test
     public void testOneLock() {
         Lock l = Depot.createLock();
