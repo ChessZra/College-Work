@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Test01_SingleThreadedOldFeatures {
+    
     @Test
     public void test01Identity() {
         Depot depot = Depot.createDepot();
