@@ -23,7 +23,6 @@ public class Test01_SingleBusLimits {
             tickets[i] = depot.issueTicket(i);
             toAdd.add(tickets[i]);
         }
-
         Assert.assertEquals(size, toAdd.size());
         Assert.assertEquals(toAdd, Set.of(tickets));
     }
