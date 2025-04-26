@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Test01_AddSingleBus {
+    
     @Test
     public void testMaxCapacity() {
         Depot depot = Depot.createDepot();
