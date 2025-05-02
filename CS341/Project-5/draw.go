@@ -1,4 +1,7 @@
-// Header comment here!
+// John Ezra See
+// Project 5 -- Geometry Using Go Interfaces
+// 05/01/25
+// draw.go -> supporting file, defines geometry interfaces and structs
 
 package main
 
@@ -12,9 +15,9 @@ import (
 // ----------------------------------------------------------------------
 //
 // Define Color type
-// TO DO: You may need to change this from an int to something else,
-// depending on your implementation
-type Color int
+type Color struct {
+	r, g, b int
+}
 
 // Point struct
 //
@@ -120,8 +123,12 @@ func init() {
 // Check if a given point would go out of bounds of the screen (return true)
 // or not (return false)
 func outOfBounds(p Point, scn screen) bool {
-	// TO DO: Implement this function
-	return true
+	maxX, maxY := scn.getMaxXY()
+	if p.x < 0 || p.y < 0 || p.x > maxX || p.y > maxY {
+		return true
+	} else {
+		return false;
+	}
 }
 
 // ----------------------------------------------------------------------
@@ -129,7 +136,23 @@ func outOfBounds(p Point, scn screen) bool {
 // colorUnknown()
 // Check if a given color is unknown (return true) or known (return false)
 func colorUnknown(c Color) bool {
-	// TO DO: Implement this function
+	knowns := []Color{
+		{255, 0, 0},    
+		{0, 255, 0},    
+		{0, 0, 255},    
+		{255, 255, 0},  
+		{255, 164, 0},  
+		{128, 0, 128},  
+		{165, 42, 42},  
+		{0, 0, 0},      
+		{255, 255, 255},
+	}
+
+	for _, color := range knowns {
+		if color.r == c.r && color.g == c.g && color.b == c.b {
+			return false;
+		}
+	}
 	return true
 }
 
@@ -138,8 +161,21 @@ func colorUnknown(c Color) bool {
 // draw() method with Rectangle receiver
 // Draws a filled in rectangle
 func (rect Rectangle) draw(scn screen) (err error) {
-	// TO DO: Implement this method
-	return
+	// Check if drawing this rectangle would cause either error
+	if outOfBounds(rect.ll, scn) || outOfBounds(rect.ur, scn) {
+		return outOfBoundsErr
+	}
+	if colorUnknown(rect.c) {
+		return colorUnknownErr
+	}
+
+	for x := rect.ll.x; x <= rect.ur.x; x++ {
+		for y := rect.ll.y; y <= rect.ur.y; y++ {
+			scn.drawPixel(x, y, rect.c)
+		}
+	} 
+
+	return 
 }
 
 // ----------------------------------------------------------------------
@@ -147,8 +183,7 @@ func (rect Rectangle) draw(scn screen) (err error) {
 // printShape() method with Rectangle receiver
 // Prints the type (a Rectangle)
 func (rect Rectangle) printShape() string {
-	// TO DO: Implement this method
-	return ""
+	return fmt.Sprintf("Rectangle: (%d,%d) to (%d,%d)", rect.ll.x, rect.ll.y, rect.ur.x, rect.ur.y)
 }
 
 // ----------------------------------------------------------------------
@@ -169,6 +204,7 @@ func interpolate(l0, d0, l1, d1 int) (values []int) {
 	}
 	return
 }
+
 func (tri Triangle) draw(scn screen) (err error) {
 	// Check if drawing this triangle would cause either error
 	if outOfBounds(tri.pt0, scn) || outOfBounds(tri.pt1, scn) || outOfBounds(tri.pt2, scn) {
@@ -177,7 +213,6 @@ func (tri Triangle) draw(scn screen) (err error) {
 	if colorUnknown(tri.c) {
 		return colorUnknownErr
 	}
-
 	y0 := tri.pt0.y
 	y1 := tri.pt1.y
 	y2 := tri.pt2.y
@@ -226,8 +261,7 @@ func (tri Triangle) draw(scn screen) (err error) {
 // printShape() method with Triangle receiver
 // Prints the type (a Triangle)
 func (tri Triangle) printShape() string {
-	// TO DO: Implement this method
-	return ""
+	return fmt.Sprintf("Triangle: (%d,%d), (%d,%d), (%d,%d)", tri.pt0.x, tri.pt0.y, tri.pt1.x, tri.pt1.y, tri.pt2.x, tri.pt2.y)
 }
 
 // ----------------------------------------------------------------------
@@ -243,9 +277,19 @@ func insideCircle(center, tile Point, r float64) (inside bool) {
 	var distance float64 = math.Sqrt(dx*dx + dy*dy)
 	return distance <= r
 }
-func (circ Circle) draw(scn screen) (err error) {
-	// TO DO: Check if drawing this circle would cause either error
 
+func (circ Circle) draw(scn screen) (err error) {
+	// Check if drawing this circle would cause either error
+	if outOfBounds(Point{circ.center.x - circ.r, circ.center.y}, scn) || 
+	   outOfBounds(Point{circ.center.x + circ.r, circ.center.y}, scn) || 
+	   outOfBounds(Point{circ.center.x, circ.center.y - circ.r}, scn) || // top
+	   outOfBounds(Point{circ.center.x, circ.center.y + circ.r}, scn) {  // bottom
+		return outOfBoundsErr
+ 	}
+	if colorUnknown(circ.c) {
+		return colorUnknownErr
+	}
+	
 	height := circ.center.y + circ.r
 	width := circ.center.x + circ.r
 	for y := 0; y < height; y++ {
@@ -263,8 +307,7 @@ func (circ Circle) draw(scn screen) (err error) {
 // printShape() method with Circle receiver
 // Prints the type (a Circle)
 func (circ Circle) printShape() string {
-	// TO DO: Implement this method
-	return ""
+	return fmt.Sprintf("Circle: centered around (%d,%d) with radius %d", circ.center.x, circ.center.y, circ.r)
 }
 
 // ----------------------------------------------------------------------
@@ -272,7 +315,13 @@ func (circ Circle) printShape() string {
 // clearScreen() method with Display pointer receiver
 // Clears the screen by resetting it to white
 func (display *Display) clearScreen() {
-	// TO DO: Implement this method
+	for x := 0; x < display.maxX; x++ {
+		for y := 0; y < display.maxY; y++ {
+			display.matrix[y][x].r = 255
+			display.matrix[y][x].g = 255
+			display.matrix[y][x].b = 255
+		}
+	}
 }
 
 // ----------------------------------------------------------------------
@@ -281,7 +330,16 @@ func (display *Display) clearScreen() {
 // Initializes a screen of maxX times maxY
 // Clears the screen so that it is all white
 func (display *Display) initialize(x, y int) {
-	// TO DO: Implement this method
+	maxX := x
+	maxY := y
+	for x := 0; x < maxX; x++ {
+		for y := 0; y < maxY; y++ {
+			// Make default screen white
+			display.matrix[y][x].r = 255
+			display.matrix[y][x].g = 255
+			display.matrix[y][x].b = 255
+		}
+	}
 }
 
 // ----------------------------------------------------------------------
@@ -289,8 +347,7 @@ func (display *Display) initialize(x, y int) {
 // getMaxXY() method with Display pointer receiver
 // Retrieve and return the maxX and maxY dimensions of the screen
 func (display *Display) getMaxXY() (x, y int) {
-	// TO DO: Implement this method
-	return
+	return display.maxX, display.maxY
 }
 
 // ----------------------------------------------------------------------
@@ -298,7 +355,7 @@ func (display *Display) getMaxXY() (x, y int) {
 // drawPixel() method with Display pointer receiver
 // Draw the pixel with a given color at a given location
 func (display *Display) drawPixel(x, y int, c Color) (err error) {
-	// TO DO: Implement this method
+	display.matrix[y][x] = c
 	return
 }
 
@@ -308,7 +365,7 @@ func (display *Display) drawPixel(x, y int, c Color) (err error) {
 // Retrieve and return the color of the pixel at a given location
 func (display *Display) getPixel(x, y int) (c Color, err error) {
 	if x < 0 || x >= display.maxX || y < 0 || y >= display.maxY {
-		return 0, outOfBoundsErr
+		return Color{0, 0, 0}, outOfBoundsErr
 	}
 	return display.matrix[y][x], nil
 }
@@ -333,11 +390,7 @@ func (display *Display) screenShot(f string) (err error) {
 	for y := 0; y < display.maxY; y++ {
 		for x := 0; x < display.maxX; x++ {
 			c := display.matrix[y][x]
-			// Convert color to RGB values (simple mapping for now)
-			r := int(c) * 50 % 256
-			g := int(c) * 100 % 256
-			b := int(c) * 150 % 256
-			fmt.Fprintf(file, "%d %d %d ", r, g, b)
+			fmt.Fprintf(file, "%d %d %d ", c.r, c.g, c.b)
 		}
 		fmt.Fprintln(file)
 	}
