@@ -124,9 +124,10 @@ func init() {
 // or not (return false)
 func outOfBounds(p Point, scn screen) bool {
 	maxX, maxY := scn.getMaxXY()
-	if p.x < 0 || p.y < 0 || p.x > maxX || p.y > maxY {
+	// maxX and maxY are inclusive because that's 0-indexed
+	if p.x < 0 || p.y < 0 || p.x >= maxX || p.y >= maxY {
 		return true
-	} else {
+	} else { // otherwise, false
 		return false;
 	}
 }
@@ -136,7 +137,7 @@ func outOfBounds(p Point, scn screen) bool {
 // colorUnknown()
 // Check if a given color is unknown (return true) or known (return false)
 func colorUnknown(c Color) bool {
-	knowns := []Color{
+	knowns := []Color{ // Initialize an array of known colors
 		{255, 0, 0},    
 		{0, 255, 0},    
 		{0, 0, 255},    
@@ -148,7 +149,9 @@ func colorUnknown(c Color) bool {
 		{255, 255, 255},
 	}
 
+	// loop through all the known colors
 	for _, color := range knowns {
+		// check if our given parameter matches any known color, then it's NOT unknown.
 		if color.r == c.r && color.g == c.g && color.b == c.b {
 			return false;
 		}
@@ -161,6 +164,7 @@ func colorUnknown(c Color) bool {
 // draw() method with Rectangle receiver
 // Draws a filled in rectangle
 func (rect Rectangle) draw(scn screen) (err error) {
+	// validate
 	// Check if drawing this rectangle would cause either error
 	if outOfBounds(rect.ll, scn) || outOfBounds(rect.ur, scn) {
 		return outOfBoundsErr
@@ -169,8 +173,9 @@ func (rect Rectangle) draw(scn screen) (err error) {
 		return colorUnknownErr
 	}
 
-	for x := rect.ll.x; x <= rect.ur.x; x++ {
-		for y := rect.ll.y; y <= rect.ur.y; y++ {
+	// make changes
+	for x := rect.ll.x; x <	rect.ur.x; x++ {
+		for y := rect.ll.y; y < rect.ur.y; y++ {
 			scn.drawPixel(x, y, rect.c)
 		}
 	} 
@@ -280,8 +285,8 @@ func insideCircle(center, tile Point, r float64) (inside bool) {
 
 func (circ Circle) draw(scn screen) (err error) {
 	// Check if drawing this circle would cause either error
-	if outOfBounds(Point{circ.center.x - circ.r, circ.center.y}, scn) || 
-	   outOfBounds(Point{circ.center.x + circ.r, circ.center.y}, scn) || 
+	if outOfBounds(Point{circ.center.x - circ.r, circ.center.y}, scn) || // left
+	   outOfBounds(Point{circ.center.x + circ.r, circ.center.y}, scn) || // right
 	   outOfBounds(Point{circ.center.x, circ.center.y - circ.r}, scn) || // top
 	   outOfBounds(Point{circ.center.x, circ.center.y + circ.r}, scn) {  // bottom
 		return outOfBoundsErr
@@ -315,11 +320,12 @@ func (circ Circle) printShape() string {
 // clearScreen() method with Display pointer receiver
 // Clears the screen by resetting it to white
 func (display *Display) clearScreen() {
+	// Loop through every cell in the matrix and set colors to white.
 	for x := 0; x < display.maxX; x++ {
 		for y := 0; y < display.maxY; y++ {
-			display.matrix[y][x].r = 255
-			display.matrix[y][x].g = 255
-			display.matrix[y][x].b = 255
+			display.matrix[x][y].r = 255
+			display.matrix[x][y].g = 255
+			display.matrix[x][y].b = 255
 		}
 	}
 }
@@ -332,12 +338,13 @@ func (display *Display) clearScreen() {
 func (display *Display) initialize(x, y int) {
 	maxX := x
 	maxY := y
+	// Loop through every cell in the matrix and set colors to white.
 	for x := 0; x < maxX; x++ {
 		for y := 0; y < maxY; y++ {
 			// Make default screen white
-			display.matrix[y][x].r = 255
-			display.matrix[y][x].g = 255
-			display.matrix[y][x].b = 255
+			display.matrix[x][y].r = 255
+			display.matrix[x][y].g = 255
+			display.matrix[x][y].b = 255
 		}
 	}
 }
@@ -355,7 +362,7 @@ func (display *Display) getMaxXY() (x, y int) {
 // drawPixel() method with Display pointer receiver
 // Draw the pixel with a given color at a given location
 func (display *Display) drawPixel(x, y int, c Color) (err error) {
-	display.matrix[y][x] = c
+	display.matrix[x][y] = c
 	return
 }
 
@@ -387,9 +394,9 @@ func (display *Display) screenShot(f string) (err error) {
 	fmt.Fprintf(file, "%d %d\n", display.maxX, display.maxY)
 	fmt.Fprintln(file, "255") // Maximum color value
 
-	for y := 0; y < display.maxY; y++ {
-		for x := 0; x < display.maxX; x++ {
-			c := display.matrix[y][x]
+	for x := 0; x < display.maxX; x++ {
+		for y := 0; y < display.maxY; y++ {
+			c := display.matrix[x][y]
 			fmt.Fprintf(file, "%d %d %d ", c.r, c.g, c.b)
 		}
 		fmt.Fprintln(file)

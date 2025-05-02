@@ -51,20 +51,24 @@ func main() {
 	// Ask user for dimensions for display
 	var xdim, ydim int
 
+	// Ask for x - this will be our rows 
 	fmt.Print("Enter the number of rows (x) that you would like the display to have: ")
 	fmt.Scanln(&xdim)
 
+	// Ask for y - this will be our columns
 	fmt.Print("Enter the number of columns (y) that you would like the display to have: ")
 	fmt.Scanln(&ydim)
 	
-	matrix := make([][]Color, ydim)
-	for i := 0; i < ydim; i++ {
-		matrix[i] = make([]Color, xdim)
+	// Allocate memory for our 2D matrix
+	matrix := make([][]Color, xdim) // x size - rows
+	for i := 0; i < xdim; i++ {
+		matrix[i] = make([]Color, ydim) // y size - columns
 	}
 
-	display = Display{xdim, ydim, matrix}
+	display = Display{xdim, ydim, matrix} // x, y is actually rows by columns (counter intuitive)
 	display.initialize(xdim, ydim)
 
+	// Queue the main loop
 	for {
 		// Menu options
 		fmt.Println("")
@@ -78,7 +82,7 @@ func main() {
 		var userChoice string
 		fmt.Scanln(&userChoice)
 		
-		if userChoice == "R" {
+		if userChoice == "R" { // R -> draw a rectangle
 			//
 			// Drawing a rectangle
 			
@@ -102,29 +106,29 @@ func main() {
 			// Draw shape
 			err := rectangle.draw(&display)
 			
-			if err == outOfBoundsErr {
+			if err == outOfBoundsErr { // check for error after drawing
 				fmt.Println(outOfBoundsErr)
 			} else if err == colorUnknownErr {
 				fmt.Println(colorUnknownErr)
 			} else {
 				fmt.Println("Rectangle drawn successfully.")
 			}
-		} else if userChoice == "T" {
+		} else if userChoice == "T" { // T -> draw a triangle
 			//
 			// Drawing a triangle
 
 			// Gather input values
 			fmt.Print("Enter the X and Y values of the first point of the triangle: ")
 			var pt0x, pt0y int
-			fmt.Scanln(&pt0y, &pt0x) // swap it
+			fmt.Scanln(&pt0x, &pt0y)
 
 			fmt.Print("Enter the X and Y values of the second point of the triangle: ")
 			var pt1x, pt1y int
-			fmt.Scanln(&pt1y, &pt1x)
+			fmt.Scanln(&pt1x, &pt1y)
 
 			fmt.Print("Enter the X and Y values of the third point of the triangle: ")
 			var pt2x, pt2y int
-			fmt.Scanln(&pt2y, &pt2x)
+			fmt.Scanln(&pt2x, &pt2y)
 
 			fmt.Print("Enter the color of the triangle: ")
 			var color string
@@ -137,7 +141,7 @@ func main() {
 			// Draw shape
 			err := triangle.draw(&display)
 			
-			if err == outOfBoundsErr {
+			if err == outOfBoundsErr { // check for error after drawing
 				fmt.Println(outOfBoundsErr)
 			} else if err == colorUnknownErr {
 				fmt.Println(colorUnknownErr)
@@ -145,7 +149,7 @@ func main() {
 				fmt.Println("Triangle drawn successfully.")
 			}
 
-		} else if userChoice == "C" {
+		} else if userChoice == "C" { // C -> draw a circle
 			//
 			// Drawing a circle
 
@@ -169,7 +173,7 @@ func main() {
 			// Draw shape
 			err := circle.draw(&display)
 
-			if err == outOfBoundsErr {
+			if err == outOfBoundsErr { // check for error after drawing
 				fmt.Println(outOfBoundsErr)
 			} else if err == colorUnknownErr {
 				fmt.Println(colorUnknownErr)
@@ -177,7 +181,7 @@ func main() {
 				fmt.Println("Circle drawn successfully.")
 			}
 
-		} else if userChoice == "X" {
+		} else if userChoice == "X" { // X -> terminate
 			break
 		} else {
 			fmt.Println("**Error, unknown command. Try again.")
